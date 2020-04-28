@@ -1,0 +1,611 @@
+{
+    'created_at': 'Tue Apr 28 10:58:24 +0000 2020',
+    'id': 1255088973766000640,
+    'id_str': '1255088973766000640',
+    'text': 'RT @HoshizoraOW: Overwatch players: we need new content 😡\n\nNobody:\n\nBlizzard:',
+    'source': '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
+    'truncated': False,
+    'in_reply_to_status_id': None,
+    'in_reply_to_status_id_str': None,
+    'in_reply_to_user_id': None,
+    'in_reply_to_user_id_str': None,
+    'in_reply_to_screen_name': None,
+    'user': {
+        'id': 152350498,
+        'id_str': '152350498',
+        'name': 'thot patrol 揺れた 歪んだ世界にだんだん僕は 透き通って見えなくなって 見つけないで 僕',
+        'screen_name': 'meowmitake',
+        'location': 'Los Angeles, CA',
+        'url': 'https://anazel.carrd.co/',
+        'description': 'Bravely Default Expert • insane person • #bruce • feed me: http://paypal.me/celesteyt • I’m 24 • she/her/they • Celestey#9307 • fnyaf',
+        'translator_type': 'none',
+        'protected': False,
+        'verified': False,
+        'followers_count': 1727,
+        'friends_count': 1409,
+        'listed_count': 82,
+        'favourites_count': 227815,
+        'statuses_count': 578728,
+        'created_at': 'Sat Jun 05 18:16:53 +0000 2010',
+        'utc_offset': None,
+        'time_zone': None,
+        'geo_enabled': True,
+        'lang': None,
+        'contributors_enabled': False,
+        'is_translator': False,
+        'profile_background_color': '331900',
+        'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme1/bg.png',
+        'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme1/bg.png',
+        'profile_background_tile': True,
+        'profile_link_color': 'C71422',
+        'profile_sidebar_border_color': 'D7C9AE',
+        'profile_sidebar_fill_color': '108692',
+        'profile_text_color': 'F0B754',
+        'profile_use_background_image': True,
+        'profile_image_url': 'http://pbs.twimg.com/profile_images/1252473077784428545/8qQ4b7kV_normal.jpg',
+        'profile_image_url_https': 'https://pbs.twimg.com/profile_images/1252473077784428545/8qQ4b7kV_normal.jpg',
+        'profile_banner_url': 'https://pbs.twimg.com/profile_banners/152350498/1509554482',
+        'default_profile': False,
+        'default_profile_image': False,
+        'following': None,
+        'follow_request_sent': None,
+        'notifications': None
+    },
+    'geo': None,
+    'coordinates': None,
+    'place': None,
+    'contributors': None,
+    'retweeted_status': {
+        'created_at': 'Fri Apr 24 04:26:52 +0000 2020',
+        'id': 1253540891731484674,
+        'id_str': '1253540891731484674',
+        'text': 'Overwatch players: we need new content 😡\n\nNobody:\n\nBlizzard:',
+        'source': '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
+        'truncated': False,
+        'in_reply_to_status_id': None,
+        'in_reply_to_status_id_str': None,
+        'in_reply_to_user_id': None,
+        'in_reply_to_user_id_str': None,
+        'in_reply_to_screen_name': None,
+        'user': {
+            'id': 1407564764,
+            'id_str': '1407564764',
+            'name': 'Hoshi',
+            'screen_name': 'HoshizoraOW',
+            'location': 'Sydney, Australia',
+            'url': 'https://www.twitch.tv/hoshizoraow',
+            'description': 'Streamer for @LegacyOCE / Twitch & Discord Partner / Business 📩 hoshizoraoce@gmail.com / Powered by @GfuelEnergy',
+            'translator_type': 'none',
+            'protected': False,
+            'verified': False,
+            'followers_count': 19119,
+            'friends_count': 929,
+            'listed_count': 49,
+            'favourites_count': 31592,
+            'statuses_count': 8022,
+            'created_at': 'Mon May 06 11:55:28 +0000 2013',
+            'utc_offset': None,
+            'time_zone': None,
+            'geo_enabled': False,
+            'lang': None,
+            'contributors_enabled': False,
+            'is_translator': False,
+            'profile_background_color': '000000',
+            'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme1/bg.png',
+            'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme1/bg.png',
+            'profile_background_tile': False,
+            'profile_link_color': '000000',
+            'profile_sidebar_border_color': '000000',
+            'profile_sidebar_fill_color': '000000',
+            'profile_text_color': '000000',
+            'profile_use_background_image': True,
+            'profile_image_url': 'http://pbs.twimg.com/profile_images/1246001088253153280/Nof2RLlu_normal.jpg',
+            'profile_image_url_https': 'https://pbs.twimg.com/profile_images/1246001088253153280/Nof2RLlu_normal.jpg',
+            'profile_banner_url': 'https://pbs.twimg.com/profile_banners/1407564764/1587178381',
+            'default_profile': False,
+            'default_profile_image': False,
+            'following': None,
+            'follow_request_sent': None,
+            'notifications': None
+        },
+        'geo': None,
+        'coordinates': None,
+        'place': None,
+        'contributors': None,
+        'quoted_status_id': 1253397713288343553,
+        'quoted_status_id_str': '1253397713288343553',
+        'quoted_status': {
+            'created_at': 'Thu Apr 23 18:57:56 +0000 2020',
+            'id': 1253397713288343553,
+            'id_str': '1253397713288343553',
+            'text': "New Basketball reset buttons on dropships. They aren't active until about 3 seconds after the ball has been knocked… https://t.co/YRBErSnFGb",
+            'display_text_range': [0, 140],
+            'source': '<a href="https://mobile.twitter.com" rel="nofollow">Twitter Web App</a>',
+            'truncated': True,
+            'in_reply_to_status_id': 1253396448592478209,
+            'in_reply_to_status_id_str': '1253396448592478209',
+            'in_reply_to_user_id': 736966708640907264,
+            'in_reply_to_user_id_str': '736966708640907264',
+            'in_reply_to_screen_name': 'Overbuff',
+            'user': {
+                'id': 736966708640907264,
+                'id_str': '736966708640907264',
+                'name': 'Overbuff',
+                'screen_name': 'Overbuff',
+                'location': None,
+                'url': 'https://www.overbuff.com',
+                'description': "Rich statistics for Blizzard Entertainment's Overwatch. Find out your winrates, rankings and more!",
+                'translator_type': 'none',
+                'protected': False,
+                'verified': False,
+                'followers_count': 15669,
+                'friends_count': 197,
+                'listed_count': 116,
+                'favourites_count': 3359,
+                'statuses_count': 11828,
+                'created_at': 'Sun May 29 17:05:30 +0000 2016',
+                'utc_offset': None,
+                'time_zone': None,
+                'geo_enabled': False,
+                'lang': None,
+                'contributors_enabled': False,
+                'is_translator': False,
+                'profile_background_color': '000000',
+                'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme1/bg.png',
+                'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme1/bg.png',
+                'profile_background_tile': False,
+                'profile_link_color': 'FF8D07',
+                'profile_sidebar_border_color': '000000',
+                'profile_sidebar_fill_color': '000000',
+                'profile_text_color': '000000',
+                'profile_use_background_image': False,
+                'profile_image_url': 'http://pbs.twimg.com/profile_images/745756628658454528/CLFCZB2L_normal.png',
+                'profile_image_url_https': 'https://pbs.twimg.com/profile_images/745756628658454528/CLFCZB2L_normal.png',
+                'profile_banner_url': 'https://pbs.twimg.com/profile_banners/736966708640907264/1466906642',
+                'default_profile': False,
+                'default_profile_image': False,
+                'following': None,
+                'follow_request_sent': None,
+                'notifications': None
+            },
+            'geo': None,
+            'coordinates': None,
+            'place': None,
+            'contributors': None,
+            'is_quote_status': False,
+            'extended_tweet': {
+                'full_text': "New Basketball reset buttons on dropships. They aren't active until about 3 seconds after the ball has been knocked away. https://t.co/peUBsRSkzm",
+                'display_text_range': [0, 121],
+                'entities': {
+                    'hashtags': [],
+                    'urls': [],
+                    'user_mentions': [],
+                    'symbols': [],
+                    'media': [{
+                        'id': 1253397363265323008,
+                        'id_str': '1253397363265323008',
+                        'indices': [122, 145],
+                        'media_url': 'http://pbs.twimg.com/media/EWT2QtfXQAAhbtO.png',
+                        'media_url_https': 'https://pbs.twimg.com/media/EWT2QtfXQAAhbtO.png',
+                        'url': 'https://t.co/peUBsRSkzm',
+                        'display_url': 'pic.twitter.com/peUBsRSkzm',
+                        'expanded_url': 'https://twitter.com/Overbuff/status/1253397713288343553/photo/1',
+                        'type': 'photo',
+                        'sizes': {
+                            'large': {
+                                'w': 696,
+                                'h': 534,
+                                'resize': 'fit'
+                            },
+                            'small': {
+                                'w': 680,
+                                'h': 522,
+                                'resize': 'fit'
+                            },
+                            'thumb': {
+                                'w': 150,
+                                'h': 150,
+                                'resize': 'crop'
+                            },
+                            'medium': {
+                                'w': 696,
+                                'h': 534,
+                                'resize': 'fit'
+                            }
+                        }
+                    }, {
+                        'id': 1253397507461259264,
+                        'id_str': '1253397507461259264',
+                        'indices': [122, 145],
+                        'media_url': 'http://pbs.twimg.com/media/EWT2ZGqWoAA5_jL.png',
+                        'media_url_https': 'https://pbs.twimg.com/media/EWT2ZGqWoAA5_jL.png',
+                        'url': 'https://t.co/peUBsRSkzm',
+                        'display_url': 'pic.twitter.com/peUBsRSkzm',
+                        'expanded_url': 'https://twitter.com/Overbuff/status/1253397713288343553/photo/1',
+                        'type': 'photo',
+                        'sizes': {
+                            'large': {
+                                'w': 707,
+                                'h': 502,
+                                'resize': 'fit'
+                            },
+                            'small': {
+                                'w': 680,
+                                'h': 483,
+                                'resize': 'fit'
+                            },
+                            'thumb': {
+                                'w': 150,
+                                'h': 150,
+                                'resize': 'crop'
+                            },
+                            'medium': {
+                                'w': 707,
+                                'h': 502,
+                                'resize': 'fit'
+                            }
+                        }
+                    }]
+                },
+                'extended_entities': {
+                    'media': [{
+                        'id': 1253397363265323008,
+                        'id_str': '1253397363265323008',
+                        'indices': [122, 145],
+                        'media_url': 'http://pbs.twimg.com/media/EWT2QtfXQAAhbtO.png',
+                        'media_url_https': 'https://pbs.twimg.com/media/EWT2QtfXQAAhbtO.png',
+                        'url': 'https://t.co/peUBsRSkzm',
+                        'display_url': 'pic.twitter.com/peUBsRSkzm',
+                        'expanded_url': 'https://twitter.com/Overbuff/status/1253397713288343553/photo/1',
+                        'type': 'photo',
+                        'sizes': {
+                            'large': {
+                                'w': 696,
+                                'h': 534,
+                                'resize': 'fit'
+                            },
+                            'small': {
+                                'w': 680,
+                                'h': 522,
+                                'resize': 'fit'
+                            },
+                            'thumb': {
+                                'w': 150,
+                                'h': 150,
+                                'resize': 'crop'
+                            },
+                            'medium': {
+                                'w': 696,
+                                'h': 534,
+                                'resize': 'fit'
+                            }
+                        }
+                    }, {
+                        'id': 1253397507461259264,
+                        'id_str': '1253397507461259264',
+                        'indices': [122, 145],
+                        'media_url': 'http://pbs.twimg.com/media/EWT2ZGqWoAA5_jL.png',
+                        'media_url_https': 'https://pbs.twimg.com/media/EWT2ZGqWoAA5_jL.png',
+                        'url': 'https://t.co/peUBsRSkzm',
+                        'display_url': 'pic.twitter.com/peUBsRSkzm',
+                        'expanded_url': 'https://twitter.com/Overbuff/status/1253397713288343553/photo/1',
+                        'type': 'photo',
+                        'sizes': {
+                            'large': {
+                                'w': 707,
+                                'h': 502,
+                                'resize': 'fit'
+                            },
+                            'small': {
+                                'w': 680,
+                                'h': 483,
+                                'resize': 'fit'
+                            },
+                            'thumb': {
+                                'w': 150,
+                                'h': 150,
+                                'resize': 'crop'
+                            },
+                            'medium': {
+                                'w': 707,
+                                'h': 502,
+                                'resize': 'fit'
+                            }
+                        }
+                    }]
+                }
+            },
+            'quote_count': 37,
+            'reply_count': 10,
+            'retweet_count': 72,
+            'favorite_count': 406,
+            'entities': {
+                'hashtags': [],
+                'urls': [{
+                    'url': 'https://t.co/YRBErSnFGb',
+                    'expanded_url': 'https://twitter.com/i/web/status/1253397713288343553',
+                    'display_url': 'twitter.com/i/web/status/1…',
+                    'indices': [117, 140]
+                }],
+                'user_mentions': [],
+                'symbols': []
+            },
+            'favorited': False,
+            'retweeted': False,
+            'possibly_sensitive': False,
+            'filter_level': 'low',
+            'lang': 'en'
+        },
+        'quoted_status_permalink': {
+            'url': 'https://t.co/i7aPnUYZNn',
+            'expanded': 'https://twitter.com/overbuff/status/1253397713288343553',
+            'display': 'twitter.com/overbuff/statu…'
+        },
+        'is_quote_status': True,
+        'quote_count': 5,
+        'reply_count': 34,
+        'retweet_count': 264,
+        'favorite_count': 1654,
+        'entities': {
+            'hashtags': [],
+            'urls': [],
+            'user_mentions': [],
+            'symbols': []
+        },
+        'favorited': False,
+        'retweeted': False,
+        'filter_level': 'low',
+        'lang': 'en'
+    },
+    'quoted_status_id': 1253397713288343553,
+    'quoted_status_id_str': '1253397713288343553',
+    'quoted_status': {
+        'created_at': 'Thu Apr 23 18:57:56 +0000 2020',
+        'id': 1253397713288343553,
+        'id_str': '1253397713288343553',
+        'text': "New Basketball reset buttons on dropships. They aren't active until about 3 seconds after the ball has been knocked… https://t.co/YRBErSnFGb",
+        'display_text_range': [0, 140],
+        'source': '<a href="https://mobile.twitter.com" rel="nofollow">Twitter Web App</a>',
+        'truncated': True,
+        'in_reply_to_status_id': 1253396448592478209,
+        'in_reply_to_status_id_str': '1253396448592478209',
+        'in_reply_to_user_id': 736966708640907264,
+        'in_reply_to_user_id_str': '736966708640907264',
+        'in_reply_to_screen_name': 'Overbuff',
+        'user': {
+            'id': 736966708640907264,
+            'id_str': '736966708640907264',
+            'name': 'Overbuff',
+            'screen_name': 'Overbuff',
+            'location': None,
+            'url': 'https://www.overbuff.com',
+            'description': "Rich statistics for Blizzard Entertainment's Overwatch. Find out your winrates, rankings and more!",
+            'translator_type': 'none',
+            'protected': False,
+            'verified': False,
+            'followers_count': 15669,
+            'friends_count': 197,
+            'listed_count': 116,
+            'favourites_count': 3359,
+            'statuses_count': 11828,
+            'created_at': 'Sun May 29 17:05:30 +0000 2016',
+            'utc_offset': None,
+            'time_zone': None,
+            'geo_enabled': False,
+            'lang': None,
+            'contributors_enabled': False,
+            'is_translator': False,
+            'profile_background_color': '000000',
+            'profile_background_image_url': 'http://abs.twimg.com/images/themes/theme1/bg.png',
+            'profile_background_image_url_https': 'https://abs.twimg.com/images/themes/theme1/bg.png',
+            'profile_background_tile': False,
+            'profile_link_color': 'FF8D07',
+            'profile_sidebar_border_color': '000000',
+            'profile_sidebar_fill_color': '000000',
+            'profile_text_color': '000000',
+            'profile_use_background_image': False,
+            'profile_image_url': 'http://pbs.twimg.com/profile_images/745756628658454528/CLFCZB2L_normal.png',
+            'profile_image_url_https': 'https://pbs.twimg.com/profile_images/745756628658454528/CLFCZB2L_normal.png',
+            'profile_banner_url': 'https://pbs.twimg.com/profile_banners/736966708640907264/1466906642',
+            'default_profile': False,
+            'default_profile_image': False,
+            'following': None,
+            'follow_request_sent': None,
+            'notifications': None
+        },
+        'geo': None,
+        'coordinates': None,
+        'place': None,
+        'contributors': None,
+        'is_quote_status': False,
+        'extended_tweet': {
+            'full_text': "New Basketball reset buttons on dropships. They aren't active until about 3 seconds after the ball has been knocked away. https://t.co/peUBsRSkzm",
+            'display_text_range': [0, 121],
+            'entities': {
+                'hashtags': [],
+                'urls': [],
+                'user_mentions': [],
+                'symbols': [],
+                'media': [{
+                    'id': 1253397363265323008,
+                    'id_str': '1253397363265323008',
+                    'indices': [122, 145],
+                    'media_url': 'http://pbs.twimg.com/media/EWT2QtfXQAAhbtO.png',
+                    'media_url_https': 'https://pbs.twimg.com/media/EWT2QtfXQAAhbtO.png',
+                    'url': 'https://t.co/peUBsRSkzm',
+                    'display_url': 'pic.twitter.com/peUBsRSkzm',
+                    'expanded_url': 'https://twitter.com/Overbuff/status/1253397713288343553/photo/1',
+                    'type': 'photo',
+                    'sizes': {
+                        'large': {
+                            'w': 696,
+                            'h': 534,
+                            'resize': 'fit'
+                        },
+                        'small': {
+                            'w': 680,
+                            'h': 522,
+                            'resize': 'fit'
+                        },
+                        'thumb': {
+                            'w': 150,
+                            'h': 150,
+                            'resize': 'crop'
+                        },
+                        'medium': {
+                            'w': 696,
+                            'h': 534,
+                            'resize': 'fit'
+                        }
+                    }
+                }, {
+                    'id': 1253397507461259264,
+                    'id_str': '1253397507461259264',
+                    'indices': [122, 145],
+                    'media_url': 'http://pbs.twimg.com/media/EWT2ZGqWoAA5_jL.png',
+                    'media_url_https': 'https://pbs.twimg.com/media/EWT2ZGqWoAA5_jL.png',
+                    'url': 'https://t.co/peUBsRSkzm',
+                    'display_url': 'pic.twitter.com/peUBsRSkzm',
+                    'expanded_url': 'https://twitter.com/Overbuff/status/1253397713288343553/photo/1',
+                    'type': 'photo',
+                    'sizes': {
+                        'large': {
+                            'w': 707,
+                            'h': 502,
+                            'resize': 'fit'
+                        },
+                        'small': {
+                            'w': 680,
+                            'h': 483,
+                            'resize': 'fit'
+                        },
+                        'thumb': {
+                            'w': 150,
+                            'h': 150,
+                            'resize': 'crop'
+                        },
+                        'medium': {
+                            'w': 707,
+                            'h': 502,
+                            'resize': 'fit'
+                        }
+                    }
+                }]
+            },
+            'extended_entities': {
+                'media': [{
+                    'id': 1253397363265323008,
+                    'id_str': '1253397363265323008',
+                    'indices': [122, 145],
+                    'media_url': 'http://pbs.twimg.com/media/EWT2QtfXQAAhbtO.png',
+                    'media_url_https': 'https://pbs.twimg.com/media/EWT2QtfXQAAhbtO.png',
+                    'url': 'https://t.co/peUBsRSkzm',
+                    'display_url': 'pic.twitter.com/peUBsRSkzm',
+                    'expanded_url': 'https://twitter.com/Overbuff/status/1253397713288343553/photo/1',
+                    'type': 'photo',
+                    'sizes': {
+                        'large': {
+                            'w': 696,
+                            'h': 534,
+                            'resize': 'fit'
+                        },
+                        'small': {
+                            'w': 680,
+                            'h': 522,
+                            'resize': 'fit'
+                        },
+                        'thumb': {
+                            'w': 150,
+                            'h': 150,
+                            'resize': 'crop'
+                        },
+                        'medium': {
+                            'w': 696,
+                            'h': 534,
+                            'resize': 'fit'
+                        }
+                    }
+                }, {
+                    'id': 1253397507461259264,
+                    'id_str': '1253397507461259264',
+                    'indices': [122, 145],
+                    'media_url': 'http://pbs.twimg.com/media/EWT2ZGqWoAA5_jL.png',
+                    'media_url_https': 'https://pbs.twimg.com/media/EWT2ZGqWoAA5_jL.png',
+                    'url': 'https://t.co/peUBsRSkzm',
+                    'display_url': 'pic.twitter.com/peUBsRSkzm',
+                    'expanded_url': 'https://twitter.com/Overbuff/status/1253397713288343553/photo/1',
+                    'type': 'photo',
+                    'sizes': {
+                        'large': {
+                            'w': 707,
+                            'h': 502,
+                            'resize': 'fit'
+                        },
+                        'small': {
+                            'w': 680,
+                            'h': 483,
+                            'resize': 'fit'
+                        },
+                        'thumb': {
+                            'w': 150,
+                            'h': 150,
+                            'resize': 'crop'
+                        },
+                        'medium': {
+                            'w': 707,
+                            'h': 502,
+                            'resize': 'fit'
+                        }
+                    }
+                }]
+            }
+        },
+        'quote_count': 37,
+        'reply_count': 10,
+        'retweet_count': 72,
+        'favorite_count': 406,
+        'entities': {
+            'hashtags': [],
+            'urls': [{
+                'url': 'https://t.co/YRBErSnFGb',
+                'expanded_url': 'https://twitter.com/i/web/status/1253397713288343553',
+                'display_url': 'twitter.com/i/web/status/1…',
+                'indices': [117, 140]
+            }],
+            'user_mentions': [],
+            'symbols': []
+        },
+        'favorited': False,
+        'retweeted': False,
+        'possibly_sensitive': False,
+        'filter_level': 'low',
+        'lang': 'en'
+    },
+    'quoted_status_permalink': {
+        'url': 'https://t.co/i7aPnUYZNn',
+        'expanded': 'https://twitter.com/overbuff/status/1253397713288343553',
+        'display': 'twitter.com/overbuff/statu…'
+    },
+    'is_quote_status': True,
+    'quote_count': 0,
+    'reply_count': 0,
+    'retweet_count': 0,
+    'favorite_count': 0,
+    'entities': {
+        'hashtags': [],
+        'urls': [],
+        'user_mentions': [{
+            'screen_name': 'HoshizoraOW',
+            'name': 'Hoshi',
+            'id': 1407564764,
+            'id_str': '1407564764',
+            'indices': [3, 15]
+        }],
+        'symbols': []
+    },
+    'favorited': False,
+    'retweeted': False,
+    'filter_level': 'low',
+    'lang': 'en',
+    'timestamp_ms': '1588071504428'
+}

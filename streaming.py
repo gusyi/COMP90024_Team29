@@ -21,15 +21,32 @@ class StdOutListener(StreamListener):
     """
     def on_data(self, data):
 
+        f = open('test.json', 'w')
+
         tweet = json.loads(data)
         print(tweet['text'])
 
-        if tweet['place'] is not None:
+        if tweet['place'] is not None and tweet['place']['country_code'] == 'AU':
+            print('\n#########')
             print(tweet['place'])
-            sys.exit('good')
+            f.write(json.dumps(tweet))
+            sys.exit('It has place\n#########\n')
         else:
-            print("not")
+            if tweet['user']['location'] is not None and \
+                ('Vic' in tweet['user']['location'] or \
+                'Melbourne' in tweet['user']['location']):
 
+                print('\n#########')
+                print(tweet['user']['location'])
+                print('It is in Vic\n#########\n')
+                #sys.exit('\n It is in Vic\n')
+
+            elif tweet['user']['location'] is not None:
+                print('\n',tweet['user']['location'],'\n')
+            else:
+                print("not")
+
+        f.close()
         return True
 
     def on_error(self, status):
@@ -41,4 +58,5 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
 
     stream = Stream(auth, l)
-    stream.filter(track=['Scott Morrison, @ScottMorrisonMP'])
+    stream.filter(track=['Scott Morrison, Morrison, @ScottMorrisonMP'])
+    #stream.filter(track=['@realDonaldTrump, Donald Trump'])

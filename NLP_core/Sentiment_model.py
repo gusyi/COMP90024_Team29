@@ -58,17 +58,21 @@ def sentiment_test(tweets, single_flag=1):
     else:
         text_list = tweets
 
-    #initialise the dataframe
+    # initialise the dataframe
     tweet_df = pd.DataFrame()
     tweet_df["tweet"] = text_list
 
     # clean the tweets
     tweet_df["tweet_clean"] = tweet_df["tweet"].apply(lambda x: clean_text(x))
 
+    # initialise analyzer
     sid = SentimentIntensityAnalyzer()
+
+    # append analyse results
     tweet_df["sentiments"] = tweet_df["tweet_clean"].apply(lambda x: sid.polarity_scores(x))
     tweet_df = pd.concat([tweet_df.drop(['sentiments'], axis=1), tweet_df['sentiments'].apply(pd.Series)], axis=1)
 
+    # append result
     tweet_df["result"] = tweet_df['compound'].apply(lambda x: 'positive' if x >= 0.05 else 'nagetive' if x <= -0.05 else 'neutral')
 
     return tweet_df["result"].tolist()

@@ -15,36 +15,76 @@ consumer_secret="dpMPUWNgbc9nwq5ntanSx7DFYDWQo7hH51CHxbauX2iKyczH7r"
 access_token="1252534782577086464-9JfCWpydeEfubm8YTbuW0wOFlAjxQz"
 access_token_secret="aS7HIw8P5AmTRs9gGyFeXPzQsBTQj6JBQTiw2KFyOzSUF"
 
+
+
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
     This is a basic listener that just prints received tweets to stdout.
     """
+
+
     def on_data(self, data):
 
         f = open('test.json', 'w')
 
         tweet = json.loads(data)
-        print(tweet['text'])
+        print('\n',tweet['text'])
 
-        if tweet['place'] is not None and tweet['place']['country_code'] == 'AU':
-            print('\n#########')
-            print(tweet['place'])
-            f.write(json.dumps(tweet))
-            sys.exit('It has place\n#########\n')
-        else:
-            if tweet['user']['location'] is not None and \
-                ('Vic' in tweet['user']['location'] or \
-                'Melbourne' in tweet['user']['location']):
+        if tweet['place'] is None and tweet['user']['location'] is None:
+            return True;
+        
+        if tweet['place'] is not None and tweet['place']['country'] == 'AU':
 
-                print('\n#########')
-                print(tweet['user']['location'])
-                print('It is in Vic\n#########\n')
-                #sys.exit('\n It is in Vic\n')
+            # if no key words in [place], pass to the next part
+            if 'Victoria'  not in tweet['place']['full_name'] and \
+               'Melbourne' not in tweet['place']['full_name']:
+                print('\nNO==NO==NO\n',tweet['place']['full_name'], '\nNO==NO==NO\n')
 
-            elif tweet['user']['location'] is not None:
-                print('\n',tweet['user']['location'],'\n')
-            else:
-                print("not")
+            elif tweet['place']['country_code'] == 'AU' and \
+                 'Victoria' in tweet['place']['full_name']:
+                # if from Melbourne, categorize 
+                if 'Melbourne' or 'Mel' in tweet['place']['full_name']:
+                    print('\n==========\n',tweet['place']['full_name'], \
+                        'Place: It is from Melbourne\n==========\n')
+                # else it is from other places in Vic
+                else:
+                    print('\n==========\n',tweet['place']['full_name'], \
+                        'Place: It is from other places in Vic\n==========\n')
+
+                f.write(json.dumps(tweet))
+                sys.exit('\nExit')
+
+            # it may from Melbourne
+            elif tweet['place']['country_code'] == 'AU' and \
+            'Melbourne' in tweet['place']['full_name']:
+                print('\n==========\n',tweet['place']['full_name'], \
+                  'It is from Melbourne\n==========\n')
+                f.write(json.dumps(tweet))
+                sys.exit('\nExit')
+
+        elif tweet['user']['location'] is not None:
+
+            if 'Victoria'  not in tweet['user']['location'] and \
+               'Melbourne' not in tweet['user']['location']:
+               print('\nNO==NO==NO\n', tweet['user']['location'], '\nNO==NO==NO\n')
+
+            elif 'Victoria' in tweet['user']['location']:
+
+                # if from Melbourne, categorize 
+                if 'Melbourne' or 'Mel' in tweet['user']['location']:
+                    print('\n==========\n',tweet['user']['location'], \
+                        '\n1. It is from Melbourne\n==========\n')
+                else:
+                    print('\n==========\n',tweet['user']['location'], \
+                        '\nIt is from other places in Vic\n==========\n')
+                f.write(json.dumps(tweet))
+                sys.exit('\nExit')
+
+            elif 'Melbourne' in tweet['user']['location']:
+                print('\n==========\n',tweet['user']['location'], \
+                  '\n2. It is from Melbourne\n==========\n')
+                f.write(json.dumps(tweet))
+                sys.exit('\nExit')
 
         f.close()
         return True

@@ -26,6 +26,8 @@ class StdOutListener(StreamListener):
     def on_data(self, data):
 
         f = open('test.json', 'a')
+        fM = open('Melbourne.json', 'a')
+        fV = open('Victoria.json', 'a')
 
         tweet = json.loads(data)
         print('\n',tweet['text'])
@@ -49,20 +51,22 @@ class StdOutListener(StreamListener):
                 if 'Melbourne' or 'Mel' in tweet['place']['full_name']:
                     print('\n==========\n',tweet['place']['full_name'], \
                         'Place: It is from Melbourne\n==========\n')
+                    fM.write(json.dumps(tweet)+',\n')
 
                 # else it is from other places in Vic
                 else:
                     print('\n==========\n',tweet['place']['full_name'], \
                         'Place: It is from other places in Vic\n==========\n')
+                    fV.write(json.dumps(tweet)+',\n')
 
-                f.write(json.dumps(tweet))
+                
                 #sys.exit('\nExit')
 
             # it may from Melbourne
             elif 'Melbourne' in tweet['place']['full_name']:
                 print('\n==========\n',tweet['place']['full_name'], \
                   'It is from Melbourne\n==========\n')
-                f.write(json.dumps(tweet))
+                fM.write(json.dumps(tweet)+',\n')
                 #sys.exit('\nExit')
 
         elif tweet['user']['location'] is not None:
@@ -79,18 +83,20 @@ class StdOutListener(StreamListener):
                 if 'Melbourne' in tweet['user']['location']:
                     print('\n==========\n',tweet['user']['location'], \
                         '\nUser: It is from Melbourne\n==========\n')
+                    fM.write(json.dumps(tweet)+',\n')
                 else:
                     print('\n==========\n',tweet['user']['location'], \
                         '\nUser: It is from other places of Vic\n==========\n')
+                    fV.write(json.dumps(tweet)+',\n')
 
-                f.write(json.dumps(tweet))
+                
                 #sys.exit('\nExit')
 
             # check if only has 'Melbourne'
             elif 'Melbourne' in tweet['user']['location']:
                 print('\n==========\n',tweet['user']['location'], \
                   '\nUser(2): It is from Melbourne\n==========\n')
-                f.write(json.dumps(tweet))
+                fM.write(json.dumps(tweet)+',\n')
                 #sys.exit('\nExit')
 
         f.close()

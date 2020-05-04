@@ -30,22 +30,26 @@ class StdOutListener(StreamListener):
         tweet = json.loads(data)
         print('\n',tweet['text'])
 
+        # if all attributes are None, don't bother
         if tweet['place'] is None and tweet['user']['location'] is None:
-            return True;
-        
-        if tweet['place'] is not None and tweet['place']['country'] == 'AU':
+            print('\nNO==NO==NO\nNothing to check\nNO==NO==NO\n')
 
-            # if no key words in [place], pass to the next part
+        elif tweet['place'] is not None and (tweet['place']['country'] == 'AU' or\
+           'Australia' in tweet['place']):
+
+            # if no key words in [place], return 
             if 'Victoria'  not in tweet['place']['full_name'] and \
                'Melbourne' not in tweet['place']['full_name']:
                 print('\nNO==NO==NO\n',tweet['place']['full_name'], '\nNO==NO==NO\n')
 
-            elif tweet['place']['country_code'] == 'AU' and \
-                 'Victoria' in tweet['place']['full_name']:
-                # if from Melbourne, categorize 
+            # if only Victoria in [place]
+            elif 'Victoria' in tweet['place']['full_name']:
+
+                # if from Melbourne, categorize it
                 if 'Melbourne' or 'Mel' in tweet['place']['full_name']:
                     print('\n==========\n',tweet['place']['full_name'], \
                         'Place: It is from Melbourne\n==========\n')
+
                 # else it is from other places in Vic
                 else:
                     print('\n==========\n',tweet['place']['full_name'], \
@@ -55,34 +59,37 @@ class StdOutListener(StreamListener):
                 sys.exit('\nExit')
 
             # it may from Melbourne
-            elif tweet['place']['country_code'] == 'AU' and \
-            'Melbourne' in tweet['place']['full_name']:
+            elif 'Melbourne' in tweet['place']['full_name']:
                 print('\n==========\n',tweet['place']['full_name'], \
                   'It is from Melbourne\n==========\n')
                 f.write(json.dumps(tweet))
                 sys.exit('\nExit')
 
         elif tweet['user']['location'] is not None:
-
+            
+            # if no key words in [place], return 
             if 'Victoria'  not in tweet['user']['location'] and \
                'Melbourne' not in tweet['user']['location']:
                print('\nNO==NO==NO\n', tweet['user']['location'], '\nNO==NO==NO\n')
 
+            # if only Victoria in user profile
             elif 'Victoria' in tweet['user']['location']:
 
-                # if from Melbourne, categorize 
-                if 'Melbourne' or 'Mel' in tweet['user']['location']:
+                # if from Melbourne, categorize it 
+                if 'Melbourne' in tweet['user']['location']:
                     print('\n==========\n',tweet['user']['location'], \
-                        '\n1. It is from Melbourne\n==========\n')
+                        '\nUser: It is from Melbourne\n==========\n')
                 else:
                     print('\n==========\n',tweet['user']['location'], \
-                        '\nIt is from other places in Vic\n==========\n')
+                        '\nUser: It is from other places of Vic\n==========\n')
+
                 f.write(json.dumps(tweet))
                 sys.exit('\nExit')
 
+            # check if only has 'Melbourne'
             elif 'Melbourne' in tweet['user']['location']:
                 print('\n==========\n',tweet['user']['location'], \
-                  '\n2. It is from Melbourne\n==========\n')
+                  '\nUser(2): It is from Melbourne\n==========\n')
                 f.write(json.dumps(tweet))
                 sys.exit('\nExit')
 

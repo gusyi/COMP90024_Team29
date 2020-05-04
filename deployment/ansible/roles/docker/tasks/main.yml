@@ -1,0 +1,56 @@
+#sudo apt-get remove docker docker-engine docker.io containerd runc
+- name: uninstall old versions of Docker
+  become: yes
+  apt:
+    name: ['docker','docker-engine','docker.io','runc','containerd']
+    state: absent
+
+#sudo apt-get update
+#sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+- name: Set up repo for installation
+  become: yes
+  apt:
+    name: ['apt-transport-https','ca-certificates','curl','gnupg-agent','software-properties-common']
+    state: latest
+    update_cache: yes
+
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- name: add Docker GPG key
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+#sudo add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu bionic stable"
+- name: add Docker repo
+  become: yes
+  apt_repository:
+    repo: 'deb [arch=arm64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+    state: present
+    update_cache: yes
+
+#sudo apt-get update
+#sudo apt-get install docker-ce docker-ce-cli containerd.io
+- name: install Docker
+  apt: 
+    name: ['docker-ce','docker-ce-cli','containerd.io']
+    state: latest
+    update_cache: yes
+
+#sudo pip install docker-compose
+- name: install Docker Compose
+  become: yes
+  pip:
+    name: 'docker-compose'
+    state: latest
+
+- name: Check that docker config folder exists
+  file: 
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+
+- name: Restart docker
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: docker

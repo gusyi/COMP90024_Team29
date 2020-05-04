@@ -25,7 +25,7 @@ class StdOutListener(StreamListener):
 
     def on_data(self, data):
 
-        f = open('test.json', 'w')
+        f = open('test.json', 'a')
 
         tweet = json.loads(data)
         print('\n',tweet['text'])
@@ -56,14 +56,14 @@ class StdOutListener(StreamListener):
                         'Place: It is from other places in Vic\n==========\n')
 
                 f.write(json.dumps(tweet))
-                sys.exit('\nExit')
+                #sys.exit('\nExit')
 
             # it may from Melbourne
             elif 'Melbourne' in tweet['place']['full_name']:
                 print('\n==========\n',tweet['place']['full_name'], \
                   'It is from Melbourne\n==========\n')
                 f.write(json.dumps(tweet))
-                sys.exit('\nExit')
+                #sys.exit('\nExit')
 
         elif tweet['user']['location'] is not None:
             
@@ -84,14 +84,14 @@ class StdOutListener(StreamListener):
                         '\nUser: It is from other places of Vic\n==========\n')
 
                 f.write(json.dumps(tweet))
-                sys.exit('\nExit')
+                #sys.exit('\nExit')
 
             # check if only has 'Melbourne'
             elif 'Melbourne' in tweet['user']['location']:
                 print('\n==========\n',tweet['user']['location'], \
                   '\nUser(2): It is from Melbourne\n==========\n')
                 f.write(json.dumps(tweet))
-                sys.exit('\nExit')
+                #sys.exit('\nExit')
 
         f.close()
         return True

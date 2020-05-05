@@ -22,19 +22,14 @@ app_credentials = [
         'consumer_secret': 'JdB9BmZfBRGGhHLs3kU4HZWQVioonv2hKmBpiOafb8GZp4lLzI',
         'access_token': '1250637428194283521-Abxm11N9HbFpQgcPXAYPCwJbhCE4vl',
         'access_secret': '2OnvW1pNC6LRRLCWVikOD4NIozzsdgfeiGJ5gTy755BWP'
-    },
-    {
-        'consumer_key': 'hytqImMqUJF9cCFd3YiWQdYJR',
-        'consumer_secret': 'iBw86hwcs4wz02f2GKLKldjhXFwQkI4GcGMElZ3m4Tjze2MMSG',
-        'access_token': '1255838323173543937-J2DYt8Z65qUfU6HjdHHMlkzKlZo2Q1',
-        'access_secret': '7RgC3JU0dQIPdHgDzH8JnNLEtCuI1ajSAnywRRl1qrF9t'
-    },
+    }
 ]
 
 app_assignment = {
     'historical-melbourne': 0,
     'historical-other' : 1,
-    'stream': 2
+    'historical-potential': 2,
+    'stream': 3
 }
 
 track_words = ['Scott Morrison', 'Morrison', '@ScottMorrisonMP']

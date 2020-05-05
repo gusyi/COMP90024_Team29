@@ -16,6 +16,12 @@ app_credentials = [
         'consumer_secret': 'NbFHMGH0hViChxxtFcsZTsORR3UP1s6opsUBFRMWefvjaqugVL'
         'access_token': '1255745861994176513-5QmcTTibpGINhf4rXfsn0zQlMgD4uV'
         'access_secret': 'XQyr4jDjwc2G2VgOZyXQcVLtlYgSiwUdJ3pxF9JLIi2QN'
+    },
+    {
+        'consumer_key': '0FvE5fDqbh433oDbuPz4iK0R1'
+        'consumer_secret': 'JdB9BmZfBRGGhHLs3kU4HZWQVioonv2hKmBpiOafb8GZp4lLzI'
+        'access_token': '1250637428194283521-Abxm11N9HbFpQgcPXAYPCwJbhCE4vl'
+        'access_secret': '2OnvW1pNC6LRRLCWVikOD4NIozzsdgfeiGJ5gTy755BWP'
     }
 ]
 

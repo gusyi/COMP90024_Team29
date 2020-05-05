@@ -2,3 +2,17 @@ consumer_key = "zXoReKA7fvCP5CLiC0C2HDI3Y"
 consumer_secret = "dpMPUWNgbc9nwq5ntanSx7DFYDWQo7hH51CHxbauX2iKyczH7r"
 access_token = "1252534782577086464-9JfCWpydeEfubm8YTbuW0wOFlAjxQz"
 access_secret = "aS7HIw8P5AmTRs9gGyFeXPzQsBTQj6JBQTiw2KFyOzSUF"
+
+Katie
+Access token secret: "XQyr4jDjwc2G2VgOZyXQcVLtlYgSiwUdJ3pxF9JLIi2QN"
+Access token: "1255745861994176513-5QmcTTibpGINhf4rXfsn0zQlMgD4uV"
+
+API key: "XhbWKUWumjzYbTeWI46oCEzTV"
+API secret key: "NbFHMGH0hViChxxtFcsZTsORR3UP1s6opsUBFRMWefvjaqugVL"
+
+Gus:
+Access token secret: "2OnvW1pNC6LRRLCWVikOD4NIozzsdgfeiGJ5gTy755BWP"
+Access token: "1250637428194283521-Abxm11N9HbFpQgcPXAYPCwJbhCE4vl"
+
+API key: "0FvE5fDqbh433oDbuPz4iK0R1"
+API secret key: "JdB9BmZfBRGGhHLs3kU4HZWQVioonv2hKmBpiOafb8GZp4lLzI"

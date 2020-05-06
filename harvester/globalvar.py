@@ -27,11 +27,21 @@ app_credentials = [
 
 app_assignment = {
     'historical-melbourne': 0,
-    'historical-other' : 1,
-    'historical-potential': 2,
+    'historical-other': 0,
+    'historical-timeline' : 1,
+    'historical-retweet': 2,
     'stream': 3
 }
 
-track_words = ['Scott Morrison', 'Morrison', '@ScottMorrisonMP']
-search_terms = '(Scott Morrison) OR Morrison OR @ScottMorrisonMP'
+geocode = {
+    'melbourne': '-37.812279,144.962270,35km',
+    'geelong': '-38.149718,144.361215,15km',
+    'ballarat': '-37.560947,143.848462,10km',
+    'victoria': '-37.812279,144.962270,390km'
+}
 
+track_words = ['Scott Morrison', 'Morrison', '@ScottMorrisonMP', '#ScottMorrison']
+search_terms = '(Scott Morrison) OR Morrison OR @ScottMorrisonMP OR #ScottMorrison'
+
+wider_range = ['vic', 'victoria']
+narrower_range = ['melbourne', 'melb']

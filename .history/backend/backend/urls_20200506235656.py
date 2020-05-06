@@ -17,5 +17,5 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('tweets.urls')),
+    path('', include(tweets.urls)),
 ]

@@ -56,7 +56,7 @@ class Analysis:
         return tweet['retweeted_status']['id_str']
     
     def contains_keywords(self, text):
-        if any(word in text for word in globalvar.track_words):
+        if any(word in text for word in globalvar.track_words_broad):
             return True
         return False
 

@@ -9,9 +9,7 @@ class dbAction:
         self.localhost = '127.0.0.1'
 
         self.dbserver = couchdb.Server("http://{}:{}@{}:5984/".format(self.user, self.pw, self.localhost))
-
-        self.db = self.dbserver['testdb']
-        
+  
         self.INSERTSUCCESS = "Success"
         self.DUPFOUND = "Doc exists"
     
@@ -53,6 +51,3 @@ class dbAction:
             db.save(data)
             print ('Doc overwritten')
             return self.DUPFOUND
-            
-        
-    

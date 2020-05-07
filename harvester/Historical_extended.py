@@ -39,37 +39,37 @@ def get_api(assigned_app):
 #                 print('Retweeter count...', len(rts))
 
 def add_to_db(data, dbname):
-    fM = open('Melbourne1.json', 'a+')
+    fM = open('historical_data/Geelong.json', 'a+')
     try:
         msg = db.insert_raw(data, dbname)
     except:
         print("Error: ", sys.exc_info())
     
     if msg == "Success":
-        fM.write(json.dumps(data)+',\n')
+        fM.write(json.dumps(data)+',\n') 
 
 def main():
-    base = 'historical-melbourne'
+    base = 'historical-geelong'
     hismel = globalvar.app_assignment[base]
     api_base = get_api(hismel)
-    db_base = db.create_or_get_db('historical-melbourne2', db.dbserver)
+    db_base = db.create_or_get_db(base, db.dbserver)
 
     timeline = 'historical-timeline'
     histl = globalvar.app_assignment[timeline]
     api_tl = get_api(histl)
-    db_tl = db.create_or_get_db(timeline, db.dbserver)
 
     retweet = 'historical-retweet'
     hisrt = globalvar.app_assignment[retweet]
     api_rt = get_api(hisrt)
-    db_rt = db.create_or_get_db(retweet, db.dbserver)
 
     end_date = date(2019, 11, 1) #cut-off date
 
     c=0
-    lvl0 = tweepy.Cursor(api_base.search, q=globalvar.search_terms, 
-                            until='2020-05-05', #7 days of data including 5/5
-                            geocode='-37.812279,144.962270,35km', #35km radius of Mel CBD
+    user_probed = []
+
+    lvl0 = tweepy.Cursor(api_base.search, q=globalvar.search_terms_broad,
+                            until='2020-04-30', #7 days of data including 5/5
+                            geocode=globalvar.geocode['geelong'], #35km radius of Mel CBD
                             lang='en', #include emoji?
                             tweet_mode='extended').items()
 
@@ -77,10 +77,11 @@ def main():
         add_to_db(t._json, db_base)
 
         c +=1
-        print ('++++++++++++++++ NUMBER ++++++++++++++++++', c)
+        print ('\n\n+++++++++++++++++++++++++++++++ NUMBER +++++++++++++++++++++++++++++++', c, '\n\n')
 
         userid = dataproc.get_user_id(t)
         print('Probing user...', userid)
+        user_probed.append(userid)
 
         tweet_count1 = 0
         tweet_count2 = 0
@@ -105,8 +106,14 @@ def main():
                     rt_profiles = api_rt.lookup_users(user_ids=rts)
                          
                     for profile in rt_profiles:
-                        if dataproc.is_user_in_range(profile.location, globalvar.narrower_range):
-                            print ('User {} in MEL...........'.format(profile.id_str))
+                        print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NEXT USER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                        if profile.id_str in user_probed: #this user's timeline has been harvested
+                            continue
+
+                        if dataproc.is_user_in_range(profile.location, globalvar.geelong_range):
+                            print ('User {} in GEELONG...........'.format(profile.id_str))
+                            user_probed.append(profile.id_str)
+
                             lvl2TL = tweepy.Cursor(api_tl.user_timeline, user_id=profile.id_str).items()
 
                             for tl in lvl2TL:

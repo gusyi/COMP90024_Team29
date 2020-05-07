@@ -41,7 +41,9 @@ geocode = {
 }
 
 track_words = ['Scott Morrison', 'Morrison', '@ScottMorrisonMP', '#ScottMorrison']
+track_words_broad = ['Scott Morrison', 'Morrison', '@ScottMorrisonMP', '#ScottMorrison', 'Prime Minister', 'PM', 'government']
 search_terms = '(Scott Morrison) OR Morrison OR @ScottMorrisonMP OR #ScottMorrison'
+search_terms_broad = '(Scott Morrison) OR Morrison OR @ScottMorrisonMP OR #ScottMorrison OR government OR (Prime Minister) OR PM'
 
 wider_range = ['vic', 'victoria']
 narrower_range = ['melbourne', 'melb']

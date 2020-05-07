@@ -13,11 +13,14 @@ class Analysis:
         return json.loads(json.dumps(orig._json))
     
     def get_user_id(self, tweet):
-        return tweet['user']['id_str']
+        t = tweet._json
+        return t['user']['id_str']
     
-    def get_create_date(self, tweet):
-        fulltimestamp = datetime.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y').replace(tzinfo=timezone.utc)
-        return fulltimestamp.date()
+    def get_create_date(self, created_at):
+        # print (created_at)
+        # print (created_at.date())
+        # fulltimestamp = datetime.strptime(created_at,'%a %b %d %H:%M:%S +0000 %Y').replace(tzinfo=timezone.utc)
+        return created_at.date()
     
     def is_user_in_range(self, loc, scope):
         loc = loc.lower()

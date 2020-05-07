@@ -11,6 +11,9 @@ class dbAction:
         self.dbserver = couchdb.Server("http://{}:{}@{}:5984/".format(self.user, self.pw, self.localhost))
 
         self.db = self.dbserver['testdb']
+        
+        self.INSERTSUCCESS = "Success"
+        self.DUPFOUND = "Doc exists"
     
     def create_or_get_db(self, db, dbs):
         try:
@@ -41,17 +44,15 @@ class dbAction:
         return all_docs
 
     def insert_raw(self, data, db):
-        # processed = json.loads(data)
-        # docid = jdata['id_str']
         docid = data['id_str']
-        print (docid)
         try:
             db[docid] = data
             print ('Doc added to DB...', docid)
+            return self.INSERTSUCCESS
         except couchdb.http.ResourceConflict:
             db.save(data)
             print ('Doc overwritten')
-            pass
+            return self.DUPFOUND
             
         
     

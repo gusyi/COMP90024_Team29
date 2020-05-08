@@ -83,6 +83,7 @@ DATABASES = {
     }
 }
 
+COUCHDB_SERVER = 'http://admin:admin@127.0.0.1:5984'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

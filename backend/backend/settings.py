@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'backend',
     'tweets',
     'rest_framework',
-    'frontend'
+    'frontend',
+    'require'
 ]
 
 

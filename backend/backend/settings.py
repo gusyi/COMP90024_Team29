@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'tweets',
     'rest_framework',
     'frontend',
-    'require'
 ]
 
 

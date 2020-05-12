@@ -1,5 +1,7 @@
 var map;
 var infoWindow;
+var percentMin = Number.MAX_VALUE,
+    percentMax = -Number.MAX_VALUE;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
@@ -9,18 +11,18 @@ function initMap() {
         },
         zoom: 9,
         mapTypeId: "roadmap",
-        streetViewControl: false,
-        mapTypeControl: false,
+        disableDefaultUI: true,
         styles: google_map_style,
-        //styles: css
+        gestureHandling: "greedy",
     });
-
     // set up the style rules and events for google.maps.Data
     map.data.setStyle(styleFeature);
 
     // load polygon GeoJson
     map.data.addGeoJson(city_coordinates);
-    map.data.addGeoJson(victoria);
+    map.data.addGeoJson(victoria, {
+        idPropertyName: "vic_lga__3",
+    });
 
     map.data.addListener("mouseover", mouseInToRegion);
     //map.data.addListener("mouseover", showInfoWindow);
@@ -28,7 +30,51 @@ function initMap() {
 
     // initialize the info window
     infoWindow = new google.maps.InfoWindow();
-    //map.data.addListener("click", showInfoWindow);
+    map.data.addListener("click", showInfoWindow);
+
+    // wire up the button
+    var selectBox = document.getElementById("census-variable");
+    google.maps.event.addDomListener(selectBox, "change", function () {
+        clearCensusData();
+        loadCensusData(selectBox.options[selectBox.selectedIndex].value);
+    });
+
+    // load data for the
+    loadPercentData();
+}
+
+/** Removes census data from each shape on the map and resets the UI. */
+function clearCensusData() {
+    percentMin = Number.MAX_VALUE;
+    percentMax = -Number.MAX_VALUE;
+    map.data.forEach(function (row) {
+        row.setProperty("percent_variable", undefined);
+    });
+    document.getElementById("data-box").style.display = "none";
+    document.getElementById("data-caret").style.display = "none";
+}
+
+function loadPercentData() {
+    for (var k = 0; k < 92; k++) {
+        var percentVariable = getRndInteger(0, 100);
+
+        var region_id = "MELBOURNE";
+        // keep track of min and max values
+        if (percentVariable < percentMin) {
+            percentMin = percentVariable;
+        }
+        if (percentVariable > percentMax) {
+            percentMax = percentVariable;
+        }
+        // update the existing row with the new data
+        map.data
+            .getFeatureById(region_id)
+            .setProperty("percent_variable", percentVariable);
+    }
+
+    // update and display the legend
+    document.getElementById("census-min").textContent = 0;
+    document.getElementById("census-max").textContent = 100;
 }
 
 function getCircle(magnitude) {
@@ -36,8 +82,8 @@ function getCircle(magnitude) {
     var high = [209, 98, 46]; // color of largest datum
 
     // delta represents where the value sits between the min and max
-    var delta = 0.9;
-
+    //var delta = 0.9;
+    var delta = Math.random();
     var color = [];
     for (var i = 0; i < 3; i++) {
         // calculate an integer color based on the delta
@@ -75,7 +121,8 @@ function styleFeature(feature) {
     var high = [209, 98, 46]; // color of largest datum
 
     // delta represents where the value sits between the min and max
-    var delta = 0.9;
+    //var delta = 0.9;
+    var delta = Math.random();
 
     var color = [];
     for (var i = 0; i < 3; i++) {
@@ -102,8 +149,8 @@ function styleFeature(feature) {
         strokeColor: "grey",
         strokeOpacity: 0.5,
         zIndex: zIndex,
-        fillColor: "white",
-        fillOpacity: 0.1,
+        fillColor: "hsl(" + color[0] + "," + color[1] + "%," + color[2] + "%)",
+        fillOpacity: 0.15,
         icon: getCircle(magnitude),
         //visible: showRow
     };
@@ -114,12 +161,27 @@ function styleFeature(feature) {
 function mouseInToRegion(e) {
     // set the hover library so the setStyle function can change the border
     e.feature.setProperty("state", "hover");
+    var percent = getRndInteger(percentMin, percentMax);
+
+    // update the label
+    document.getElementById("data-label").textContent = e.feature.getProperty(
+        "vic_lga__3"
+    );
+    document.getElementById("data-value").textContent = percent;
+    document.getElementById("data-box").style.display = "block";
+    document.getElementById("data-caret").style.display = "block";
+    document.getElementById("data-caret").style.paddingLeft = percent + "%";
 }
+
 // Responds to the mouse-out event on a map shape (library).
 // type of 'e': google.maps.MouseEvent
 function mouseOutOfRegion(e) {
     // reset the hover library, returning the border to normal
     e.feature.setProperty("state", "normal");
     // close info window display
-    infoWindow.close();
+    //infoWindow.close();
+}
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

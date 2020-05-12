@@ -1,29 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">
   <title>Group 29 Project</title>
   <style>
-    /* Always set the map height explicitly to define the size of the div
-     * element that contains the map. */
+    html,
+    body,
     #map {
-      height: 100%;
-    }
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
       height: 100%;
       margin: 0;
       padding: 0;
+      overflow: hidden;
+    }
+
+    .nicebox {
+      position: absolute;
+      text-align: center;
+      font-family: "Roboto", "Arial", sans-serif;
+      font-size: 13px;
+      z-index: 5;
+      box-shadow: 0 4px 6px -4px #333;
+      padding: 5px 10px;
+      background: rgb(255, 255, 255);
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(245, 245, 245, 1) 100%);
+      border: rgb(229, 229, 229) 1px solid;
+    }
+
+    #controls {
+      top: 20px;
+      left: 50px;
+      width: 400px;
+      height: 60px;
+      
+    }
+
+    #data-box {
+      top: 20px;
+      left: 500px;
+      height: 45px;
+      line-height: 45px;
+      display: none;
+    }
+
+    #census-variable {
+      width: 360px;
+      height: 20px;
+    }
+
+    #legend {
+      display: flex;
+      display: -webkit-box;
+      padding-top: 7px
+    }
+
+    .color-key {
+      background: linear-gradient(to right,
+          hsl(5, 69%, 54%) 0%,
+          hsl(29, 71%, 51%) 17%,
+          hsl(54, 74%, 47%) 33%,
+          hsl(78, 76%, 44%) 50%,
+          hsl(102, 78%, 41%) 67%,
+          hsl(127, 81%, 37%) 83%,
+          hsl(151, 83%, 34%) 100%);
+      flex: 1;
+      -webkit-box-flex: 1;
+      margin: 0 5px;
+      text-align: left;
+      font-size: 1.0em;
+      line-height: 1.0em;
+    }
+
+    #data-value {
+      font-size: 2.0em;
+      font-weight: bold
+    }
+
+    #data-label {
+      font-size: 2.0em;
+      font-weight: normal;
+      padding-right: 10px;
+    }
+
+    #data-label:after {
+      content: ':'
+    }
+
+    #data-caret {
+      margin-left: -5px;
+      display: none;
+      font-size: 14px;
+      width: 14px
     }
   </style>
 </head>
+
 <body>
+  <div id="controls" class="nicebox">
+    <div>
+      <select id="census-variable">
+        <option value="https://storage.googleapis.com/mapsdevsite/json/DP02_0066PE">Percent of population over 25 that
+          completed high
+          school</option>
+        <option value="https://storage.googleapis.com/mapsdevsite/json/DP05_0017E">Median age</option>
+        <option value="https://storage.googleapis.com/mapsdevsite/json/DP05_0001E">Total population</option>
+        <option value="https://storage.googleapis.com/mapsdevsite/json/DP02_0016E">Average family size</option>
+        <option value="https://storage.googleapis.com/mapsdevsite/json/DP03_0088E">Per-capita income</option>
+      </select>
+    </div>
+    <div id="legend">
+      <div id="census-min">min</div>
+      <div class="color-key"><span id="data-caret">&#x25c6;</span></div>
+      <div id="census-max">max</div>
+    </div>
+  </div>
+  <div id="data-box" class="nicebox">
+    <label id="data-label" for="data-value"></label>
+    <span id="data-value"></span>
+  </div>
   <div id='map'></div>
   <div id="app"></div>
-  
+
   {% load static %}
   <script src="{% static "frontend/main.js" %}"></script>
   <script src="{% static "frontend/map.js" %}"></script>
@@ -32,9 +132,18 @@
   <script src="{% static "frontend/maps_google_map_style.js" %}"></script>
   <script src="{% static "frontend/map_style.js" %}"></script>
   <script src="{% static "frontend/city_coordinates.js" %}"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlIvCw8l_EHI3YDXdgdC2jkvhNEivXQ10&callback=initMap"async defer></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  </body>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlIvCw8l_EHI3YDXdgdC2jkvhNEivXQ10&callback=initMap&language=en&region=au"
+    async defer></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

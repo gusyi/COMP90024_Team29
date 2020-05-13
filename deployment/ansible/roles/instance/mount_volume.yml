@@ -1,0 +1,18 @@
+- name: create volumes
+  os_volume:
+    display_name: '{{ item.vol_name }}'
+    size: '{{ item.vol_size }}'
+    availability_zone: '{{ availability_zone }}'
+    wait: yes
+    timeout: 600
+    state: present
+  loop: '{{ volumes }}'
+  register: os_vol
+
+- name: create volume IDs
+  set_fact:
+    os_vol_id: '{{ os_vol_id | default([]) + [item.id] }}'
+  loop: '{{ os_vol.results }}'
+
+- debug:
+    msg: "Volume {{ os_vol_id }} created"

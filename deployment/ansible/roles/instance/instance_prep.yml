@@ -1,0 +1,12 @@
+- name: install pip3
+    become: yes
+    apt:
+        name: ['pip3']
+        state: latest
+        update_cache: yes
+
+- name: install openstacksdk
+    pip:
+        name: ['openstacksdk']
+        state: latest
+        executable: pip3

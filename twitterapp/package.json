@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./a2test/frontend/src/index.js --output ./a2test/frontend/static/frontend/main.js",
-    "build": "webpack --mode production ./a2test/frontend/src/index.js --output ./a2test/frontend/static/frontend/main.js"
+    "dev": "webpack --mode development --watch ./a2test/frontend/src/index.js --output ./a2test/frontend/static/frontend/main.js",
+    "build": "webpack --mode production --watch ./a2test/frontend/src/index.js --output ./a2test/frontend/static/frontend/main.js"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +16,12 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "d3-scale": "^3.2.1",
+    "deck.gl": "^8.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-map-gl": "^5.2.5",
+    "react-router-dom": "^5.1.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },

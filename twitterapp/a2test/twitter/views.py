@@ -12,7 +12,7 @@ from twitter.serializers import TweetSerializer
 db = SERVER['test']
 
 @api_view(['POST'])
-def create_paper(request):
+def create_tweet(request):
     data = JSONParser().parse(request)
 
     serializer = TweetSerializer(data=data)
@@ -26,5 +26,5 @@ def create_paper(request):
 @api_view(['GET'])
 def tweet_detail(request, tid):
     tweet = Tweet.load(db, tid)
-    serializer = TweetSerializer(paper)
+    serializer = TweetSerializer(tweet)
     return Response(serializer.data)

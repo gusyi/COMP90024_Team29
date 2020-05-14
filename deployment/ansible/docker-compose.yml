@@ -5,7 +5,7 @@ services:
     image: couchdb
     restart: always
     volumes:
-      - /home/ubuntu/data:/opt/couchdb/data #?????
+      - /home/ubuntu/data:/opt/couchdb/data
     environment:
       COUCHDB_USER: 'admin'
       COUCHDB_PASSWORD: 'comp90024'

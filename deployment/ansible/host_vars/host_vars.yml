@@ -1,3 +1,7 @@
+volumes:
+  - source: "/dev/vdb"
+    destination: "/home/ubuntu/data"
+
 instance_proxy: 
   - "http_proxy=\"http://wwwproxy.unimelb.edu.au:8000\""
   - "https_proxy=\"http://wwwproxy.unimelb.edu.au:8000\""
@@ -5,6 +9,6 @@ instance_proxy:
   - "HTTPS_PROXY=\"http://wwwproxy.unimelb.edu.au:8000/\""
   - "NO_PROXY=localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au"
 
-docker_proxys: "[Service]\nEnvironment=\"HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/\"\nEnvironment=\"HTTP_PROXY=https://wwwproxy.unimelb.edu.au:8000/\"\nEnvironment=\"NO_PROXY=localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au\""
+docker_proxys: "[Service]\nEnvironment=\"HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/\"\nEnvironment=\"HTTPS_PROXY=https://wwwproxy.unimelb.edu.au:8000/\"\nEnvironment=\"NO_PROXY=localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au\""
 docker_proxy_directory: "/etc/systemd/system/docker.service.d"
 docker_proxy_files: "/etc/systemd/system/docker.service.d/http-proxy.conf"

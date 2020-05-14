@@ -1,0 +1,33 @@
+- name: check whether proxy directory exists
+  become: yes
+  stat:
+      path: "{{ docker_proxy_directory }}"
+  register: directory_stats
+
+- name: create proxy directory if not yet exist
+  become: yes
+  file:
+      path: "{{ docker_proxy_directory }}"
+      state: directory
+      mode: 0777
+  when: directory_stats.stat.exists == false
+
+- name: create http-proxy.conf
+  become: yes
+  file:
+    path: "{{ docker_proxy_files }}"
+    state: touch
+    mode: 0777
+  when: directory_stats.stat.exists == false
+
+- name: add proxys
+  become: yes
+  lineinfile:
+    path: "{{ docker_proxy_files }}"
+    line: "{{ docker_proxys }}"
+    create: yes
+  when: directory_stats.stat.exists == false
+
+- name: flush changes & restart Docker service
+  become: yes
+  raw: systemctl daemon_reload; systemctl restart docker 

@@ -6,7 +6,7 @@
     flavor: '{{ instance_flavor }}'
     availability_zone: '{{ availability_zone }}'
     security_groups: '{{ sg_name }}'
-    volumes: '{{ os_vol_id }}'
+    volumes: '{{ item.volume_names }}'
     auto_floating_ip: yes
     wait: yes
     timeout: 600
@@ -15,7 +15,7 @@
   register: os_instance
 
 - debug:
-    msg: "Instance {{ item.openstack.name }} creted with IP {{ item.openstack.public_v4 }}"
+    msg: "Instance {{ item.openstack.name }} created with IP address {{ item.openstack.public_v4 }}"
   loop: '{{ os_instance.results }}'
   when: item.openstack is defined
 
@@ -23,7 +23,7 @@
   wait_for:
     host: '{{ item.openstack.public_v4 }}'
     port: 22
-    timeout: 120
+    timeout: 240
     search_regex: OpenSSH
   loop: '{{ os_instance.results }}'
   when: item.openstack is defined

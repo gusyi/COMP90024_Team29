@@ -1,0 +1,16 @@
+- name: Gather facts of remote host
+  setup:
+    gather_subset: all
+
+- name: get environment arguments
+  shell: cat /etc/environment
+  register: env_args
+
+- name: set proxy
+  tags: always
+  become: yes
+  lineinfile:
+    path: /etc/environment
+    line: "{{ item }}"
+    create: yes
+  loop: "{{ instance_proxy }}"

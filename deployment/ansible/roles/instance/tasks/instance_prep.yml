@@ -1,12 +1,19 @@
-- name: install pip3
-    become: yes
-    apt:
-        name: ['pip3']
-        state: latest
-        update_cache: yes
+- name: install pip
+  become: yes
+  apt:
+    name: ['python-pip']
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
 
-- name: install openstacksdk
-    pip:
-        name: ['openstacksdk']
-        state: latest
-        executable: pip3
+- name: Update pip
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
+
+- name: Install openstack
+  become: yes
+  pip:
+    name: ['openstacksdk']
+    state: latest

@@ -1,6 +1,6 @@
 availability_zone: melbourne-qh2-uom
 instance_image: 215f9775-483c-4e0a-b703-d21a5c966f2e
-private_key: team29
+instance_key_name: team29
 instance_flavor: uom.mse.2c9g
 
 security_groups:

@@ -1,4 +1,5 @@
 - include_tasks: instance_prep.yml
+- include_tasks: images.yml
 - include_tasks: mount_volume.yml
 - include_tasks: security_groups.yml
 - include_tasks: instance.yml

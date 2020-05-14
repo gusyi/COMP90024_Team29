@@ -14,8 +14,23 @@
   loop: '{{ instances }}' 
   register: os_instance
 
-- name: log instances created
-  debug:
+- debug:
     msg: "Instance {{ item.openstack.name }} creted with IP {{ item.openstack.public_v4 }}"
+  loop: '{{ os_instance.results }}'
+  when: item.openstack is defined
+
+- name: wait for connection
+  wait_for:
+    host: '{{ item.openstack.public_v4 }}'
+    port: 22
+    timeout: 120
+    search_regex: OpenSSH
+  loop: '{{ os_instance.results }}'
+  when: item.openstack is defined
+
+- name: add host
+  add_host:
+    name: '{{ item.openstack.public_v4 }}'
+    groups: TEAM29
   loop: '{{ os_instance.results }}'
   when: item.openstack is defined

@@ -1,7 +1,5 @@
 availability_zone: melbourne-qh2-uom
-instance_image: 215f9775-483c-4e0a-b703-d21a5c966f2e
-instance_key_name: team29
-instance_flavor: uom.mse.2c9g
+ssh_info: "ansible_ssh_private_key_file=~/.ssh/team29.pem ansible_user=ubuntu ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
 
 security_groups:
   - name: ssh
@@ -45,3 +43,7 @@ instances:
   - name: ins2
     volume_names:
       - ins2-vol
+
+instance_image: 215f9775-483c-4e0a-b703-d21a5c966f2e
+instance_key_name: team29
+instance_flavor: uom.mse.2c9g

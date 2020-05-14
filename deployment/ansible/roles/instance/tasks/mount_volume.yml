@@ -1,5 +1,4 @@
 - name: create volumes
-  become: yes
   os_volume:
     display_name: '{{ item.vol_name }}'
     size: '{{ item.vol_size }}'

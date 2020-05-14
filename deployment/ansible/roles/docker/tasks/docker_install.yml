@@ -35,7 +35,7 @@
   become: yes
   apt: 
     name: ['docker-ce','docker-ce-cli','containerd.io']
-    state: latest
+    state: present
     update_cache: yes
 
 #sudo pip install docker-compose
@@ -44,9 +44,3 @@
   pip:
     name: 'docker-compose'
     state: latest
-
-- name: restart Docker
-  systemd:
-    state: restarted
-    daemon_reload: yes
-    name: docker

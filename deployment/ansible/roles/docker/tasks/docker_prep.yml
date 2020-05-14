@@ -7,10 +7,30 @@
   register: env_args
 
 - name: set proxy
-  tags: always
   become: yes
   lineinfile:
     path: /etc/environment
     line: "{{ item }}"
     create: yes
   loop: "{{ instance_proxy }}"
+
+- name: install tools
+  become: yes
+  apt:
+    name: ['vim','python3-pip'] 
+    state: latest
+    install_recommends: no
+    update_cache: yes
+
+- name: update pip
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
+
+- name: install setuptools
+  become: yes
+  pip:
+    name: ['setuptools']
+    state: latest
+    executable: pip3

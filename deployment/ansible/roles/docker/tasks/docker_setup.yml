@@ -28,6 +28,18 @@
     create: yes
   when: directory_stats.stat.exists == false
 
+# - name: flush changes
+#   become: yes
+#   shell: |
+#     sudo systemctl daemon-reload
+
+# - name: restart Docker
+#   shell: |
+#     sudo systemctl restart docker
+
 - name: flush changes & restart Docker service
   become: yes
-  raw: systemctl daemon_reload; systemctl restart docker 
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: docker

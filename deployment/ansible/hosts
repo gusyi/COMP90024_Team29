@@ -1,4 +1,6 @@
-[all]
+[TEAM29]
+
+[TEAM29:vars]
 ansible_python_interpreter=/usr/bin/python3
 ansible_user=ubuntu
 ansible_ssh_private_key_file=~/.ssh/team29.pem

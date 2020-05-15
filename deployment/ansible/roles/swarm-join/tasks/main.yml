@@ -1,0 +1,16 @@
+- name: get manager IP 
+  become: yes
+  set_fact:
+    swarm_manager: "{{ groups['manager'][0] }}"
+
+- debug:
+    msg: "Manager IP: {{ swarm_manager }}"
+
+- name: join swarm as worker
+  become: yes
+  docker_swarm:
+    state: join
+    advertise_addr: eth0:2377
+    join_token: "{{ hostvars[item]['worker_token'] }}" #hostvars['manager']['worker_token']['stdout']
+    remote_addrs: "{{ swarm_manager }}:2377"
+  with_items: "{{ groups['manager'] }}"

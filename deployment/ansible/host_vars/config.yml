@@ -35,6 +35,8 @@ volumes:
     vol_size: 30
   - vol_name: ins2-vol
     vol_size: 30
+  - vol_name: ins3-vol
+    vol_size: 30
 
 instances:
   - name: ins1    
@@ -43,6 +45,9 @@ instances:
   - name: ins2
     volume_names:
       - ins2-vol
+  - name: ins3
+    volume_names:
+      - ins3-vol
 
 instance_image: 215f9775-483c-4e0a-b703-d21a5c966f2e
 instance_key_name: team29

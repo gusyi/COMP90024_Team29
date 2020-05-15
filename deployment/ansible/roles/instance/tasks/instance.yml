@@ -23,7 +23,7 @@
   wait_for:
     host: '{{ item.openstack.public_v4 }}'
     port: 22
-    timeout: 240
+    timeout: 120
     search_regex: OpenSSH
   loop: '{{ os_instance.results }}'
   when: item.openstack is defined

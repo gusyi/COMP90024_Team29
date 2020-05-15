@@ -1,0 +1,11 @@
+- name: copy docker-compose file from local to server
+  copy:
+    src: ../../docker-compose.yml
+    dest: /home/ubuntu/docker-compose.yml
+
+- name: start CouchDB service
+  become: yes
+  docker_stack:
+    state: present
+    name: dbservice
+    compose: /home/ubuntu/docker-compose.yml

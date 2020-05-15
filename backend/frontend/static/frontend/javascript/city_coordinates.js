@@ -8,7 +8,8 @@ var city_coordinates = {
                 coordinates: [144.960958, -37.799748],
             },
             properties: {
-                prop0: "value0",
+                name: "Melbourne",
+                city_id: "0",
             },
         },
         {
@@ -18,7 +19,8 @@ var city_coordinates = {
                 coordinates: [144.361733, -38.149988],
             },
             properties: {
-                prop0: "value0",
+                name: "Geelong",
+                city_id: "1",
             },
         },
         {
@@ -28,7 +30,8 @@ var city_coordinates = {
                 coordinates: [143.850336, -37.561172],
             },
             properties: {
-                prop0: "value0",
+                name: "Ballarat",
+                city_id: "2",
             },
         },
         {
@@ -38,7 +41,8 @@ var city_coordinates = {
                 coordinates: [144.279946, -36.756719],
             },
             properties: {
-                prop0: "value0",
+                name: "Bendigo",
+                city_id: "3",
             },
         },
         {
@@ -48,7 +52,8 @@ var city_coordinates = {
                 coordinates: [144.577877, -37.680519],
             },
             properties: {
-                prop0: "value0",
+                name: "Melton",
+                city_id: "4",
             },
         },
     ],

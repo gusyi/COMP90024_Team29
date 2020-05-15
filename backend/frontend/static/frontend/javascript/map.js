@@ -1,5 +1,6 @@
 var map;
 var infoWindow;
+var percent_array = ["0", "0", "0", "0", "0"];
 var percentMin = Number.MAX_VALUE,
     percentMax = -Number.MAX_VALUE;
 
@@ -19,7 +20,7 @@ function initMap() {
     map.data.setStyle(styleFeature);
 
     // load polygon GeoJson
-    map.data.addGeoJson(city_coordinates);
+    map.data.addGeoJson(city_coordinates, { idPropertyName: "city_id" });
     /* map.data.addGeoJson(victoria, {
         idPropertyName: "vic_lga__3",
     }); */
@@ -54,8 +55,8 @@ function clearCensusData() {
     document.getElementById("data-caret").style.display = "none";
 }
 
-function loadPercentData() {
-    for (var k = 0; k < 92; k++) {
+async function loadPercentData() {
+    /* for (var k = 0; k < 92; k++) {
         var percentVariable = getRndInteger(0, 100);
 
         var region_id = "MELBOURNE";
@@ -70,11 +71,40 @@ function loadPercentData() {
         map.data
             .getFeatureById(region_id)
             .setProperty("percent_variable", percentVariable);
+    } */
+    await updatePercent();
+    for (var i = 0; i < 5; i++) {
+        var percentVariable = percent_array[i];
+        var city_id = i;
+        
+        // keep track of min and max values
+        if (percentVariable < percentMin) {
+            percentMin = percentVariable;
+        }
+        if (percentVariable > percentMax) {
+            percentMax = percentVariable;
+        }
+
+        console.log("\n");
+        // update the existing row with the new data
+        map.data
+            .getFeatureById(city_id)
+            .setProperty("percent_variable", ""+percentVariable);
+
     }
 
     // update and display the legend
-    document.getElementById("census-min").textContent = 0;
-    document.getElementById("census-max").textContent = 100;
+    document.getElementById("census-min").textContent = percentMin.toLocaleString();
+    document.getElementById("census-max").textContent = percentMax.toLocaleString();
+}
+
+async function updatePercent() {
+
+    for (i = 0; i < 5; i++) {
+
+        percent_array[i] = getRndInteger(0, 100);
+    }
+    console.log(percent_array);
 }
 
 function getCircle(magnitude) {
@@ -83,7 +113,7 @@ function getCircle(magnitude) {
 
     // delta represents where the value sits between the min and max
     //var delta = 0.9;
-    var delta = Math.random();
+    var delta = (magnitude - percentMin) / (100);
     var color = [];
     for (var i = 0; i < 3; i++) {
         // calculate an integer color based on the delta
@@ -93,7 +123,7 @@ function getCircle(magnitude) {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: "hsl(" + color[0] + "," + color[1] + "%," + color[2] + "%)",
         fillOpacity: 0.2,
-        scale: Math.pow(2, magnitude) / 2,
+        scale: Math.pow(2, 7) / 2,
         strokeColor: "grey",
         strokeWeight: 0.1,
         strokeOpacity: 1.0,
@@ -104,7 +134,15 @@ function getCircle(magnitude) {
 function showInfoWindow(e) {
     var contentString = "Good day";
 
-    //e.feature.setProperty('lib_id', 'hover');
+    var contentString =
+        "<b> Name: </b>" +
+        e.feature.getProperty("name") +
+        "<br><b> Percent: </b>" +
+        //getRndInteger(0, 100).toLocaleString() +
+        e.feature.getProperty("percent_variable").toLocaleString()+
+        "%<br>" +
+        '<a href = "/' +
+        '" class = "click_a" >More info</a>';
 
     // Replace the info window's content and position.
     infoWindow.setContent(contentString);
@@ -122,7 +160,7 @@ function styleFeature(feature) {
 
     // delta represents where the value sits between the min and max
     //var delta = 0.9;
-    var delta = Math.random();
+    var delta = (feature.getProperty('percent_variable') - percentMin) / (100);
 
     var color = [];
     for (var i = 0; i < 3; i++) {
@@ -142,7 +180,7 @@ function styleFeature(feature) {
     if (feature.getProperty("state") === "hover") {
         outlineWeight = zIndex = 2;
     }
-    var magnitude = 7;
+    var magnitude = feature.getProperty('percent_variable');
     return {
         strokeWeight: outlineWeight,
         //strokeColor: "#fff",
@@ -161,12 +199,15 @@ function styleFeature(feature) {
 function mouseInToRegion(e) {
     // set the hover library so the setStyle function can change the border
     e.feature.setProperty("state", "hover");
-    var percent = getRndInteger(percentMin, percentMax);
+    var percent = e.feature.getProperty("percent_variable");
 
     // update the label
-    document.getElementById("data-label").textContent = e.feature.getProperty(
+    /* document.getElementById("data-label").textContent = e.feature.getProperty(
         "vic_lga__3"
-    );
+    ); */
+    document.getElementById("data-label").textContent = e.feature.getProperty(
+        "name"
+    ); 
     document.getElementById("data-value").textContent = percent;
     document.getElementById("data-box").style.display = "block";
     document.getElementById("data-caret").style.display = "block";

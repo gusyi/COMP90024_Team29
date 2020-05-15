@@ -1,0 +1,14 @@
+- hosts: manager
+  gather_facts: true
+  roles:
+    - role: swarm-init
+
+- hosts: workers
+  gather_facts: true
+  roles:
+    - role: swarm-join
+
+- hosts: manager
+  gather_facts: true
+  roles:
+    - role: start-service

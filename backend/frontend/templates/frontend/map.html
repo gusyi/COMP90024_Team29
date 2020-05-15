@@ -1,0 +1,8 @@
+{% extends "base_generic.html" %}
+
+{% block main%}
+  <div id="app" >Hello world</div>
+  <div id="map"></div>
+  {% load static %}
+  <script src="{% static "frontend/main.js" %}"></script>
+{% endblock %}

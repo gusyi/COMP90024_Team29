@@ -9,3 +9,7 @@ def home(request):
 def index(request):
 
     return render(request, 'frontend/index.html')
+
+def map(request):
+    
+    return render(request, 'frontend/map.html')

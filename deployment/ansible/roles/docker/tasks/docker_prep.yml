@@ -31,6 +31,6 @@
 - name: install setuptools
   become: yes
   pip:
-    name: ['setuptools']
+    name: ['setuptools', 'jsondiff']
     state: latest
     executable: pip3

@@ -1,16 +1,65 @@
 version: "3.8"
 services:
-  db: 
-    container_name: db
-    image: couchdb
-    restart: always
+  db-master: 
+    # container_name: db-master
+    image: couchdb:3.1.0
+    # restart: always
+    deploy:
+      restart_policy:
+        condition: any
     volumes:
       - /home/ubuntu/data:/opt/couchdb/data
     environment:
       COUCHDB_USER: 'admin'
       COUCHDB_PASSWORD: 'comp90024'
+      NODENAME: '172.26.131.225'
     ports:
       - "5984:5984"
       - "5986:5896"
       - "4369:4369"
       - "9100-9200:9100-9200"
+    networks:
+      - dbnetwork
+  
+  db-slave1:
+    image: couchdb:3.1.0
+    deploy:
+      restart_policy:
+        condition: any
+    # restart: always
+    ports:
+      - "15984:5984"
+      # - "15986:5896"
+      # - "14369:4369"
+      # - "19100-19200:9100-9200"
+    volumes:
+      - /home/ubuntu/data:/opt/couchdb/data
+    environment: 
+      COUCHDB_USER: 'admin'
+      COUCHDB_PASSWORD: 'comp90024'
+      NODENAME: '172.26.133.204'
+    networks:
+      - dbnetwork
+  
+  db-slave2:
+    image: couchdb:3.1.0
+    # restart: always
+    deploy:
+      restart_policy:
+        condition: any
+    ports:
+      - "25984:5984"
+      # - "25986:5896"
+      # - "24369:4369"
+      # - "29100-29200:9100-9200"
+    volumes:
+      - /home/ubuntu/data:/opt/couchdb/data
+    environment: 
+      COUCHDB_USER: 'admin'
+      COUCHDB_PASSWORD: 'comp90024'
+      NODENAME: '172.26.130.43'
+    networks:
+      - dbnetwork
+
+networks:
+  dbnetwork:

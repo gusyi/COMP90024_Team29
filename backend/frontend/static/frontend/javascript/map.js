@@ -4,6 +4,7 @@ var percent_array = ["0", "0", "0", "0", "0"];
 var percentMin = Number.MAX_VALUE,
     percentMax = -Number.MAX_VALUE;
 
+var infoWindow_exist = false; 
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: {
@@ -32,6 +33,13 @@ function initMap() {
     // initialize the info window
     infoWindow = new google.maps.InfoWindow();
     map.data.addListener("click", showInfoWindow);
+
+    google.maps.event.addListener(map, "click", function (event) {
+        if (infoWindow_exist == true) {
+            infoWindow_exist == false;
+            infoWindow.close();
+        }
+    });
 
     // wire up the button
     var selectBox = document.getElementById("census-variable");
@@ -130,7 +138,6 @@ function getCircle(magnitude) {
 
 // Load the info window with necessary infomation
 function showInfoWindow(e) {
-    var contentString = "Good day";
 
     /* var contentString =
         "<b> Name: </b>" +
@@ -163,6 +170,7 @@ function showInfoWindow(e) {
         e.feature.getProperty("city_id") +
         '" class = "click_a" >More info</a>'; */
 
+    infoWindow_exist = true; 
     // Replace the info window's content and position.
     infoWindow.setContent(contentString);
     infoWindow.setPosition(e.latLng);
@@ -223,6 +231,7 @@ function mouseInToRegion(e) {
     // set the hover library so the setStyle function can change the border
     e.feature.setProperty("state", "hover");
     var percent = e.feature.getProperty("percent_variable");
+    showInfoWindow(e);
 
     // update the label
     /* document.getElementById("data-label").textContent = e.feature.getProperty(

@@ -76,7 +76,7 @@ async function loadPercentData() {
     for (var i = 0; i < 5; i++) {
         var percentVariable = percent_array[i];
         var city_id = i;
-        
+
         // keep track of min and max values
         if (percentVariable < percentMin) {
             percentMin = percentVariable;
@@ -85,7 +85,6 @@ async function loadPercentData() {
             percentMax = percentVariable;
         }
 
-        console.log("\n");
         // update the existing row with the new data
         map.data
             .getFeatureById(city_id)
@@ -104,7 +103,6 @@ async function updatePercent() {
 
         percent_array[i] = getRndInteger(0, 100);
     }
-    console.log(percent_array);
 }
 
 function getCircle(magnitude) {
@@ -123,7 +121,7 @@ function getCircle(magnitude) {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: "hsl(" + color[0] + "," + color[1] + "%," + color[2] + "%)",
         fillOpacity: 0.2,
-        scale: Math.pow(2, 7) / 2,
+        scale: 64 + (magnitude-64)*0.5,
         strokeColor: "grey",
         strokeWeight: 0.1,
         strokeOpacity: 1.0,
@@ -134,21 +132,46 @@ function getCircle(magnitude) {
 function showInfoWindow(e) {
     var contentString = "Good day";
 
-    var contentString =
+    /* var contentString =
         "<b> Name: </b>" +
         e.feature.getProperty("name") +
         "<br><b> Percent: </b>" +
         //getRndInteger(0, 100).toLocaleString() +
-        e.feature.getProperty("percent_variable").toLocaleString()+
+        e.feature.getProperty("percent_variable").toLocaleString() +
         "%<br>" +
-        '<a href = "/' +
-        '" class = "click_a" >More info</a>';
+        '<a href = "/city/' +
+        e.feature.getProperty("city_id") +
+        '" class = "click_a" >More info</a>'; */
+    
+    var contentString =
+        "<div style ='font-size:15; line-height: 1'> " +
+        "<p class='font-weight-bold'> Name: " +
+        e.feature.getProperty("name") +
+        "</p>" +
+        "<br><p class='font-weight-bold'> Percent: " +
+        //getRndInteger(0, 100).toLocaleString() +
+        e.feature.getProperty("percent_variable").toLocaleString() +
+        "%</p>" +
+        "<br>" +
+        "<button type='button' class='btn btn-primary btn-sm btn-block' " +
+        "data-toggle='modal' data-target='#exampleModal'" +
+        "data-whatever='" +
+        e.feature.getProperty("name") +
+        "'>More Info</button>" +
+        "</div>";
+        /* '<a href = "/city/' +
+        e.feature.getProperty("city_id") +
+        '" class = "click_a" >More info</a>'; */
 
     // Replace the info window's content and position.
     infoWindow.setContent(contentString);
     infoWindow.setPosition(e.latLng);
     infoWindow.open(map);
 }
+
+
+
+
 
 // Applies a gradient style based on the 'percent_variable' column.
 // This is the callback passed to data.setStyle() and is called for each row in

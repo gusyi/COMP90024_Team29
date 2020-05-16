@@ -13,3 +13,10 @@ def index(request):
 def map(request):
     
     return render(request, 'frontend/map.html')
+
+def city(request, city_id):
+    context = {
+        'city_id' : city_id
+    }
+    
+    return render(request, 'frontend/city.html', context = context)

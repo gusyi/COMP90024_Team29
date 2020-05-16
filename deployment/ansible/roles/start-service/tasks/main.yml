@@ -32,3 +32,18 @@
 #     state: present
 #     name: dbservice
 #     compose: /home/ubuntu/docker-compose.yml
+
+#sudo ls -l /var/run/docker.sock
+- name: check file permission for docker.sock
+  become: yes
+  stat:
+    path: /var/run/docker.sock
+  register: fstat
+
+#sudo chmod 666 /var/run/docker.sock
+- name: change permission for docker.sock
+  become: yes
+  file: 
+    path: /var/run/docker.sock
+    mode: 0666
+  when: fstat.mode != "0666"

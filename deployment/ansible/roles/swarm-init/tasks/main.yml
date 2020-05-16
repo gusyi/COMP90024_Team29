@@ -10,7 +10,8 @@
   register: manager_token_result
 
 - debug:
-    msg: "{{ manager_token_result }}"  
+    msg: "{{ manager_token_result }}, advertise addr -- {{ ansible_eth0['ipv4']['address'] }}"
+    
 - set_fact:
     manager_token: "{{ manager_token_result.stdout }}"
 

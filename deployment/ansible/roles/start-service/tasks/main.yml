@@ -1,3 +1,25 @@
+- name: restart Docker service
+  become: yes
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: docker
+
+- name: a
+  become: yes
+  docker_container:
+    name: db-master
+    image: couchdb:latest
+    state: started
+    restart: yes
+    ports:
+      - "5984:5984"
+      - "5986:5896"
+      - "4369:4369"
+      - "9100:9100"
+    volumes:
+      - /home/ubuntu/data:/opt/couchdb/data
+
 - name: copy docker-compose file from local to server
   copy:
     src: ../../docker-compose.yml
@@ -5,7 +27,8 @@
 
 - name: start CouchDB service
   become: yes
-  docker_stack:
-    state: present
-    name: dbservice
-    compose: /home/ubuntu/docker-compose.yml
+  raw: docker stack deploy -c /home/ubuntu/docker-compose.yml dbservice
+#   docker_stack:
+#     state: present
+#     name: dbservice
+#     compose: /home/ubuntu/docker-compose.yml

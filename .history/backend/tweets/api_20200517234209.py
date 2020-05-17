@@ -15,4 +15,4 @@ class TweetResultViewSet(viewsets.ModelViewSet):
     permission_classes=[
         permissions.AllowAny
     ]
-    serializer_class = TweetResultSerializer
+    serializer_class = TweetTestSerializer

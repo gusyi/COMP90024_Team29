@@ -5,20 +5,44 @@
     daemon_reload: yes
     name: docker
 
-- name: a
-  become: yes
-  docker_container:
-    name: db-master
-    image: couchdb:latest
-    state: started
-    restart: yes
-    ports:
-      - "5984:5984"
-      - "5986:5896"
-      - "4369:4369"
-      - "9100:9100"
-    volumes:
-      - /home/ubuntu/data:/opt/couchdb/data
+# - name: start Docker containers
+#   become: yes
+#   docker_container:
+#     name: db-master
+#     image: couchdb:latest
+#     state: started
+#     restart: yes
+#     ports:
+#       - "5984:5984"
+#       - "5986:5896"
+#       - "4369:4369"
+#       - "9100:9100"
+#     volumes:
+#       - /home/ubuntu/data:/opt/couchdb/data
+    
+#     name: db-slave-1
+#     image: couchdb:latest
+#     state: started
+#     restart: yes
+#     ports:
+#       - "15984:5984"
+#       - "15986:5896"
+#       - "14369:4369"
+#       - "19100:9100"
+#     volumes:
+#       - /home/ubuntu/data:/opt/couchdb/data
+    
+#     name: db-slave-1
+#     image: couchdb:latest
+#     state: started
+#     restart: yes
+#     ports:
+#       - "25984:5984"
+#       - "25986:5896"
+#       - "24369:4369"
+#       - "29100:9100"
+#     volumes:
+#       - /home/ubuntu/data:/opt/couchdb/data
 
 - name: copy docker-compose file from local to server
   copy:
@@ -28,12 +52,9 @@
 - name: start CouchDB service
   become: yes
   raw: docker stack deploy -c /home/ubuntu/docker-compose.yml dbservice
-#   docker_stack:
-#     state: present
-#     name: dbservice
-#     compose: /home/ubuntu/docker-compose.yml
 
 #sudo ls -l /var/run/docker.sock
+#permission needs to be changed if attempting to use 'docker' command on instance
 - name: check file permission for docker.sock
   become: yes
   stat:
@@ -46,4 +67,7 @@
   file: 
     path: /var/run/docker.sock
     mode: 0666
-  when: fstat.mode != "0666"
+  when: fstat.stat.mode != "0666"
+
+- debug:
+    msg: "{{ fstat.stat.mode }}"

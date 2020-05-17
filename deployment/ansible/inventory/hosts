@@ -1,7 +1,8 @@
 [all]
-172.26.131.225
-172.26.133.204
-172.26.130.43
+172.26.134.36
+172.26.130.123
+172.26.130.204
+172.26.130.155
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
@@ -10,16 +11,19 @@ ansible_ssh_private_key_file=~/.ssh/team29.pem
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 [manager]
-172.26.131.225
+172.26.134.36
 
 [workers]
-172.26.133.204
-172.26.130.43
+172.26.130.123
+172.26.130.204
 
 [databases]
-172.26.131.225
-172.26.133.204
-172.26.130.43
+172.26.134.36
+172.26.130.123
+172.26.130.204
+
+[webserver]
+172.26.130.155
 
 [TEAM29:vars]
 ansible_python_interpreter=/usr/bin/python3

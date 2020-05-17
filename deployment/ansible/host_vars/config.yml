@@ -39,11 +39,13 @@ security_groups:
 
 volumes:
   - vol_name: ins1-vol
-    vol_size: 30
+    vol_size: 40
   - vol_name: ins2-vol
-    vol_size: 30
+    vol_size: 40
   - vol_name: ins3-vol
-    vol_size: 30
+    vol_size: 40
+  - vol_name: ins4-vol
+    vol_size: 40
 
 instances:
   - name: ins1    
@@ -55,6 +57,9 @@ instances:
   - name: ins3
     volume_names:
       - ins3-vol
+  - name: ins4
+    volume_names:
+      - ins4-vol
 
 instance_image: 215f9775-483c-4e0a-b703-d21a5c966f2e
 instance_key_name: team29

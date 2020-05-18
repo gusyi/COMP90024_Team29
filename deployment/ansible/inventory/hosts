@@ -1,8 +1,13 @@
+ins1 ansible_host=172.26.132.216
+ins2 ansible_host=172.26.128.114
+ins3 ansible_host=172.26.134.61
+ins4 ansible_host=172.26.131.25
+
 [all]
-172.26.134.36
-172.26.130.123
-172.26.130.204
-172.26.130.155
+ins1
+ins2
+ins3
+ins4
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
@@ -11,16 +16,16 @@ ansible_ssh_private_key_file=~/.ssh/team29.pem
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 [manager]
-manager ansible_host=172.26.134.36
+ins1
 
 [workers]
-worker-1 ansible_host=172.26.130.123
-worker-2 ansible_host=172.26.130.204
+ins2
+ins3
 
 [databases]
-manager ansible_host=172.26.134.36
-worker-1 ansible_host=172.26.130.123
-worker-2 ansible_host=172.26.130.204
+ins1
+ins2
+ins3
 
 [webserver]
-webserver ansible_host=172.26.130.155
+ins4

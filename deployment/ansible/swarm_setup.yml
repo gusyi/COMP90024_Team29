@@ -1,29 +1,29 @@
-# - hosts: manager
-#   gather_facts: true
-#   roles:
-#     - role: swarm-init
-
-# - hosts: workers
-#   gather_facts: true
-#   roles:
-#     - role: swarm-join
-
-- hosts: databases
-  remote_user: ubuntu
-  become: yes
+- hosts: manager
   gather_facts: true
-  pre_tasks:
-    - set_fact:
-        hosts: {}
-    - name: Ensure proxys are well-configured
-      template:
-        src: ./proxy_config
-        dest: /etc/environment
+  roles:
+    - role: swarm-init
 
-    - name: Ensure ssh server is well configured
-      template:
-        src: ./ssh_config
-        dest: /home/ubuntu/.ssh/config
+- hosts: workers
+  gather_facts: true
+  roles:
+    - role: swarm-join
+
+# - hosts: databases
+#   remote_user: ubuntu
+#   become: yes
+#   gather_facts: true
+#   pre_tasks:
+#     - set_fact:
+#         hosts: {}
+#     - name: Ensure proxys are well-configured
+#       template:
+#         src: ./proxy_config
+#         dest: /etc/environment
+
+#     - name: Ensure ssh server is well configured
+#       template:
+#         src: ./ssh_config
+#         dest: /home/ubuntu/.ssh/config
 
     # - name: Scan all nodes port to get information step 1
     #   command: ssh-keyscan -H {{ item }}
@@ -59,8 +59,8 @@
     #   when: item.stdout != "success"
     #   with_items: "{{ ssh_states.results }}"
 
-  roles:
-    - role: container-setup
+  # roles:
+  #   - role: container-setup
 
 # - hosts: databases
 #   remote_user: ubuntu

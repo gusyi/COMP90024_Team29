@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "== Set variables =="
-export declare -a nodes=(172.26.134.36 172.26.130.123 172.26.130.204)
+export declare -a nodes=(172.26.132.216 172.26.128.114 172.26.134.61)
 export masternode=`echo ${nodes} | cut -f1 -d' '`
 export declare -a othernodes=`echo ${nodes[@]} | sed s/${masternode}//`
 export size=${#nodes[@]}
@@ -106,8 +106,10 @@ for node in "${nodes[@]}"; do  curl -X GET "http://${user}:${pass}@${node}:5984/
 
 # sleep 10
 
+# echo "== Finish cluster =="
 # curl -X POST "http://${user}:${pass}@localhost:${master_port}/_cluster_setup" -H 'Content-Type: application/json' -d '{"action": "finish_cluster"}'
 
 # curl http://${user}:${pass}@localhost:${master_port}/_cluster_setup
 
+# echo "== Check nodes =="
 # for port in "${ports[@]}"; do  curl -X GET http://${user}:${pass}@localhost:${port}/_membership; done

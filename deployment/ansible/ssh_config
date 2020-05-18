@@ -1,0 +1,7 @@
+IdentityFile ~/.ssh/team29.pem
+{% for host in groups['all'] %}
+Host {{ host }}
+    Hostname {{ host }}
+    Port 22
+    User ubuntu
+{% endfor %}

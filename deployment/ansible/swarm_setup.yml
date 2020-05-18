@@ -8,7 +8,82 @@
 #   roles:
 #     - role: swarm-join
 
-- hosts: manager
+- hosts: databases
+  remote_user: ubuntu
+  become: yes
   gather_facts: true
+  pre_tasks:
+    - set_fact:
+        hosts: {}
+    - name: Ensure proxys are well-configured
+      template:
+        src: ./proxy_config
+        dest: /etc/environment
+
+    - name: Ensure ssh server is well configured
+      template:
+        src: ./ssh_config
+        dest: /home/ubuntu/.ssh/config
+
+    # - name: Scan all nodes port to get information step 1
+    #   command: ssh-keyscan -H {{ item }}
+    #   loop: "{{ groups['all'] }}"
+    #   register: knownhosts
+
+    # - name: Scan all nodes port to get information step 3
+    #   command: ssh-keyscan -H {{ item }},{{ hostvars[item]['ansible_default_ipv4']['address'] }}
+    #   loop: "{{ groups['all'] }}"
+    #   register: knownhosts
+
+    # - name: Create known hosts if it doesn't exist
+    #   file:
+    #     path: "/home/ubuntu/.ssh/known_hosts"
+    #     state: touch
+
+    # - name: Save nodes info to known hosts
+    #   blockinfile:
+    #     path: /home/ubuntu/.ssh/known_hosts
+    #     block: |
+    #       {% for knownhost in knownhosts.results %}
+    #       {{ knownhost.stdout }}
+    #       {% endfor %}
+
+    # - name: Ensure all nodes can visit other nodes
+    #   command: 'ssh {{ item }} echo "success"'
+    #   loop: "{{ groups['all'] }}"
+    #   register: ssh_states
+    
+    # - name: Testing all nodes can visit other nodes
+    #   fail:
+    #     msg: "Connection failed"
+    #   when: item.stdout != "success"
+    #   with_items: "{{ ssh_states.results }}"
+
   roles:
-    - role: start-service
+    - role: container-setup
+
+# - hosts: databases
+#   remote_user: ubuntu
+#   become: yes
+#   gather_facts: true
+#   roles:
+#     - role: enable-cluster
+
+# - hosts: workers
+#   remote_user: ubuntu
+#   become: yes
+#   gather_facts: true
+#   roles:
+#     - role: add-node
+
+# - hosts: manager
+#   remote_user: ubuntu
+#   become: yes
+#   gather_facts: true 
+#   roles:
+#     - role: finish-cluster
+
+# - hosts: manager
+#   gather_facts: true
+#   roles:
+#     - role: start-service

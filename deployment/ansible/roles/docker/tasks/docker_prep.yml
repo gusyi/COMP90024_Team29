@@ -1,4 +1,4 @@
-- name: Gather facts of remote host
+- name: gather facts of remote host
   setup:
     gather_subset: all
 
@@ -17,7 +17,7 @@
 - name: install tools
   become: yes
   apt:
-    name: ['vim','python3-pip'] 
+    name: ['vim', 'python3-pip', 'python3-setuptools'] 
     state: latest
     install_recommends: no
     update_cache: yes
@@ -28,9 +28,9 @@
     name: ['pip']
     state: latest
 
-- name: install setuptools
+- name: install
   become: yes
   pip:
-    name: ['setuptools', 'jsondiff']
+    name: ['jsondiff']
     state: latest
     executable: pip3

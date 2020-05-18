@@ -1,0 +1,21 @@
+- hosts: manager
+  gather_facts: true
+  tasks:
+    - name: copy file from local to server
+      become: yes
+      copy:
+        src: ./cluster_setup.sh
+        dest: /home/ubuntu/cluster_setup.sh
+        mode: 0777
+    - name: copy file from local to server
+      become: yes
+      copy:
+        src: ./docker-compose.yml
+        dest: /home/ubuntu/docker-compose.yml
+        mode: 0777
+    - name: copy file from local to server
+      become: yes
+      copy:
+        src: ~/.ssh/team29.pem
+        dest: /home/ubuntu/.ssh/team29.pem
+        mode: 0777

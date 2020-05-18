@@ -1,65 +1,137 @@
-version: "3.8"
+version: "3"
 services:
-  db-master: 
-    # container_name: db-master
-    image: couchdb:3.1.0
-    # restart: always
-    deploy:
-      restart_policy:
-        condition: any
-    volumes:
-      - /home/ubuntu/data:/opt/couchdb/data
-    environment:
-      COUCHDB_USER: 'admin'
-      COUCHDB_PASSWORD: 'comp90024'
-      NODENAME: '172.26.134.36'
+  couch_master:
+    image: "ibmcom/couchdb3:3.0.0"
+    restart: always
     ports:
       - "5984:5984"
       - "5986:5986"
       - "4369:4369"
       - "9100-9200:9100-9200"
+    links:
+      - couch_slave1
+      - couch_slave2
+    volumes:
+      - ./data/master/data:/opt/couchdb/data
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=admin
+      - NODENAME=172.26.134.36
+    container_name: couch_master
     networks:
-      - dbnetwork
-  
-  db-slave1:
-    image: couchdb:3.1.0
-    deploy:
-      restart_policy:
-        condition: any
-    # restart: always
+      couchdb_nw:
+        ipv4_address: 172.26.134.36
+
+  couch_slave1:
+    image: "ibmcom/couchdb3:3.0.0"
+    restart: always
     ports:
       - "15984:5984"
-      - "15986:5986"
-      - "14369:4369"
-      - "19100-19200:9100-9200"
     volumes:
-      - /home/ubuntu/data:/opt/couchdb/data
-    environment: 
-      COUCHDB_USER: 'admin'
-      COUCHDB_PASSWORD: 'comp90024'
-      NODENAME: '172.26.130.123'
+      - ./data/slave1/data:/opt/couchdb/data
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=admin
+      - NODENAME=172.26.130.123
+    container_name: couch_slave1
     networks:
-      - dbnetwork
-  
-  db-slave2:
-    image: couchdb:3.1.0
-    # restart: always
-    deploy:
-      restart_policy:
-        condition: any
+      couchdb_nw:
+        ipv4_address: 172.26.130.123
+
+  couch_slave2:
+    image: "ibmcom/couchdb3:3.0.0"
+    restart: always
     ports:
       - "25984:5984"
-      - "25986:5986"
-      - "24369:4369"
-      - "29100-29200:9100-9200"
     volumes:
-      - /home/ubuntu/data:/opt/couchdb/data
-    environment: 
-      COUCHDB_USER: 'admin'
-      COUCHDB_PASSWORD: 'comp90024'
-      NODENAME: '172.26.130.204'
+      - ./data/slave2/data:/opt/couchdb/data
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=admin
+      - NODENAME=172.26.130.204
+    container_name: couch_slave2
     networks:
-      - dbnetwork
+      couchdb_nw:
+        ipv4_address: 172.26.130.204
 
 networks:
-  dbnetwork:
+  couchdb_nw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.26.0.0/16
+
+
+# version: "3.8"
+
+# services:
+#   db-master: 
+#     # container_name: db-master
+#     image: couchdb:3.1.0
+#     # restart: always
+#     command: -name couchdb@172.26.134.36 -setcookie thecookie
+#     deploy:
+#       restart_policy:
+#         condition: any
+#     links:
+#       - db-slave1
+#       - db-slave2
+#     ports:
+#       - "5984:5984"
+#       # - "5986:15986"
+#       # - "44369:4369"
+#       # - "49100-49200:9100-9200"
+#     volumes:
+#       - /home/ubuntu/data:/opt/couchdb/data
+#     environment:
+#       COUCHDB_USER: 'admin'
+#       COUCHDB_PASSWORD: 'comp90024'
+#       # NODENAME: '172.26.134.36'
+#     networks:
+#       - dbnetwork
+
+#   db-slave1:
+#     image: couchdb:3.1.0
+#     # restart: always
+#     deploy:
+#       restart_policy:
+#         condition: any
+#     command: -name couchdb@172.26.130.123 -setcookie thecookie
+#     ports:
+#       - "15984:5984"
+#       # - "5986:15986"
+#       # - "14369:4369"
+#       # - "19100-19200:9100-9200"
+#     volumes:
+#       - /home/ubuntu/data:/opt/couchdb/data
+#     environment: 
+#       COUCHDB_USER: 'admin'
+#       COUCHDB_PASSWORD: 'comp90024'
+#       # NODENAME: '172.26.130.123'
+#     networks:
+#       - dbnetwork
+  
+#   db-slave2:
+#     image: couchdb:3.1.0
+#     # restart: always
+#     deploy:
+#       restart_policy:
+#         condition: any
+#     command: -name couchdb@172.26.130.204 -setcookie thecookie
+#     ports:
+#       - "25984:5984"
+#       # - "25986:5986"
+#       # - "24369:4369"
+#       # - "29100-29200:9100-9200"
+#     volumes:
+#       - /home/ubuntu/data:/opt/couchdb/data
+#     environment: 
+#       COUCHDB_USER: 'admin'
+#       COUCHDB_PASSWORD: 'comp90024'
+#       # NODENAME: '172.26.130.204'
+#     networks:
+#       - dbnetwork
+
+# networks:
+#   dbnetwork:
+#     driver: overlay

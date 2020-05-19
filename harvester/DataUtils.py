@@ -60,8 +60,28 @@ class Analysis:
             return True
         return False
 
-    # def get_sentiment(self, text):
-    #     tb = TextBlob(text)
-    #     sen = tb.sentiment
+    def retain_essential(self, tweet):
+        if 'full_text' not in tweet:
+            essential = {
+                '_id': tweet['_id'],
+                'created_at': tweet['created_at'],
+                'text': tweet['text'],
+                'user': tweet['user'],
+                'place': tweet['place'],
+                'geo': tweet['geo'],
+                'coordinates': tweet['coordinates'],
+                'lang': tweet['lang']
+            }
+        else:
+            essential = {
+                '_id': tweet['_id'],
+                'created_at': tweet['created_at'],
+                'text': tweet['full_text'],
+                'user': tweet['user'],
+                'place': tweet['place'],
+                'geo': tweet['geo'],
+                'coordinates': tweet['coordinates'],
+                'lang': tweet['lang']
+            }
 
-    #     return sen.polarity, sen.subjectivity
+        return essential

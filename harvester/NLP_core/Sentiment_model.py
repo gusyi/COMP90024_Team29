@@ -73,7 +73,7 @@ def sentiment_test(tweets, single_flag=1):
     tweet_df = pd.concat([tweet_df.drop(['sentiments'], axis=1), tweet_df['sentiments'].apply(pd.Series)], axis=1)
 
     # append result
-    tweet_df["result"] = tweet_df['compound'].apply(lambda x: 'positive' if x >= 0.05 else 'nagetive' if x <= -0.05 else 'neutral')
+    tweet_df["result"] = tweet_df['compound'].apply(lambda x: 'positive' if x >= 0.05 else 'negative' if x <= -0.05 else 'neutral')
 
     return tweet_df["result"].tolist()
 

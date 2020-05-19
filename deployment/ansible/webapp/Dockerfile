@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.7-slim
+FROM python:3.7.3
 
 ENV http_proxy http://wwwproxy.unimelb.edu.au:8000
 ENV https_proxy http://wwwproxy.unimelb.edu.au:8000
@@ -19,15 +19,16 @@ RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 
-# Set the working directory to /app
-WORKDIR /app
+# Set working directory
+WORKDIR /home/ubuntu/
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the current directory contents into the container
+COPY ./backend /home/ubuntu/
+COPY ./startserver.sh /home/ubuntu/startserver.sh
 
 
-# Make port 80 available to the world outside this container
-EXPOSE 8081
+# Expose port 8080
+EXPOSE 8080
 
-# Run app.py when the container launches
-CMD ["python", "back.py"]
+# Run manage.py when the container launches
+CMD [ "python","manage.py","runserver","0.0.0.0:8080" ]

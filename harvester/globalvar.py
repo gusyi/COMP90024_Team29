@@ -46,6 +46,7 @@ track_words_broad = ['Scott Morrison', 'Morrison', '@ScottMorrisonMP', '#ScottMo
 search_terms = '(Scott Morrison) OR Morrison OR @ScottMorrisonMP OR #ScottMorrison'
 search_terms_broad = '(Scott Morrison) OR Morrison OR @ScottMorrisonMP OR #ScottMorrison OR PM OR (Prime Minister)'
 
+all_range = ['vic', 'victoria', 'melbourne', 'melb']
 wider_range = ['vic', 'victoria']
 narrower_range = ['melbourne', 'melb']
 geelong_range = ['Geelong', 'geelong']

@@ -2,7 +2,7 @@ import sys
 import json
 from datetime import date, datetime
 import tweepy
-from tweepy import Stream
+from tweepy import Streamqa                                                                                                                                                             
 from tweepy.streaming import StreamListener
 
 import globalvar
@@ -19,24 +19,6 @@ def get_api(assigned_app):
     # auth.set_access_token(access_token, access_secret)
 
     return tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
-
-# def probe_timeline(collection):
-#     for item in collection:
-#         item = json.loads(json.dumps(item._json))
-
-#         if dataproc.get_create_date(item) < end_date: #don't care anything posted beyond the cut-off date
-#             break
-            
-#         if dataproc.contains_keywords(item):
-#             tweet_count1 += 1
-#             print(tl['text'],'\n-----------------------\n')
-
-#             if dataproc.is_retweet(item):
-#                 print('!!! Found RT !!!')
-#                 source_id = dataproc.get_source_tweet(tl)
-#                 rts = api_rt.retweeters(id=source_id,stringify_ids=True)
-
-#                 print('Retweeter count...', len(rts))
 
 def add_to_db(data, dbname):
     fM = open('historical_data/Geelong.json', 'a+')

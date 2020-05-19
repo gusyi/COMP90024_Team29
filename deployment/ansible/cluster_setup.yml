@@ -4,8 +4,8 @@
     - name: copy file from local to server
       become: yes
       copy:
-        src: ./cluster_setup.sh
-        dest: /home/ubuntu/cluster_setup.sh
+        src: ./cluster_master.sh
+        dest: /home/ubuntu/cluster_master.sh
         mode: 0777
     - name: copy file from local to server
       become: yes
@@ -21,6 +21,52 @@
         mode: 0777
     #sudo ls -l /var/run/docker.sock
     #permission needs to be changed if attempting to use 'docker' command on instance
+    - name: check file permission for docker.sock
+      become: yes
+      stat:
+        path: /var/run/docker.sock
+      register: fstat
+
+    #sudo chmod 666 /var/run/docker.sock
+    - name: change permission for docker.sock
+      become: yes
+      file: 
+        path: /var/run/docker.sock
+        mode: 0666
+      when: fstat.stat.mode != "0666"
+
+- hosts: worker1
+  tasks:
+    - name: copy file from local to server
+      become: yes
+      copy:
+        src: ./cluster_worker1.sh
+        dest: /home/ubuntu/cluster_worker1.sh
+        mode: 0777
+
+    - name: check file permission for docker.sock
+      become: yes
+      stat:
+        path: /var/run/docker.sock
+      register: fstat
+
+    #sudo chmod 666 /var/run/docker.sock
+    - name: change permission for docker.sock
+      become: yes
+      file: 
+        path: /var/run/docker.sock
+        mode: 0666
+      when: fstat.stat.mode != "0666"
+
+- hosts: worker2
+  tasks:
+    - name: copy file from local to server
+      become: yes
+      copy:
+        src: ./cluster_worker2.sh
+        dest: /home/ubuntu/cluster_worker2.sh
+        mode: 0777
+
     - name: check file permission for docker.sock
       become: yes
       stat:

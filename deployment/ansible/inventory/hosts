@@ -18,6 +18,12 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 [manager]
 ins1
 
+[worker1]
+ins2
+
+[worker2]
+ins3
+
 [workers]
 ins2
 ins3

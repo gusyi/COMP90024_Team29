@@ -1,4 +1,4 @@
 - include_tasks: docker_prep.yml
-- include_tasks: mount_volumes.yml
+# - include_tasks: mount_volumes.yml
 - include_tasks: docker_install.yml
 - include_tasks: docker_setup.yml

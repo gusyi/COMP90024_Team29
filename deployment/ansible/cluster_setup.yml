@@ -1,4 +1,4 @@
-- hosts: manager
+- hosts: databases
   gather_facts: true
   tasks:
     - name: copy file from local to server
@@ -19,3 +19,18 @@
         src: ~/.ssh/team29.pem
         dest: /home/ubuntu/.ssh/team29.pem
         mode: 0777
+    #sudo ls -l /var/run/docker.sock
+    #permission needs to be changed if attempting to use 'docker' command on instance
+    - name: check file permission for docker.sock
+      become: yes
+      stat:
+        path: /var/run/docker.sock
+      register: fstat
+
+    #sudo chmod 666 /var/run/docker.sock
+    - name: change permission for docker.sock
+      become: yes
+      file: 
+        path: /var/run/docker.sock
+        mode: 0666
+      when: fstat.stat.mode != "0666"

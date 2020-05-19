@@ -2,6 +2,7 @@
 
 echo "== Set variables =="
 export declare -a nodes=(172.26.132.216 172.26.128.114 172.26.134.61)
+export declare -a ports=(5984 15984 25984)
 export masternode=`echo ${nodes} | cut -f1 -d' '`
 export declare -a othernodes=`echo ${nodes[@]} | sed s/${masternode}//`
 export size=${#nodes[@]}
@@ -9,7 +10,7 @@ export user=admin
 export pass=admin
 export VERSION='3.0.0'
 export cookie='a192aeb9904e6590849337933b000c99'
-export uuid='a192aeb9904e6590849337933b001159'
+export uuid='d4f7112a8d8ed58016aeac66cbe8ac22'
 
 echo "== Get CouchDB =="
 docker pull ibmcom/couchdb3:${VERSION}
@@ -24,14 +25,29 @@ for node in "${nodes[@]}"
     fi 
 done
 
-for node in "${nodes[@]}" 
+# for node in "${nodes[@]}" 
+#   do
+#     docker create\
+#       --name couchdb${node}\
+#       --publish 5984:5984\
+#       --publish 4369:4369\
+#       --publish 9100:9100\
+#       --env COUCHDB_USER=${user}\
+#       --env COUCHDB_PASSWORD=${pass}\
+#       --env COUCHDB_SECRET=${cookie}\
+#       --env ERL_FLAGS="-setcookie \"${cookie}\" -name \"couchdb@${node}\""\
+#       ibmcom/couchdb3:${VERSION}
+# done
+
+for (( i=0; i<${size}; i++ )); 
   do
     docker create\
-      --name couchdb${node}\
+      --name couchdb${nodes[${i}]}\
+      -p ${ports[${i}]}:5984\
       --env COUCHDB_USER=${user}\
       --env COUCHDB_PASSWORD=${pass}\
       --env COUCHDB_SECRET=${cookie}\
-      --env ERL_FLAGS="-setcookie \"${cookie}\" -name \"couchdb@${node}\""\
+      --env ERL_FLAGS="-setcookie \"${cookie}\" -name \"couchdb@${nodes[${i}]}\""\
       ibmcom/couchdb3:${VERSION}
 done
 
@@ -40,31 +56,39 @@ declare -a conts=(`docker ps --all | grep couchdb | cut -f1 -d' ' | xargs -n${si
 for cont in "${conts[@]}"; do docker start ${cont}; done
 
 echo "== Setup cluster =="
-for node in ${othernodes} 
-do
-    curl -XPOST "http://${user}:${pass}@${masternode}:5984/_cluster_setup" \
-      --header "Content-Type: application/json"\
-      --data "{\"action\": \"enable_cluster\", \"bind_address\":\"0.0.0.0\",\
-             \"username\": \"${user}\", \"password\":\"${pass}\", \"port\": \"5984\",\
-             \"remote_node\": \"${node}\", \"node_count\": \"$(echo ${nodes[@]} | wc -w)\",\
-             \"remote_current_user\":\"${user}\", \"remote_current_password\":\"${pass}\"}"
-done
+curl -X POST -H "Content-Type: application/json" http://admin:admin@172.26.132.216:5984/_cluster_setup  -d '{"action":"enable_cluster", "bind_address":"0.0.0.0", "username":"admin", "password":"admin", "port":"25984", "remote_node":"172.26.134.61", "node_count":"3", "remote_current_user":"admin", "remote_current_password":"admin"}'
+curl -X POST -H "Content-Type: application/json" http://admin:admin@172.26.132.216:5984/_cluster_setup  -d '{"action":"enable_cluster", "bind_address":"0.0.0.0", "username":"admin", "password":"admin", "port":"15984", "remote_node":"172.26.128.114", "node_count":"3", "remote_current_user":"admin", "remote_current_password":"admin"}'
 
-for node in ${othernodes}
-do
-    curl -XPOST "http://${user}:${pass}@${masternode}:5984/_cluster_setup"\
-      --header "Content-Type: application/json"\
-      --data "{\"action\": \"add_node\", \"host\":\"${node}\",\
-             \"port\": \"5984\", \"username\": \"${user}\", \"password\":\"${pass}\"}"
-done
+# for node in ${othernodes} 
+# do
+#     curl -XPOST "http://${user}:${pass}@${masternode}:5984/_cluster_setup" \
+#       --header "Content-Type: application/json"\
+#       --data "{\"action\": \"enable_cluster\", \"bind_address\":\"0.0.0.0\",\
+#              \"username\": \"${user}\", \"password\":\"${pass}\", \"port\": \"5984\",\
+#              \"remote_node\": \"${node}\", \"node_count\": \"$(echo ${nodes[@]} | wc -w)\",\
+#              \"remote_current_user\":\"${user}\", \"remote_current_password\":\"${pass}\"}"
+# done
+
+curl -X POST -H "Content-Type: application/json" http://admin:admin@172.26.132.216:5984/_cluster_setup  -d '{"action":"add_node", "host":"172.26.128.114", "username":"admin", "password":"admin", "port":"15984"}'
+curl -X POST -H "Content-Type: application/json" http://admin:admin@172.26.132.216:5984/_cluster_setup  -d '{"action":"add_node", "host":"172.26.134.61", "port":"25984", "username":"admin", "password":"admin"}'
+
+# for node in ${othernodes}
+# do
+#     curl -XPOST "http://${user}:${pass}@${masternode}:5984/_cluster_setup"\
+#       --header "Content-Type: application/json"\
+#       --data "{\"action\": \"add_node\", \"host\":\"${node}\",\
+#              \"port\": \"5984\", \"username\": \"${user}\", \"password\":\"${pass}\"}"
+# done
 
 # THis empty request is to avoid an error message when finishing the cluster setup 
 curl -XGET "http://${user}:${pass}@${masternode}:5984/"
 
+echo "== Finish cluster =="
 curl -XPOST "http://${user}:${pass}@${masternode}:5984/_cluster_setup"\
     --header "Content-Type: application/json" --data "{\"action\": \"finish_cluster\"}"
 
 echo "== Check nodes =="
+# curl -X GET http://admin:admin@172.26.132.216:5984/_membership
 for node in "${nodes[@]}"; do  curl -X GET "http://${user}:${pass}@${node}:5984/_membership"; done
 
 echo "== Test create DB =="

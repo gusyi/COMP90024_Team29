@@ -14,6 +14,7 @@ class TweetResultData(models.Model):
     tweetcounts = models.IntegerField()
     location = models.CharField(max_length=30, blank=True)
     approval_rate = models.DecimalField(max_digits=6, decimal_places=5)
+    city_id = models.CharField(max_length =30, null = False, default = "Melbourne")
 
 
 

@@ -11,8 +11,6 @@ class CityAdmin(admin.ModelAdmin):
         
         (None, {'fields':['postgraduate_percentage']}),
         (None, {'fields':['migration_percentage']}),
-        
-        (None, {'fields':['migration_number']}),
     ]
 
     list_display = ('name',)

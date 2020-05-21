@@ -12,10 +12,9 @@ class TweetTestData(models.Model):
 class City (models.Model):
     name = models.CharField(max_length=30, blank=False, null=False, default="Melbourne")
     average_income = models.IntegerField()
-    education_level = models.CharField(max_length=50, blank=True)
-    postgraduate_percentage = models.DecimalField(max_digits=6, decimal_places=3)
-    migration_percentage = models.DecimalField(max_digits=6, decimal_places=3, null=False,help_text='decimal, 0-1')
-    migration_number = models.IntegerField(null = True, blank=True, default=0,help_text='Integer')
+    education_level = models.DecimalField(max_digits=6, decimal_places=3)
+    migration_percentage = models.DecimalField(max_digits=6, decimal_places=3)
+    migration_number = models.IntegerField(null = True, blank=True, default=0)
 
     def __str__(self):
         return self.name

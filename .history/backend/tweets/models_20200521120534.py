@@ -15,17 +15,11 @@ class City (models.Model):
     education_level = models.CharField(max_length=50, blank=True)
     migration_percentage = models.DecimalField(max_digits=6, decimal_places=3)
 
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['name']
-
 
 class TweetResultData(models.Model):
     date = models.DateField(null = False)
     tweetcounts = models.IntegerField()
-    approval_rate = models.DecimalField(max_digits=6, decimal_places=5, help_text='decimal, 0-1')
+    approval_rate = models.DecimalField(max_digits=6, decimal_places=5)
     cityname = models.CharField(max_length=30, blank=False, null=False, default="Melbourne",
                                 choices=[('Melbourne', ('Melbourne')), 
                                         ('Geelong', ('Geelong')), 
@@ -33,9 +27,6 @@ class TweetResultData(models.Model):
                                         ('Bendigo', ('Bendigo')),
                                         ('Melton', ('Melton'))])
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ['date', 'city']
 
 
 

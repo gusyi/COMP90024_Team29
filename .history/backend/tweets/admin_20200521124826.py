@@ -11,20 +11,21 @@ class CityAdmin(admin.ModelAdmin):
         (None, {'fields':['migration_percentage']}),
     ]
 
-    list_display = ('name',)
-    search_fields = ['name']
+    list_display = ('category_name')
+    search_fields = ['category_name']
 
 class TweetResultDataAdmin(admin.ModelAdmin):
-    
+    filter_horizontal = ('city',)
     fieldsets = [
         ('Date', {'fields' : ['date'], 'classes':['collapse']}),
         (None, {'fields':['tweetcounts']}),
+        (None, {'fields':['location']}),
         (None, {'fields':['approval_rate']}),
         (None, {'fields':['cityname']}),
         (None, {'fields':['city']}),
     ]
 
-    list_display = ('date','cityname',)
+    list_display = ('date','cityname')
     list_filter = ['date','cityname']
     search_fields = ['category_name','cityname']
 

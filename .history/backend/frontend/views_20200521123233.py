@@ -12,7 +12,7 @@ def index(request):
         'queryset' : TweetResultData.objects.all(),
         'City': City.objects.all(),
     }
-    return render(request, 'frontend/index.html', context=context)
+    return render(request, 'frontend/map.html', context=context)
 
 def map(request):
     context = {

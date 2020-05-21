@@ -25,7 +25,7 @@ class City (models.Model):
 class TweetResultData(models.Model):
     date = models.DateField(null = False)
     tweetcounts = models.IntegerField()
-    approval_rate = models.DecimalField(max_digits=6, decimal_places=5, help_text='decimal, 0-1')
+    approval_rate = models.DecimalField(max_digits=6, decimal_places=5)
     cityname = models.CharField(max_length=30, blank=False, null=False, default="Melbourne",
                                 choices=[('Melbourne', ('Melbourne')), 
                                         ('Geelong', ('Geelong')), 

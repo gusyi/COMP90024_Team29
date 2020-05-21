@@ -58,6 +58,6 @@
 - name: install
   become: yes
   pip:
-    name: ['jsondiff']
+    name: ['jsondiff', 'tweepy', 'couchdb', 'nltk']
     state: latest
     executable: pip3

@@ -16,14 +16,15 @@ if __name__ == '__main__':
     # print ((fname.lower().split('/')[1]).split('.')[0] + '-raw')
     # #------test purpose only------
 
-    if len(sys.argv) >= 2:
+    if len(sys.argv) >= 3:
         ip = sys.argv[1]
         fname = sys.argv[2]
+        dbname = sys.argv[3]
     else:
         print('Missing parameter(s)')
         sys.exit(0)
 
-    dbname = (fname.lower().split('/')[1]).split('.')[0] + '-raw'
+    # dbname = (fname.lower().split('/')[1]).split('.')[0] + '-raw'
 
     dbserver = dba.get_server(dba.user, dba.pw, ip)
     db = dba.create_or_get_db(dbname, dbserver)

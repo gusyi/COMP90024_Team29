@@ -1,0 +1,4 @@
+couchdb
+Django
+virtualenv
+shapely

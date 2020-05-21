@@ -38,8 +38,7 @@ class dbAction:
     
     def get_all_docs(self, db):
         all_docs = []
-        docs = db.view('_all_docs')
-        for d in docs:
+        for d in db.view('_all_docs'):
             all_docs.append(self.get_doc(d.id, db))
 
         return all_docs

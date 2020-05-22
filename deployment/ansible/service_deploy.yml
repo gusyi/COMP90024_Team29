@@ -1,0 +1,21 @@
+- hosts: webserver
+  tasks:
+    - name: copy image build resource files to cloud
+      copy:
+        src: ../../backend
+        dest: /home/ubuntu
+
+    # - name: stop old myapi container
+    #   become: yes
+    #   raw: docker stop $(docker ps -aqf "name=backapi")
+    # - name: remove old myapi container
+    #   become: yes
+    #   raw: docker rm $(docker ps -aqf "name=backapi")
+
+    - name: build image
+      become: yes
+      raw: cd /home/ubuntu/backend; docker build --tag=webserver:v1 .
+
+    # - name: start web service
+    #   become: yes
+    #   raw: docker run -d -p 8080:8080 --name app webserver:v1

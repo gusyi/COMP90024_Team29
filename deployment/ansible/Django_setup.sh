@@ -1,12 +1,14 @@
-sudo apt update
-sudo apt install python3-pip python3-dev libpq-dev nginx curl 
-sudo -H pip3 install --upgrade pip
-sudo -H pip3 install virtualenv
+#!/bin/bash
 
-cd ~/backend
-source myenv/bin/activate
+sudo apt update;
+sudo apt install python3-pip python3-dev libpq-dev nginx curl;
+sudo -H pip3 install --upgrade pip;
+sudo -H pip3 install virtualenv;
 
-sudo ufw allow 8000
+cd ~/backend;
+source myenv/bin/activate;
 
-deactivate
+sudo ufw allow 8000;
+
+deactivate;
 

@@ -36,7 +36,7 @@ class myListener(StreamListener):
         return False
     
     def on_data(self, data):
-        fV = open('Victoria.json', 'a')
+        fV = open('data/stream-Victoria.json', 'a')
 
         tweet = self.dataproc.retain_essential(json.loads(data))
         sentiment = nlp.sentiment_test(tweet['text'], 1)
@@ -48,10 +48,10 @@ class myListener(StreamListener):
         if tweet['place'] is None and tweet['user']['location'] is None:
             print('***************SKIP****************')
 
-        #tweet has Place attribute    
+        #tweet has Place attribute
         elif tweet['place'] is not None and (tweet['place']['country'] == 'AU' or 'Australia' in tweet['place']):
 
-            # if no key words in [place], return 
+            # if no key words in [place], return
             if not self.dataproc.is_user_in_range(tweet['place']['full_name'], globalvar.all_range):
                 print('****************SKIP****************')
 

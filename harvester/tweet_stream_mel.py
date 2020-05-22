@@ -37,7 +37,7 @@ class myListener(StreamListener):
         return False
     
     def on_data(self, data):
-        fM = open('Melbourne.json', 'a')
+        fM = open('data/stream-Melbourne.json', 'a')
 
         tweet = self.dataproc.retain_essential(json.loads(data))
         sentiment = nlp.sentiment_test(tweet['text'], 1)

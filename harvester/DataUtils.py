@@ -61,10 +61,12 @@ class Analysis:
         return False
 
     def retain_essential(self, tweet):
+        fulltimestamp = datetime.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y').replace(tzinfo=timezone.utc)
+        date = str(fulltimestamp.date())
         if 'full_text' not in tweet:
             essential = {
-                '_id': tweet['_id'],
-                'created_at': tweet['created_at'],
+                '_id': tweet['id_str'],
+                'created_at': date,
                 'text': tweet['text'],
                 'user': tweet['user'],
                 'place': tweet['place'],
@@ -74,8 +76,8 @@ class Analysis:
             }
         else:
             essential = {
-                '_id': tweet['_id'],
-                'created_at': tweet['created_at'],
+                '_id': tweet['id_str'],
+                'created_at': date,
                 'text': tweet['full_text'],
                 'user': tweet['user'],
                 'place': tweet['place'],

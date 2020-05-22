@@ -81,3 +81,8 @@ html,
       font-size: 14px;
       width: 14px
     }
+    
+    .modal-title {
+      font-size: xx-large;
+      font-weight: bolder;
+    }

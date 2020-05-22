@@ -44,7 +44,7 @@ function initMap() {
     // wire up the button
     var selectBox = document.getElementById("census-variable");
     google.maps.event.addDomListener(selectBox, "change", function () {
-        clearCensusData();
+        clearData();
         loadCensusData(selectBox.options[selectBox.selectedIndex].value);
     });
 
@@ -52,8 +52,8 @@ function initMap() {
     loadPercentData();
 }
 
-/** Removes census data from each shape on the map and resets the UI. */
-function clearCensusData() {
+/** Removes data from each shape on the map and resets the UI. */
+function clearData() {
     percentMin = Number.MAX_VALUE;
     percentMax = -Number.MAX_VALUE;
     map.data.forEach(function (row) {
@@ -64,10 +64,12 @@ function clearCensusData() {
 }
 
 async function loadPercentData() {
-    /* for (var k = 0; k < 92; k++) {
-        var percentVariable = getRndInteger(0, 100);
 
-        var region_id = "MELBOURNE";
+    //await updatePercent();
+    for (let item of city_info) {
+        var percentVariable = parseInt(item.percent);
+        var city_id = item.city_id;
+
         // keep track of min and max values
         if (percentVariable < percentMin) {
             percentMin = percentVariable;
@@ -77,11 +79,11 @@ async function loadPercentData() {
         }
         // update the existing row with the new data
         map.data
-            .getFeatureById(region_id)
-            .setProperty("percent_variable", percentVariable);
-    } */
-    await updatePercent();
-    for (var i = 0; i < 5; i++) {
+            .getFeatureById(city_id)
+            .setProperty("percent_variable", ""+percentVariable);
+    }
+
+    /* for (var i = 0; i < 5; i++) {
         var percentVariable = percent_array[i];
         var city_id = i;
 
@@ -97,21 +99,19 @@ async function loadPercentData() {
         map.data
             .getFeatureById(city_id)
             .setProperty("percent_variable", ""+percentVariable);
-
-    }
+    } */
 
     // update and display the legend
     document.getElementById("census-min").textContent = percentMin.toLocaleString();
     document.getElementById("census-max").textContent = percentMax.toLocaleString();
 }
 
-async function updatePercent() {
-
+/* async function updatePercent() {
     for (i = 0; i < 5; i++) {
-
-        percent_array[i] = getRndInteger(0, 100);
+        if (percent_array[i] == "0")
+            percent_array[i] = getRndInteger(0, 100);
     }
-}
+} */
 
 function getCircle(magnitude) {
     var low = [204, 49, 87]; // color of smallest datum
@@ -135,50 +135,6 @@ function getCircle(magnitude) {
         strokeOpacity: 1.0,
     };
 }
-
-// Load the info window with necessary infomation
-function showInfoWindow(e) {
-
-    /* var contentString =
-        "<b> Name: </b>" +
-        e.feature.getProperty("name") +
-        "<br><b> Percent: </b>" +
-        //getRndInteger(0, 100).toLocaleString() +
-        e.feature.getProperty("percent_variable").toLocaleString() +
-        "%<br>" +
-        '<a href = "/city/' +
-        e.feature.getProperty("city_id") +
-        '" class = "click_a" >More info</a>'; */
-    
-    var contentString =
-        "<div style ='font-size:15; line-height: 1'> " +
-        "<p class='font-weight-bold'> Name: " +
-        e.feature.getProperty("name") +
-        "</p>" +
-        "<br><p class='font-weight-bold'> Percent: " +
-        //getRndInteger(0, 100).toLocaleString() +
-        e.feature.getProperty("percent_variable").toLocaleString() +
-        "%</p>" +
-        "<br>" +
-        "<button type='button' class='btn btn-primary btn-sm btn-block' " +
-        "data-toggle='modal' data-target='#exampleModal'" +
-        "data-whatever='" +
-        e.feature.getProperty("name") +
-        "'>More Info</button>" +
-        "</div>";
-        /* '<a href = "/city/' +
-        e.feature.getProperty("city_id") +
-        '" class = "click_a" >More info</a>'; */
-
-    infoWindow_exist = true; 
-    // Replace the info window's content and position.
-    infoWindow.setContent(contentString);
-    infoWindow.setPosition(e.latLng);
-    infoWindow.open(map);
-}
-
-
-
 
 
 // Applies a gradient style based on the 'percent_variable' column.
@@ -225,36 +181,3 @@ function styleFeature(feature) {
     };
 }
 
-// Responds to the mouse-in event on a map shape (library).
-// type of 'e': google.maps.MouseEvent
-function mouseInToRegion(e) {
-    // set the hover library so the setStyle function can change the border
-    e.feature.setProperty("state", "hover");
-    var percent = e.feature.getProperty("percent_variable");
-    showInfoWindow(e);
-
-    // update the label
-    /* document.getElementById("data-label").textContent = e.feature.getProperty(
-        "vic_lga__3"
-    ); */
-    document.getElementById("data-label").textContent = e.feature.getProperty(
-        "name"
-    ); 
-    document.getElementById("data-value").textContent = percent;
-    document.getElementById("data-box").style.display = "block";
-    document.getElementById("data-caret").style.display = "block";
-    document.getElementById("data-caret").style.paddingLeft = percent + "%";
-}
-
-// Responds to the mouse-out event on a map shape (library).
-// type of 'e': google.maps.MouseEvent
-function mouseOutOfRegion(e) {
-    // reset the hover library, returning the border to normal
-    e.feature.setProperty("state", "normal");
-    // close info window display
-    //infoWindow.close();
-}
-
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}

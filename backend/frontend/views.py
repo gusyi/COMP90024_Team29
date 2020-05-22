@@ -17,7 +17,7 @@ def index(request):
 def map(request):
     context = {
         'queryset' : TweetResultData.objects.all(),
-        'City': City.objects.all(),
+        'city_list': City.objects.all(),
     }
     return render(request, 'frontend/map.html',context=context)
 

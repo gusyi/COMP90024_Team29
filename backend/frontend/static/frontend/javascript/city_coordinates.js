@@ -58,3 +58,58 @@ var city_coordinates = {
         },
     ],
 };
+
+var city_info = [
+    {
+        name: "Melbourne",
+        city_id: "0",
+        percent: "0",
+        average_income: "0",
+        education_level: "0",
+        postgraduate_percentage: "0",
+        migration_percentage: "0",
+        migration_number: "0",
+    },
+    {
+        name: "Geelong",
+        city_id: "1",
+        percent: "0",
+        average_income: "0",
+        education_level: "0",
+        postgraduate_percentage: "0",
+        migration_percentage: "0",
+        migration_number: "0",
+    },
+    {
+        name: "Ballarat",
+        city_id: "2",
+        percent: "0",
+        average_income: "0",
+        education_level: "0",
+        postgraduate_percentage: "0",
+        migration_percentage: "0",
+        migration_number: "0",
+    },
+    {
+        name: "Bendigo",
+        city_id: "3",
+        percent: "0",
+        average_income: "0",
+        education_level: "0",
+        postgraduate_percentage: "0",
+        migration_percentage: "0",
+        migration_number: "0",
+    },
+    {
+        name: "Melton",
+        city_id: "4",
+        percent: "0",
+        average_income: "0",
+        education_level: "0",
+        postgraduate_percentage: "0",
+        migration_percentage: "0",
+        migration_number: "0",
+    },
+];
+
+var city_names = ["Melbourne", "Geelong", "Ballarat", "Bendigo", "Melton"];

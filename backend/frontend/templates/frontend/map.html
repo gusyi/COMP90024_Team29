@@ -1,6 +1,5 @@
-{% block main%}
+{% block main %}
 {% load static %}
-
 <head>
   <link rel="stylesheet" href="{% static 'frontend/css/map_page.css' %}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -8,13 +7,35 @@
   <script src="{% static "frontend/javascript/jquery-3.5.1.js" %}"></script>
 </head>
 
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">City Name: </h5>
+        <div class="container">
+          <div class="row">
+            <div class="col-3 modal-title" id="exampleModalLabel"></div>
+            <div class="col" >
+              Average Income: <br><span class="badge badge-primary" id="Average Income:"></span>
+            </div>
+            <div class="col" >
+              Postgraduate Percentage:<br> <span class="badge badge-primary" id="Postgraduate Percentage: "></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col" >
+              Migration Percentage: <br><span class="badge badge-primary" id="Migration Percentage: "></span>
+            </div>
+            <div class="col">
+              Migration Number:<br> <span class="badge badge-primary" id="Migration Number: "></span>
+            </div>
+          </div>
+        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -59,9 +80,63 @@
 <script src="{% static "frontend/javascript/vic_geo.js" %}"></script>
 <script src="{% static "frontend/javascript/maps_google_map_style.js" %}"></script>
 <script src="{% static "frontend/javascript/map_style.js" %}"></script>
-<script src="{% static "frontend/javascript/city_coordinates.js" %}"></script>
 <script src="{% static "frontend/javascript/modal.js" %}"></script>
 <script src="{% static "frontend/javascript/apex_charts.js" %}"></script>
+<script src="{% static "frontend/javascript/mouse.js" %}"></script>
+<script src="{% static "frontend/javascript/info_window.js" %}"></script>
+<script src="{% static "frontend/javascript/input.js" %}"></script>
+<script src="{% static "frontend/javascript/city_coordinates.js" %}"></script>
+{% for collection in queryset %}
+    <script> 
+      {% comment %} var date = "{{ collection.date|escapejs }}";
+      var tweet_counts = "{{ collection.tweetcounts|escapejs }}";
+      
+      var city  = "{{ collection.city|escapejs }}";
+      var average_income = "{{ collection.city.average_income|escapejs }}";
+      //var education_level = "{{ collection.city.education_level|escapejs }}";
+      var postgraduate_percentage = "{{ collection.city.postgraduate_percentage|escapejs }}";
+      var migration_percentage = "{{ collection.city.migration_percentage|escapejs }}";
+      var migration_number = "{{ collection.city.migration_number|escapejs }}";
+
+
+      var approval_rate = "{{ collection.approval_rate|escapejs }}";
+      var city_name = "{{ collection.cityname|escapejs }}";
+
+      for (var i = 0; i < percent_array.length; i++){
+        if (city_name == city_names[i]){
+          var percent = Math.round(parseFloat(approval_rate) * 100).toString(10);
+          percent_array[i] = percent;
+        }
+      } {% endcomment %}
+
+      var approval_rate = "{{ collection.approval_rate|escapejs }}";
+      var city_name = "{{ collection.cityname|escapejs }}";
+
+      for (let item of city_info) {
+        if (item.name == city_name) {
+          item.percent =  Math.round(parseFloat(approval_rate) * 100).toString(10);
+          item.average_income = "{{ collection.city.average_income|escapejs }}";
+          item.postgraduate_percentage = "{{ collection.city.postgraduate_percentage|escapejs }}";
+          item.migration_percentage = "{{ collection.city.migration_percentage|escapejs }}";
+          item.migration_number = "{{ collection.city.migration_number|escapejs }}";
+        }  
+      }
+      console.log(city_info);
+
+      {% comment %} console.log(date);
+      console.log(tweet_counts);
+      console.log(approval_rate);
+      console.log(city_name);
+      console.log(average_income);
+      //console.log(education_level);
+      console.log(postgraduate_percentage);
+      console.log(migration_percentage);
+      console.log(migration_number);
+      console.log("=======\n");
+      //console.log(collection.city.average_income); {% endcomment %}
+
+    </script>
+{% endfor%}
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlIvCw8l_EHI3YDXdgdC2jkvhNEivXQ10&callback=initMap&language=en&region=au"
   async defer></script>

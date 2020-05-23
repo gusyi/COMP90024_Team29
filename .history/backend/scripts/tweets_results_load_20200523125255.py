@@ -35,13 +35,13 @@ def run():
                 print(row)
                 c, created = City.objects.get_or_create(name = city_name)
                 if row['ratio'] == 0:
-                    tweetcount = data["daily_total"][row['key'][0]]
-                else:
-                    tweetcount = int(row['value'] / row['ratio'])
+                    tweetcount = data["daily_total"][rowindex]
 
                 result = TweetResultData(
                     date = row['key'][0],
-                    tweetcounts = tweetcount,
+                    
+
+                    tweetcounts = int(row['value'] / row['ratio']),
                     approval_rate = row['ratio'],
                     cityname = city_name,
                     city = c

@@ -48,7 +48,7 @@ if __name__ == '__main__':
             doc['sentiment'] = sentiment
             print(doc)
             try:
-                msg = dba.insert_raw(doc, db)
+                msg = dba.insert_cleansed(doc, db)
             except:
                 print("Error: ", sys.exc_info())
 

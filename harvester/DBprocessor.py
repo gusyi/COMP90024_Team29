@@ -44,6 +44,17 @@ class dbAction:
         return all_docs
 
     def insert_raw(self, data, db):
+        docid = data['id_str']
+        try:
+            db[docid] = data
+            print ('Doc added to DB...', docid)
+            return self.INSERTSUCCESS
+        except couchdb.http.ResourceConflict:
+            # db.save(data)
+            print ('Doc skipped')
+            return self.DUPFOUND
+    
+    def insert_cleansed(self, data, db):
         docid = data['_id']
         try:
             db[docid] = data

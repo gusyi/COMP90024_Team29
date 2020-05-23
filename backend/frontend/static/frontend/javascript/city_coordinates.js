@@ -69,6 +69,7 @@ var city_info = [
         postgraduate_percentage: "0",
         migration_percentage: "0",
         migration_number: "0",
+        flag: "0",
     },
     {
         name: "Geelong",
@@ -79,6 +80,7 @@ var city_info = [
         postgraduate_percentage: "0",
         migration_percentage: "0",
         migration_number: "0",
+        flag: "0",
     },
     {
         name: "Ballarat",
@@ -89,6 +91,7 @@ var city_info = [
         postgraduate_percentage: "0",
         migration_percentage: "0",
         migration_number: "0",
+        flag: "0",
     },
     {
         name: "Bendigo",
@@ -99,6 +102,7 @@ var city_info = [
         postgraduate_percentage: "0",
         migration_percentage: "0",
         migration_number: "0",
+        flag: "0",
     },
     {
         name: "Melton",
@@ -109,7 +113,15 @@ var city_info = [
         postgraduate_percentage: "0",
         migration_percentage: "0",
         migration_number: "0",
+        flag: "0",
     },
 ];
 
 var city_names = ["Melbourne", "Geelong", "Ballarat", "Bendigo", "Melton"];
+
+var approval_rate_matrix = [[], [], [], [], []];
+
+function formatCourseDate(date) {
+    const dateObj = new Date(date + "T00:00:00");
+    return new Intl.DateTimeFormat("en-US").format(dateObj);
+}

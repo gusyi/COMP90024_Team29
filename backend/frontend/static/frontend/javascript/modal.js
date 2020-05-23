@@ -1,3 +1,5 @@
+var city_apex;
+var approval_rate_array=[];
 $(document).ready(function () {
     $("#exampleModal").on("show.bs.modal", function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
@@ -12,6 +14,20 @@ $(document).ready(function () {
                 var postgraduate_percentage = item.postgraduate_percentage;
                 var migration_percentage = item.migration_percentage;
                 var migration_number = item.migration_number;
+                city_apex = item.city_id;
+                //console.log(city_apex);
+                console.log(approval_rate_matrix[city_apex]);      
+
+                approval_rate_array = [];
+                for (let i = 0; i < approval_rate_matrix[city_apex].length; i++) {
+                    const element = approval_rate_matrix[city_apex][i];
+                    approval_rate_array.push({
+                        x: element["x"],
+                        y: Number(element["y"]),
+                    });
+                }
+                console.log(approval_rate_array);
+                
             }
         }
         modal.find(".modal-title").text(recipient);
@@ -22,5 +38,9 @@ $(document).ready(function () {
             parseFloat(migration_percentage).toFixed(2) + "%";
         document.getElementById("Migration Number: ").innerHTML = migration_number;
         infoWindow.close();
+        options.series[0].data = approval_rate_array;
+        console.log(options.series[0].data);
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
     });
 });

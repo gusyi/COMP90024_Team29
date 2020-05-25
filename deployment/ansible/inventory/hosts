@@ -1,7 +1,7 @@
-ins1 ansible_host=172.26.132.216
-ins2 ansible_host=172.26.128.114
-ins3 ansible_host=172.26.134.61
-ins4 ansible_host=172.26.131.25
+ins1 ansible_host=172.26.133.229
+ins2 ansible_host=172.26.133.240
+ins3 ansible_host=172.26.134.32
+ins4 ansible_host=172.26.133.195
 
 [all]
 ins1

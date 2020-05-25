@@ -38,11 +38,6 @@
     state: present
     update_cache: yes
 
-# - name: install docker-ce
-#   package:
-#     name: docker-ce
-#     state: present    
-
 #sudo pip install docker-compose
 - name: install Docker Compose
   become: yes

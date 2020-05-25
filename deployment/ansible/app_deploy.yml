@@ -1,0 +1,16 @@
+- hosts: webserver
+  become: yes
+  tasks:
+    - name: copy Django files to server
+      copy:
+        src: ../../backend
+        dest: /home/ubuntu
+    
+    - name: activate virtual environment
+      raw: cd /home/ubuntu/backend; source myenv/bin/activate
+    
+    - name: open port 8000
+      raw: ufw allow 8000
+    
+    - name: deactivate virtual environment
+      raw: deactivate

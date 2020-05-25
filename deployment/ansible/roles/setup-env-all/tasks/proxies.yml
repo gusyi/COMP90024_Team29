@@ -14,10 +14,6 @@
     state: absent
   when: fstat.stat.exists == true
 
-# - name: get environment arguments
-#   become: yes
-#   shell: cat /etc/environment
-#   register: env_args
 - name: create
   become: yes
   file:
@@ -40,24 +36,3 @@
   become: yes
   reboot:
     reboot_timeout: 3000
-
-- name: install tools
-  become: yes
-  apt:
-    name: ['vim', 'python3-pip', 'python3-setuptools'] 
-    state: latest
-    install_recommends: no
-    update_cache: yes
-
-- name: update pip
-  become: yes
-  pip:
-    name: ['pip']
-    state: latest
-
-- name: install
-  become: yes
-  pip:
-    name: ['jsondiff', 'tweepy', 'couchdb', 'nltk']
-    state: latest
-    executable: pip3

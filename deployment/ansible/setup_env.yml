@@ -1,0 +1,9 @@
+- hosts: all
+  gather_facts: true
+  roles:
+    - role: setup-env-all
+
+- hosts: webserver
+  gather_facts: true
+  roles:
+    - role: setup-env-webserver

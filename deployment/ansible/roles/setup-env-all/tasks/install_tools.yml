@@ -1,0 +1,20 @@
+- name: install tools
+  become: yes
+  apt:
+    name: ['vim', 'python3-pip', 'python3-setuptools'] 
+    state: latest
+    install_recommends: no
+    update_cache: yes
+
+- name: update pip
+  become: yes
+  pip:
+    name: ['pip']
+    state: latest
+
+- name: install
+  become: yes
+  pip:
+    name: ['jsondiff', 'tweepy', 'couchdb', 'nltk']
+    state: latest
+    executable: pip3

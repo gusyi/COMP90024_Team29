@@ -30,7 +30,7 @@ var city_coordinates = {
                 coordinates: [143.850336, -37.561172],
             },
             properties: {
-                name: "Ballarat",
+                name: "Victoria",
                 city_id: "2",
             },
         },
@@ -45,7 +45,7 @@ var city_coordinates = {
                 city_id: "3",
             },
         },
-        {
+       /*  {
             type: "Feature",
             geometry: {
                 type: "Point",
@@ -55,7 +55,7 @@ var city_coordinates = {
                 name: "Melton",
                 city_id: "4",
             },
-        },
+        }, */
     ],
 };
 
@@ -70,6 +70,7 @@ var city_info = [
         migration_percentage: "0",
         migration_number: "0",
         flag: "0",
+        tweet_counts: "0",
     },
     {
         name: "Geelong",
@@ -81,9 +82,10 @@ var city_info = [
         migration_percentage: "0",
         migration_number: "0",
         flag: "0",
+        tweet_counts: "0",
     },
     {
-        name: "Ballarat",
+        name: "Victoria",
         city_id: "2",
         percent: "0",
         average_income: "0",
@@ -92,6 +94,7 @@ var city_info = [
         migration_percentage: "0",
         migration_number: "0",
         flag: "0",
+        tweet_counts: "0",
     },
     {
         name: "Bendigo",
@@ -103,21 +106,11 @@ var city_info = [
         migration_percentage: "0",
         migration_number: "0",
         flag: "0",
-    },
-    {
-        name: "Melton",
-        city_id: "4",
-        percent: "0",
-        average_income: "0",
-        education_level: "0",
-        postgraduate_percentage: "0",
-        migration_percentage: "0",
-        migration_number: "0",
-        flag: "0",
+        tweet_counts: "0",
     },
 ];
 
-var city_names = ["Melbourne", "Geelong", "Ballarat", "Bendigo", "Melton"];
+var city_names = ["Melbourne", "Geelong", "Victoria", "Bendigo"];
 
 var approval_rate_matrix = [[], [], [], [], []];
 

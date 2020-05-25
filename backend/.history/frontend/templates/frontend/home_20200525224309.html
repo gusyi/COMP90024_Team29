@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+{% block main%}
+
+    <div style="background-color:slategray;">
+
+
+    <div style="height: 30px"></div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-6">
+           <div style="height: 70px"></div>
+            <h1 style="font-size:100px;color:white;" > Scott Morrison</h1>
+            <svg height="30" width="1000">
+                <line x1="0" y1="30" x2="400" y2="30" style="stroke:rgb(255,255,255);stroke-width:20" />
+            </svg>
+            <div style="height: 20px"></div>
+            <h1 style="font-size:50px;color:white;" > A Sentiment Analysis on</h1>
+            <h1 style="font-size:50px;color:white;" > Twitter Content</h1>
+
+            <div style="height: 80px"></div>
+            <a href="/index/"><button type="button" class="btn btn-outline-danger">Track Approval Rate</button></a>
+
+
+        </div>
+        <div class="col-sm-5">
+
+            {% load static %}
+            <img src="{% static 'frontend/images/test2.svg' %}" />
+
+
+        </div>
+
+    </div>
+    <div style="height: 100px"></div>
+    <hr>
+    <h1> Hello </h1>
+    
+    
+
+    <div>
+      
+    </div>
+    </div>
+
+
+
+{% endblock %}

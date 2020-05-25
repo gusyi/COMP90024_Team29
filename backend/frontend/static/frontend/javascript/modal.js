@@ -16,17 +16,20 @@ $(document).ready(function () {
                 var migration_number = item.migration_number;
                 city_apex = item.city_id;
                 //console.log(city_apex);
-                console.log(approval_rate_matrix[city_apex]);      
+                //console.log(approval_rate_matrix[city_apex]);      
 
                 approval_rate_array = [];
                 for (let i = 0; i < approval_rate_matrix[city_apex].length; i++) {
                     const element = approval_rate_matrix[city_apex][i];
-                    approval_rate_array.push({
+                    if (element["y"] != 100 && element["y"] != 0) {
+                        approval_rate_array.push({
                         x: element["x"],
                         y: Number(element["y"]),
-                    });
+                        });
+                    }
+                    
                 }
-                console.log(approval_rate_array);
+                //console.log(approval_rate_array);
                 
             }
         }
@@ -39,8 +42,15 @@ $(document).ready(function () {
         document.getElementById("Migration Number: ").innerHTML = migration_number;
         infoWindow.close();
         options.series[0].data = approval_rate_array;
-        console.log(options.series[0].data);
+        //console.log(options.series[0].data);
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
+    });
+});
+
+
+$(document).ready(function () {
+    $(".vertical").on("click", function () {
+        button_value = $(this).val();
     });
 });

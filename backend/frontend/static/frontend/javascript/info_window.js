@@ -13,10 +13,10 @@ function showInfoWindow(e) {
 
     var contentString =
         "<div style ='font-size:15; line-height: 1'> " +
-        "<p class='font-weight-bold'> Name: " +
+        "<h3 class='font-weight-bold'>" +
         e.feature.getProperty("name") +
-        "</p>" +
-        "<br><p class='font-weight-bold'> Percent: " +
+        "</h3>" +
+        "<br><p class='font-weight-bold'> Realtime Approval Rate: " +
         //getRndInteger(0, 100).toLocaleString() +
         e.feature.getProperty("percent_variable").toLocaleString() +
         "%</p>" +

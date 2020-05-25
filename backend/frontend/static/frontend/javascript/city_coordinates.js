@@ -30,7 +30,7 @@ var city_coordinates = {
                 coordinates: [143.850336, -37.561172],
             },
             properties: {
-                name: "Victoria",
+                name: "Ballarat",
                 city_id: "2",
             },
         },
@@ -85,7 +85,7 @@ var city_info = [
         tweet_counts: "0",
     },
     {
-        name: "Victoria",
+        name: "Ballarat",
         city_id: "2",
         percent: "0",
         average_income: "0",
@@ -110,7 +110,7 @@ var city_info = [
     },
 ];
 
-var city_names = ["Melbourne", "Geelong", "Victoria", "Bendigo"];
+var city_names = ["Melbourne", "Geelong", "Ballarat", "Bendigo"];
 
 var approval_rate_matrix = [[], [], [], [], []];
 
@@ -118,3 +118,6 @@ function formatCourseDate(date) {
     const dateObj = new Date(date + "T00:00:00");
     return new Intl.DateTimeFormat("en-US").format(dateObj);
 }
+
+var week_day = [0, 0, 0, 0]; 
+var weekly_total = [0, 0, 0, 0];

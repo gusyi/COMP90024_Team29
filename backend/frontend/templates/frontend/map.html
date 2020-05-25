@@ -2,6 +2,7 @@
 {% load static %}
 <head>
   <link rel="stylesheet" href="{% static 'frontend/css/map_page.css' %}">
+  <link rel="stylesheet" href="{% static 'frontend/css/menu.css' %}">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <script src="{% static "frontend/javascript/jquery-3.5.1.js" %}"></script>
@@ -46,17 +47,12 @@
     </div>
   </div>
 </div>
+<div>
+  <a href="/" role="button" id="back" class="btn btn-secondary btn-lg">Back</a>
+</div>
+
 
 <div id="controls" class="nicebox">
-  <div>
-    <select id="census-variable">
-      <option value="https://storage.googleapis.com/mapsdevsite/json/DP02_0066PE">Approval Rate</option>
-      <option value="https://storage.googleapis.com/mapsdevsite/json/DP05_0017E">Median age</option>
-      <option value="https://storage.googleapis.com/mapsdevsite/json/DP05_0001E">Total population</option>
-      <option value="https://storage.googleapis.com/mapsdevsite/json/DP02_0016E">Average family size</option>
-      <option value="https://storage.googleapis.com/mapsdevsite/json/DP03_0088E">Per-capita income</option>
-    </select>
-  </div>
   <div id="legend">
     <div id="census-min">min</div>
     <div class="color-key"><span id="data-caret">&#x25c6;</span></div>
@@ -67,6 +63,28 @@
   <label id="data-label" for="data-value"></label>
   <span id="data-value"></span>
 </div>
+
+{% comment %} <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Whatever you want
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button"  value="tweet_counts">Tweet Counts</button>
+    <button class="dropdown-item" type="button"  value="average_income">Average Income</button>
+    <button class="dropdown-item" type="button"  value="postgraduate_percentage">Postgraduate Percentage</button>
+    <button class="dropdown-item" type="button"  value="migration_percentage">Migration Percentage</button>
+    <button class="dropdown-item" type="button"  value="migration_number">Migration Number</button>
+  </div>
+</div> {% endcomment %}
+
+<div class="btn-group-vertical"  id="dropdown">
+    <button class="vertical btn btn-secondary" type="button"  value="tweet_counts">Tweet Counts</button>
+    <button class="vertical btn btn-secondary" type="button"  value="average_income">Average Income</button>
+    <button class="vertical btn btn-secondary" type="button"  value="postgraduate_percentage">Postgraduate Percentage</button>
+    <button class="vertical btn btn-secondary" type="button"  value="migration_percentage">Migration Percentage</button>
+    <button class="vertical btn btn-secondary" type="button"  value="migration_number">Migration Number</button>
+</div>
+
 <div id='map'></div>
 
 {% load static %}
@@ -109,6 +127,7 @@
 
       var approval_rate = "{{ collection.approval_rate|escapejs }}";
       var city_name = "{{ collection.cityname|escapejs }}";
+      var tweet_counts  = "{{ collection.tweetcounts|escapejs }}";
 
       for (let item of city_info) {
         if (item.name == city_name && item.flag == "0") {
@@ -120,10 +139,32 @@
           item.flag = "1";
           console.log(city_info);
         }
-        if (item.name == city_name) {
+
+        {% comment %} if (item.name == city_name) {
+          item.percent =  Math.round(parseFloat(approval_rate) * 100).toString(10);
+          item.tweet_counts = (parseInt(item.tweet_counts) + parseInt(tweet_counts)).toString(10); 
           var date = formatCourseDate("{{ collection.date|escapejs }}");
           approval_rate_matrix[parseInt(item.city_id)].push({x: date, y: Number(Math.round(parseFloat(approval_rate) * 100))});
           //console.log(approval_rate_matrix);
+
+        } {% endcomment %}
+
+        if (item.name == city_name) {
+          
+          if (week_day[parseInt(item.city_id)] == 7) {
+            
+            item.percent =  Math.round(parseFloat(approval_rate) * 100).toString(10);
+            item.tweet_counts = (parseInt(item.tweet_counts) + parseInt(tweet_counts)).toString(10); 
+            var date = formatCourseDate("{{ collection.date|escapejs }}");
+            approval_rate_matrix[parseInt(item.city_id)].push({x: date, y: Number(Math.round(weekly_total[parseInt(item.city_id)] / 7))});
+
+            week_day[parseInt(item.city_id)] = 0; 
+            weekly_total[parseInt(item.city_id)] = 0; 
+            //console.log(approval_rate_matrix);
+          } else {
+            week_day[parseInt(item.city_id)] += 1; 
+            weekly_total[parseInt(item.city_id)] += Math.round(parseFloat(approval_rate) * 100);
+          }
         }
       }
       

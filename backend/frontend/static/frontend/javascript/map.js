@@ -1,8 +1,13 @@
 var map;
 var infoWindow;
+var button_value = document.getElementById("dropdown");
 var percent_array = ["0", "0", "0", "0", "0"];
 var percentMin = Number.MAX_VALUE,
-    percentMax = -Number.MAX_VALUE;
+    percentMax = -Number.MAX_VALUE,
+    variableMin = Number.MAX_VALUE,
+    variableMax = -Number.MAX_VALUE;
+var input_variable; 
+var flag = 0; 
 
 var infoWindow_exist = false; 
 function initMap() {
@@ -11,7 +16,7 @@ function initMap() {
             lat: -37.327732,
             lng: 144.317647,
         },
-        zoom: 8.5,
+        zoom: 8,
         mapTypeId: "roadmap",
         disableDefaultUI: true,
         styles: google_map_style,
@@ -42,10 +47,25 @@ function initMap() {
     });
 
     // wire up the button
-    var selectBox = document.getElementById("census-variable");
-    google.maps.event.addDomListener(selectBox, "change", function () {
+    //var dropdown = document.getElementById("dropdown");
+    google.maps.event.addDomListener(button_value, "click", function () {
+        flag = 1; 
+/*         switch (button_value) {
+            case "tweet_counts":
+                input_variable = Math.sqrt(parseInt(item.tweet_counts));
+                break;
+            case "average_income":
+                input_variable = parseInt(item.average_income);
+                break;
+        } */
+        
+        console.log(button_value);
         clearData();
-        loadCensusData(selectBox.options[selectBox.selectedIndex].value);
+        loadPercentData();
+
+        //console.log(dropdown);
+        //clearData();
+        //loadCensusData(selectBox.options[selectBox.selectedIndex].value);
     });
 
     // load data for the
@@ -56,9 +76,8 @@ function initMap() {
 function clearData() {
     percentMin = Number.MAX_VALUE;
     percentMax = -Number.MAX_VALUE;
-    map.data.forEach(function (row) {
-        row.setProperty("percent_variable", undefined);
-    });
+    variableMin = Number.MAX_VALUE;
+    variableMax = -Number.MAX_VALUE;
     document.getElementById("data-box").style.display = "none";
     document.getElementById("data-caret").style.display = "none";
 }
@@ -70,6 +89,31 @@ async function loadPercentData() {
         var percentVariable = parseInt(item.percent);
         var city_id = item.city_id;
 
+        if (flag == 0) {
+            input_variable = Math.sqrt(parseInt(item.tweet_counts));
+        } 
+        switch (button_value) {
+            case "tweet_counts":
+                input_variable = Math.sqrt(parseInt(item.tweet_counts));
+                break;
+            case "average_income":
+                input_variable = parseInt(item.average_income);
+                break;
+            case "postgraduate_percentage":
+                input_variable = parseInt(item.postgraduate_percentage);
+                break;
+            case "migration_percentage":
+                input_variable = parseInt(item.migration_percentage);
+                break;
+            case "migration_number":
+                input_variable = parseInt(item.migration_number);
+                break;
+        }
+
+        console.log(item.name+"   " + input_variable);
+            
+        //console.log("tweets:" + tweet_counts + "  " + Math.sqrt(tweet_counts));
+
         // keep track of min and max values
         if (percentVariable < percentMin) {
             percentMin = percentVariable;
@@ -77,10 +121,21 @@ async function loadPercentData() {
         if (percentVariable > percentMax) {
             percentMax = percentVariable;
         }
+
+        // keep track of min and max values
+        if (input_variable < variableMin) {
+            variableMin = input_variable;
+        }
+        if (input_variable > variableMax) {
+            variableMax = input_variable;
+        }
         // update the existing row with the new data
         map.data
             .getFeatureById(city_id)
-            .setProperty("percent_variable", ""+percentVariable);
+            .setProperty("percent_variable", "" + percentVariable);
+        map.data
+            .getFeatureById(city_id)
+            .setProperty("input_variable", "" + input_variable);
     }
 
     /* for (var i = 0; i < 5; i++) {
@@ -113,23 +168,27 @@ async function loadPercentData() {
     }
 } */
 
-function getCircle(magnitude) {
+function getCircle(approval_rate, magnitude) {
     var low = [204, 49, 87]; // color of smallest datum
     var high = [209, 98, 46]; // color of largest datum
 
     // delta represents where the value sits between the min and max
     //var delta = 0.9;
-    var delta = (magnitude - percentMin) / (100);
+    //var delta = (magnitude - percentMin) / (100);
+    var delta = (approval_rate - percentMin) / (percentMax - percentMin);
     var color = [];
     for (var i = 0; i < 3; i++) {
         // calculate an integer color based on the delta
         color[i] = (high[i] - low[i]) * delta + low[i];
     }
+
     return {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: "hsl(" + color[0] + "," + color[1] + "%," + color[2] + "%)",
         fillOpacity: 0.7,
-        scale: 100 + (magnitude-66)*0.5,
+        //scale: 100 + (magnitude-66)*0.5,
+        scale:
+            50 + ((magnitude - (variableMin*0.9)) / (variableMax * 1.1 - variableMin)) * 50,
         strokeColor: "grey",
         strokeWeight: 0.1,
         strokeOpacity: 1.0,
@@ -167,7 +226,8 @@ function styleFeature(feature) {
     if (feature.getProperty("state") === "hover") {
         outlineWeight = zIndex = 2;
     }
-    var magnitude = feature.getProperty('percent_variable');
+    var approval_rate = feature.getProperty('percent_variable');
+    var magnitude = feature.getProperty('input_variable');
     return {
         strokeWeight: outlineWeight,
         //strokeColor: "#fff",
@@ -176,7 +236,7 @@ function styleFeature(feature) {
         zIndex: zIndex,
         fillColor: "hsl(" + color[0] + "," + color[1] + "%," + color[2] + "%)",
         fillOpacity: 0.15,
-        icon: getCircle(magnitude),
+        icon: getCircle(approval_rate, magnitude),
         //visible: showRow
     };
 }

@@ -3,8 +3,8 @@ import pandas as pd
 from tweets.models import TweetResultData, City
 
 def run():
-    #TweetResultData.objects.all().delete()
-    city_names = ["Victoria"]
+    TweetResultData.objects.all().delete()
+    city_names = ["Ballarat","Melbourne","Geelong","Bendigo"]
     for city_name in city_names:
 
         FILE_NAME = 'mapreduce_result/'+city_name+'.json'

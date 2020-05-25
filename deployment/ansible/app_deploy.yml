@@ -1,0 +1,27 @@
+- hosts: webserver
+  become: yes
+  tasks:
+    - name: check whether /home/ubuntu/A2 directory exists
+      stat:
+          path: /home/ubuntu/A2
+      register: directory_stats
+
+    - name: Create A2 directory if not yet exists
+      file:
+        path: /home/ubuntu/A2
+        state: directory
+      when: directory_stats.stat.exists == false
+
+    - name: clone git repo to remote
+      git:
+        repo: https://github.com/gusyi/COMP90024_Team29.git
+        dest: /home/ubuntu/A2
+    
+    - name: activate virtual environment
+      raw: cd /home/ubuntu/backend; source myenv/bin/activate
+    
+    - name: open port 8000
+      raw: ufw allow 8000
+    
+    - name: deactivate virtual environment
+      raw: deactivate

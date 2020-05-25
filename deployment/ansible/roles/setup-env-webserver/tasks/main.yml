@@ -1,0 +1,14 @@
+- name: install tools
+  become: yes
+  apt:
+    name: ['python3-dev', 'libpq-dev', 'nginx', 'curl', 'git'] 
+    state: latest
+    install_recommends: no
+    update_cache: yes
+
+- name: install
+  become: yes
+  pip:
+    name: ['virtualenv']
+    state: latest
+    executable: pip3

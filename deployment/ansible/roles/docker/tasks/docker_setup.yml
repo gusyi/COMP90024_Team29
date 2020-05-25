@@ -19,31 +19,6 @@
     dest: /etc/systemd/system/docker.service.d/http-proxy.conf
     mode: 0777
 
-# - name: create http-proxy.conf
-#   become: yes
-#   file:
-#     path: "{{ docker_proxy_files }}"
-#     state: touch
-#     mode: 0777
-#   when: directory_stats.stat.exists == false
-
-# - name: add proxys
-#   become: yes
-#   lineinfile:
-#     path: "{{ docker_proxy_files }}"
-#     line: "{{ docker_proxys }}"
-#     create: yes
-#   when: directory_stats.stat.exists == false
-
-# - name: flush changes
-#   become: yes
-#   shell: |
-#     sudo systemctl daemon-reload
-
-# - name: restart Docker
-#   shell: |
-#     sudo systemctl restart docker
-
 #sudo ls -l /var/run/docker.sock
 #permission needs to be changed if attempting to use 'docker' command on instance
 - name: check file permission for docker.sock

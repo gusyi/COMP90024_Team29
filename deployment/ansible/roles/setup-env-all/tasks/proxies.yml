@@ -1,0 +1,38 @@
+- name: gather facts of remote host
+  setup:
+    gather_subset: all
+
+- name: check
+  stat: 
+    path: /etc/environment
+  register: fstat
+
+- name: remove /etc/environment
+  become: yes
+  file:
+    path: /etc/environment
+    state: absent
+  when: fstat.stat.exists == true
+
+- name: create
+  become: yes
+  file:
+    path: /etc/environment
+    state: touch
+    mode: 0777
+
+- name: add ins env proxy
+  become: yes
+  blockinfile:
+    path: /etc/environment
+    block: |
+      HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/
+      HTTPS_PROXY=http://wwwproxy.unimelb.edu.au:8000/
+      http_proxy=http://wwwproxy.unimelb.edu.au:8000/
+      https_proxy=http://wwwproxy.unimelb.edu.au:8000/
+      no_proxy=localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au
+
+- name: reboot
+  become: yes
+  reboot:
+    reboot_timeout: 3000

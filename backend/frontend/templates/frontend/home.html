@@ -2,6 +2,11 @@
 
 {% block main%}
 
+{% load static %}
+<head>
+  <link rel="stylesheet" href="{% static 'frontend/css/home_page.css' %}">
+</head>
+
     <div style="background-color:rgb(25, 27, 33);">
 
 
@@ -33,88 +38,57 @@
         </div>
 
     </div>
-    <div style="height: 150px"></div>
-    <hr>
 
-        <div style="height: 10px"></div>
-        <h3  style="text-align: center;color:white;"> Members</h3>
-        <div style="height: 5px"></div>
-        <svg height="30" width="2000">
-            <line x1="725" y1="-5" x2="925" y2="-5" style="stroke:rgb(255,255,255);stroke-width:20" />
-        </svg>
-
-        <h5  style="text-align: center;color:white;"> Here are our group members!</h5>
-        <br>
-
-    <div style="height: 20px"></div>
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-2">
-            
-            <div style="height: 50px"></div>
-            {% load static %}
-            <img src="{% static 'frontend/images/gus.png' %}" width="250" height="200"/>
-            <div style="height: 20px"></div>
-
-            <h5 style="text-align: center;color:white;">Hongwei Yin</h5>
-
-
-        </div>
-
-        <div class="col-sm-2">
-            <div style="height: 50px"></div>
-            {% load static %}
-            <img src="{% static 'frontend/images/pic1.jpeg' %}" width="250" height="200"/>
-            <div style="height: 20px"></div>
-
-            <h5 style="text-align: center;color:white;">Xinyi Xu</h5>
-
-
-        </div>
-
-        <div class="col-sm-2">
-            <div style="height: 50px"></div>
-            {% load static %}
-            <img src="{% static 'frontend/images/scott.jpeg' %}" width="250" height="200"/>
-            <div style="height: 20px"></div>
-
-            <h5 style="text-align: center;color:white;">Cheng Sun</h5>
-
-
-        </div>
-
-        <div class="col-sm-2">
-            <div style="height: 50px"></div>
-            {% load static %}
-            <img src="{% static 'frontend/images/pic1.jpeg' %}" width="250" height="200"/>
-            <div style="height: 20px"></div>
-
-            <h5 style="text-align: center;color:white;">Yiran Yao</h5>
-
-
-        </div>
-
-        <div class="col-sm-2">
-            <div style="height: 50px"></div>
-            {% load static %}
-            <img src="{% static 'frontend/images/pic1.jpeg' %}" width="250" height="200"/>
-            <div style="height: 20px"></div>
-
-            <h5 style="text-align: center;color:white;">Xiaotao Tan</h5>
-
-
-        </div>
-
-    </div>
-    <div style="height: 100px"></div>
-    
     
 
-    <div>
-      
-    </div>
-    </div>
+<h1 class="divider" style="font-size:50px;color:white;" > Here are our Group members:</h1>
 
+<div class="member">
+<div class="row">
+  <div class="column">
+    <div class="card text-white bg-dark mb-3">
+      <img src="{% static 'frontend/images/gus.jpg' %}" alt="Hongwei Yin" style="width:100%">
+      <div class="container">
+        <h3>Hongwei Yin</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card text-white bg-dark mb-3">
+      <img src="{% static 'frontend/images/katie.jpg' %}" alt="Xinyi Xu" style="width:100%">
+      <div class="container">
+        <h3>Xinyi Xu</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card text-white bg-dark mb-3">
+      <img src="{% static 'frontend/images/scott.jpeg' %}" alt="Cheng Sun" style="width:100%">
+      <div class="container">
+        <h3>Cheng Sun</h3>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card text-white bg-dark mb-3">
+      <img src="{% static 'frontend/images/lexie.png' %}" alt="Yiran Yao" style="width:100%">
+      <div class="container">
+        <h3>Yiran Yao</h3>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card text-white bg-dark mb-3">
+      <img src="{% static 'frontend/images/eddie.jpeg' %}" alt="Xiaotao Tan" style="width:100%">
+      <div class="container">
+        <h3>Xiaotao Tan</h3>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 
 {% endblock %}

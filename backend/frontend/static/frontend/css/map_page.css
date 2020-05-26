@@ -20,19 +20,32 @@ html,
       border: rgb(229, 229, 229) 1px solid;
     }
 
+    #back {
+      top: 20px;
+      left: 40px; 
+      position: absolute;
+      z-index: 5;
+      line-height: 1.4;
+    }
+
+    #dropdown {
+      position: absolute;
+      z-index: 5;
+      top: 20px;
+      left: 80%;
+    }
+
     #controls {
       top: 20px;
-      left: 50px;
+      left: 150px;
       width: 400px;
-      height: 60px;
-      
+      height: 45px;
     }
 
     #data-box {
       top: 20px;
-      left: 500px;
+      left: 600px;
       height: 45px;
-      line-height: 45px;
       display: none;
     }
 

@@ -4,7 +4,7 @@ var options = {
             name: "Approval Rate",
             //data: [approval_rate_matrix[city_apex]],
             //data: [approval_rate_array],
-            data: [{ x: '05/06/2014', y: 54 }, { x: '05/08/2014', y: 17 } , { x: '05/28/2014', y: 26 }],
+            //data: [{ x: '05/06/2014', y: 54 }, { x: '05/08/2014', y: 17 } , { x: '05/28/2014', y: 26 }],
         },
     ],
     chart: {
@@ -43,7 +43,7 @@ var options = {
     yaxis: {
         labels: {
             formatter: function (val) {
-                return (val).toFixed(0);
+                return val.toFixed(0);
             },
         },
         title: {
@@ -57,9 +57,25 @@ var options = {
         shared: false,
         y: {
             formatter: function (val) {
-                return (val).toFixed(0);
+                return val.toFixed(0);
             },
         },
+    },
+    annotations: {
+        xaxis: [
+            {
+                x: new Date("20 Dec 2019").getTime(),
+                x2: new Date('27 Dec 2019').getTime(),
+                borderColor: "#000",
+                fillColor: "#FEB019",
+                label: {
+                    text: "Hawaii Holiday",
+                },
+            },
+        ],
+    },
+    stroke: {
+        width: 1.5,
     },
 };
 

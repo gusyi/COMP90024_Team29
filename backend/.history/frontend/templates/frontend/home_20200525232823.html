@@ -1,0 +1,96 @@
+{% extends "base_generic.html" %}
+
+{% block main%}
+
+    <div style="background-color:rgb(25, 27, 33);">
+
+
+    <div style="height: 30px"></div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-6">
+           <div style="height: 70px"></div>
+            <h1 style="font-size:100px;color:white;" > Scott Morrison</h1>
+            <svg height="30" width="1000">
+                <line x1="0" y1="30" x2="400" y2="30" style="stroke:rgb(255,255,255);stroke-width:20" />
+            </svg>
+            <div style="height: 20px"></div>
+            <h1 style="font-size:50px;color:white;" > A Sentiment Analysis on</h1>
+            <h1 style="font-size:50px;color:white;" > Twitter Content</h1>
+
+            <div style="height: 80px"></div>
+            <a href="/map/"><button type="button" class="btn btn-outline-danger">Track Approval Rate</button></a>
+
+
+        </div>
+        <div class="col-sm-5">
+            <div style="height: 50px"></div>
+            {% load static %}
+            <img src="{% static 'frontend/images/test2.svg' %}" width="500" height="500"/>
+
+
+        </div>
+
+    </div>
+    <div style="height: 150px"></div>
+    <hr>
+    <div style="height: 10px"></div>
+    <h3  style="text-align: center;color:white;"> Members</h3>
+    <hr style="width:50%;text-align:center;margin-left:0">
+    <br>
+    <div style="height: 20px"></div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+            <div style="height: 50px"></div>
+            {% load static %}
+            <img src="{% static 'frontend/images/pic1.jpeg' %}" width="200" height="150"/>
+
+
+        </div>
+
+        <div class="col-sm-2">
+            <div style="height: 50px"></div>
+            {% load static %}
+            <img src="{% static 'frontend/images/pic1.jpeg' %}" width="200" height="150"/>
+
+
+        </div>
+
+        <div class="col-sm-2">
+            <div style="height: 50px"></div>
+            {% load static %}
+            <img src="{% static 'frontend/images/pic1.jpeg' %}" width="200" height="150"/>
+
+
+        </div>
+
+        <div class="col-sm-2">
+            <div style="height: 50px"></div>
+            {% load static %}
+            <img src="{% static 'frontend/images/pic1.jpeg' %}" width="200" height="150"/>
+
+
+        </div>
+
+        <div class="col-sm-2">
+            <div style="height: 50px"></div>
+            {% load static %}
+            <img src="{% static 'frontend/images/pic1.jpeg' %}" width="200" height="150"/>
+
+
+        </div>
+
+    </div>
+    
+    
+
+    <div>
+      
+    </div>
+    </div>
+
+
+
+{% endblock %}

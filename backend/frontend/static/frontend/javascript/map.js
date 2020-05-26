@@ -16,7 +16,7 @@ function initMap() {
             lat: -37.327732,
             lng: 144.317647,
         },
-        zoom: 8,
+        zoom: 8.5,
         mapTypeId: "roadmap",
         disableDefaultUI: true,
         styles: google_map_style,
@@ -100,10 +100,10 @@ async function loadPercentData() {
                 input_variable = parseInt(item.average_income);
                 break;
             case "postgraduate_percentage":
-                input_variable = parseInt(item.postgraduate_percentage);
+                input_variable = parseInt(parseFloat(item.postgraduate_percentage) * 100);
                 break;
             case "migration_percentage":
-                input_variable = parseInt(item.migration_percentage);
+                input_variable = parseInt(parseFloat(item.migration_percentage) * 100);
                 break;
             case "migration_number":
                 input_variable = parseInt(item.migration_number);

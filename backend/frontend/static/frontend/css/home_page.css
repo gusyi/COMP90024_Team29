@@ -1,0 +1,43 @@
+/* Five columns side by side */
+.column {
+  text-align: center;
+  width: 20%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+.member {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 10%;
+}
+
+
+/* Display the columns below each other instead of side by side on small screens */
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.divider {
+    margin-left: 5%;
+    margin-top: 20%;
+}
+
+/* Some left and right padding inside the container */
+.container {
+  padding: 0 16px;
+}
+
+/* Clear floats */
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}

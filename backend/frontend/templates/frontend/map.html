@@ -47,9 +47,6 @@
     </div>
   </div>
 </div>
-<div>
-  <a href="/" role="button" id="back" class="btn btn-secondary btn-lg">Back</a>
-</div>
 
 
 <div id="controls" class="nicebox">
@@ -64,28 +61,22 @@
   <span id="data-value"></span>
 </div>
 
-{% comment %} <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle btn-lg" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Whatever you want
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button"  value="tweet_counts">Tweet Counts</button>
-    <button class="dropdown-item" type="button"  value="average_income">Average Income</button>
-    <button class="dropdown-item" type="button"  value="postgraduate_percentage">Postgraduate Percentage</button>
-    <button class="dropdown-item" type="button"  value="migration_percentage">Migration Percentage</button>
-    <button class="dropdown-item" type="button"  value="migration_number">Migration Number</button>
-  </div>
-</div> {% endcomment %}
+
 
 <div class="btn-group-vertical"  id="dropdown">
-    <button class="vertical btn btn-secondary" type="button"  value="tweet_counts">Tweet Counts</button>
-    <button class="vertical btn btn-secondary" type="button"  value="average_income">Average Income</button>
-    <button class="vertical btn btn-secondary" type="button"  value="postgraduate_percentage">Postgraduate Percentage</button>
-    <button class="vertical btn btn-secondary" type="button"  value="migration_percentage">Migration Percentage</button>
-    <button class="vertical btn btn-secondary" type="button"  value="migration_number">Migration Number</button>
+    <button class="vertical btn btn-secondary btn-lg" type="button"  value="tweet_counts">Tweet Counts</button>
+    <button class="vertical btn btn-secondary btn-lg" type="button"  value="average_income">Average Income</button>
+    <button class="vertical btn btn-secondary btn-lg" type="button"  value="postgraduate_percentage">Postgraduate Percentage</button>
+    <button class="vertical btn btn-secondary btn-lg" type="button"  value="migration_percentage">Migration Percentage</button>
+    <button class="vertical btn btn-secondary btn-lg" type="button"  value="migration_number">Migration Number</button>
+</div>
+<div>
+  <a href="/" role="button" id="back" class="btn btn-secondary btn-lg">Back</a>
 </div>
 
+
 <div id='map'></div>
+
 
 {% load static %}
 <script src="{% static "frontend/javascript/city_coordinates.js" %}"></script>

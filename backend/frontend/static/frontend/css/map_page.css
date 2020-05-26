@@ -7,6 +7,13 @@ html,
       overflow: hidden;
     }
 
+    .container-fluid {
+      top: 20px;
+      position: absolute;
+      z-index: 5;
+      line-height: 1.4;
+    }
+
     .nicebox {
       position: absolute;
       text-align: center;
@@ -28,19 +35,6 @@ html,
       line-height: 1.4;
     }
 
-    .dropdown {
-      top: 20px;
-      left: 950px; 
-      position: absolute;
-      z-index: 5;
-      line-height: 1.4;
-    }
-    #dropdown {
-      top: 20px; 
-      left: 950px; 
-      position: absolute;
-      z-index: 5;
-    }
 
     #controls {
       top: 20px;

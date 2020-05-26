@@ -10,16 +10,6 @@ from DBprocessor import dbAction
 from DataUtils import Analysis
 from NLP_core import Sentiment_model as nlp
 
-consumer_key = "zXoReKA7fvCP5CLiC0C2HDI3Y"
-consumer_secret = "dpMPUWNgbc9nwq5ntanSx7DFYDWQo7hH51CHxbauX2iKyczH7r"
-access_token = "1252534782577086464-9JfCWpydeEfubm8YTbuW0wOFlAjxQz"
-access_secret = "aS7HIw8P5AmTRs9gGyFeXPzQsBTQj6JBQTiw2KFyOzSUF"
-
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_secret)
-
-api = tweepy.API(auth)
-
 class myListener(StreamListener):
     def __init__(self):
         self.dba = dbAction()
@@ -56,7 +46,7 @@ class myListener(StreamListener):
                 print('****************SKIP****************')
 
             # tweet posted in the state of Victoria
-            elif self.dataproc.is_user_in_range(tweet['place']['full_name'], globalvar.wider_range) # elif 'Victoria' in tweet['place']['full_name']:
+            elif self.dataproc.is_user_in_range(tweet['place']['full_name'], globalvar.wider_range):
 
                 # tweet not posted in Melbourne
                 if not self.dataproc.is_user_in_range(tweet['place']['full_name'], globalvar.narrower_range):
@@ -108,10 +98,23 @@ if __name__ == "__main__":
 
     if len(sys.argv) >= 2:
         ip = sys.argv[1]
-        dbname = sys.argv[2]
+        role = sys.argv[2]
+        dbname = sys.argv[3]
     else:
         print('Missing parameter(s)')
         sys.exit(0)
+    
+    api_no = globalvar.app_assignment[role]
+
+    consumer_key = globalvar.app_credentials[api_no]['consumer_key']
+    consumer_secret = globalvar.app_credentials[api_no]['consumer_secret']
+    access_token = globalvar.app_credentials[api_no]['access_token']
+    access_secret = globalvar.app_credentials[api_no]['access_secret']
+
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_secret)
+
+    api = tweepy.API(auth)
 
     liveStream = Stream(api.auth, myListener())
 

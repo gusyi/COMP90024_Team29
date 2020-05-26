@@ -15,6 +15,6 @@
 - name: install
   become: yes
   pip:
-    name: ['jsondiff', 'tweepy', 'couchdb', 'nltk']
+    name: ['jsondiff', 'couchdb']
     state: latest
     executable: pip3

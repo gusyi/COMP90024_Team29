@@ -3,6 +3,11 @@
   roles:
     - role: setup-env-all
 
+- hosts: databases
+  gather_facts: true
+  roles:
+    - role: setup-env-db
+
 - hosts: webserver
   gather_facts: true
   roles:

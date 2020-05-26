@@ -27,14 +27,13 @@ app_credentials = [
 
 app_assignment = {
     'historical-melbourne': 0,
-    'historical-other': 0,
-    'historical-geelong': 0,
+    'historical-geelong': 3,
     'historical-bendigo': 3,
-    'historical-melton': 0,
-    'historical-ballarat': 3,
+    'historical-victoria': 0,
     'historical-timeline' : 1,
     'historical-retweet': 2,
-    'stream': 3
+    'stream-vic': 2,
+    'stream-mel': 3
 }
 
 geocode = {
@@ -42,8 +41,7 @@ geocode = {
     'geelong': '-38.149718,144.361215,15km',
     'bendigo': '-36.756871, 144.280140,55km',
     'ballarat': '-37.560947,143.848462,15km',
-    'victoria': '-37.812279,144.962270,390km',
-    'melton': '-37.686664, 144.561479,55km'
+    'victoria': '-37.812279,144.962270,390km'
 }
 
 track_words = ['Scott Morrison', 'Morrison', '@ScottMorrisonMP', '#ScottMorrison']
@@ -56,5 +54,4 @@ wider_range = ['vic', 'victoria']
 narrower_range = ['melbourne', 'melb']
 geelong_range = ['Geelong', 'geelong']
 bendigo_range = ['Bendigo', 'bendigo']
-melton_range = ['Melton', 'melton']
-ballarat_range = ['Ballarat', 'ballarat']
+not_vic = ['melbourne', 'melb', 'geelong', 'bendigo']

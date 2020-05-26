@@ -18,7 +18,7 @@ def get_api(assigned_app):
     return tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
 def add_to_db(data, dbname):
-    fM = open(fname, 'a+')
+    fM = open('data/true-victoria.json', 'a+')
     try:
         msg = db.insert_raw(data, dbname)
     except:
@@ -30,10 +30,10 @@ def add_to_db(data, dbname):
 def main():
     dbs = db.get_server(db.user, db.pw, db.localhost)
 
-    # base = 'historical-bendigo'
+    base = 'historical-victoria'
     hismel = globalvar.app_assignment[base]
     api_base = get_api(hismel)
-    db_base = db.create_or_get_db(base, dbs)
+    db_base = db.create_or_get_db('historical-victoria', dbs)
 
     timeline = 'historical-timeline'
     histl = globalvar.app_assignment[timeline]
@@ -48,15 +48,19 @@ def main():
     c=0
     user_probed = []
 
-    lvl0 = tweepy.Cursor(api_base.search, q=globalvar.search_terms_broad,
-                            until='2020-05-18', #7 days of data # geocode=globalvar.geocode['bendigo'], #35km radius
+    lvl0 = tweepy.Cursor(api_base.search, q=globalvar.search_terms,
+                            until='2020-05-23', #7 days of data 
+                            # geocode=globalvar.geocode['geelong'], #35km radius
                             lang='en', #include emoji?
                             tweet_mode='extended').items()
 
     for t in lvl0:
-        # if user located in Bendigo
-        if dataproc.is_user_in_range(t.user.location, globalvar.bendigo_range):
-
+        # if user located in VIC
+        # if dataproc.is_user_in_range(t.user.location, globalvar.narrower_range):
+        print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
+        print(t.user.location)
+        print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
+        if dataproc.no_city_in_loc(t.user.location):
             add_to_db(t._json, db_base)
 
             c +=1
@@ -89,12 +93,16 @@ def main():
                         rt_profiles = api_rt.lookup_users(user_ids=rts)
                             
                         for profile in rt_profiles:
-                            print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~NEXT USER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                            print ("~~~~~~~~~~~~~~~~~~~~NEXT USER~~~~~~~~~~~~~~~~~~~")
                             if profile.id_str in user_probed: #this user's timeline has been harvested
                                 continue
 
-                            if dataproc.is_user_in_range(profile.location, globalvar.bendigo_range):
-                                print ('User {} in BENDIGO...........'.format(profile.id_str))
+                            # if dataproc.is_user_in_range(profile.location, globalvar.narrower_range):
+                            print('|||||||||||||||||||||||||||||||||||')
+                            print(profile.location)
+                            print('|||||||||||||||||||||||||||||||||||')
+                            if dataproc.no_city_in_loc(profile.location):
+                                print ('User {} in VIC...........'.format(profile.id_str))
                                 user_probed.append(profile.id_str)
 
                                 lvl2TL = tweepy.Cursor(api_tl.user_timeline, user_id=profile.id_str).items()
@@ -117,11 +125,10 @@ if __name__ == '__main__':
     db = dbAction()
     dataproc = Analysis()
 
-    if len(sys.argv) >= 2:
-        fname = sys.argv[1]
-        base = sys.argv[2]
-    else:
-        print('Missing parameter(s)')
-        sys.exit(0)
+    # if len(sys.argv) >= 1:
+    #     fname = sys.argv[1]
+    # else:
+    #     print('Missing parameter(s)')
+    #     sys.exit(0)
 
     main()

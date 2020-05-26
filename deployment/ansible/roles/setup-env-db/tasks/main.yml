@@ -1,0 +1,6 @@
+- name: install dependencies
+  become: yes
+  pip:
+    name: ['pandas', 'nltk', 'tweepy', ]
+    state: latest
+    executable: pip3

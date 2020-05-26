@@ -27,6 +27,15 @@ class Analysis:
         if any(word in loc for word in scope):
             return True
         return False
+    
+    def no_city_in_loc(self, loc):
+        loc = loc.lower()
+        if any(word in loc for word in globalvar.wider_range):
+            if any(word in loc for word in globalvar.not_vic):
+                return False
+            else:
+                return True
+        return False
 
     def geo_in_range(self, tweet): #coord=tweet['place']['bounding_box']['coordinates'][0]
         if not tweet['place'] is None:

@@ -1,27 +1,63 @@
+- hosts: localhost
+  tasks:
+    - name: compress backend folder
+      raw: cd ../..; tar czpvf deployment/backend.tgz backend
+    
+    - name: check whether /deployment/backend directory exists
+      stat:
+          path: ../backend
+      register: directory_stats
+
+    - name: Create directory if not yet exists
+      file:
+        path: ../backend
+        state: directory
+        mode: 0777
+      when: directory_stats.stat.exists == false
+    
+    - name: split archive into smaller chunks
+      raw: cd ..; split -b 10m backend.tgz backend/backend.tgz.
+
 - hosts: webserver
   become: yes
   tasks:
-    - name: check whether /home/ubuntu/A2 directory exists
+    - name: check whether /home/ubuntu/app directory exists
       stat:
-          path: /home/ubuntu/A2
+          path: /home/ubuntu/app
       register: directory_stats
 
-    - name: Create A2 directory if not yet exists
+    - name: Create directory if not yet exists
       file:
-        path: /home/ubuntu/A2
+        path: /home/ubuntu/app
         state: directory
+        mode: 0777
       when: directory_stats.stat.exists == false
+    
+    - name: copy split archives to remote
+      synchronize:
+        src: ../backend
+        dest: /home/ubuntu/app
+        rsync_opts:
+          - --include=backend.tgz.*
+    
+    - name: assemble into original tgz file
+      raw: cd /home/ubuntu/app/backend; cat backend.tgz.* > backend.tgz
 
-    - name: clone git repo to remote
-      git:
-        repo: https://github.com/gusyi/COMP90024_Team29.git
-        dest: /home/ubuntu/A2
+    - name: unzip archive to /home/ubuntu
+      raw: tar -xzf /home/ubuntu/app/backend/backend.tgz -C /home/ubuntu
     
-    - name: activate virtual environment
-      raw: cd /home/ubuntu/backend; source myenv/bin/activate
+    - name: copy nginx config file to remote
+      copy:
+        src: ./backend
+        dest: /etc/nginx/sites-available
+        mode: 0777
     
-    - name: open port 8000
-      raw: ufw allow 8000
+    - name: copy ./startapp.sh
+      copy:
+        src: ./startapp.sh
+        dest: /home/ubuntu
+        mode: 0777
+
+    # - name: configure virtual environment and start server
+    #   raw: ./startapp.sh
     
-    - name: deactivate virtual environment
-      raw: deactivate

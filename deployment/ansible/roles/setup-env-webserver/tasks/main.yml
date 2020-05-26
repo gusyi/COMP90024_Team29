@@ -9,6 +9,6 @@
 - name: install
   become: yes
   pip:
-    name: ['virtualenv']
+    name: ['virtualenv', 'django', 'whitenoise', 'djangorestframework', 'python-dateutil', 'django-jquery', 'django-extensions']
     state: latest
     executable: pip3

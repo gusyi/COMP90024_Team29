@@ -1,3 +1,13 @@
+# ====================================
+# COMP90024 Cluster and Cloud Computing - Assignment 2
+# Group 29
+# Hongwei Yin 901012
+# Cheng Sun 900806
+# Xinyi Xu 900966
+# Yiran Yao 1144268
+# Xiaotao Tan 1032950
+# ====================================
+
 - name: restart Docker service
   become: yes
   systemd:
@@ -10,10 +20,6 @@
   copy:
     src: ../../docker-compose.yml
     dest: /home/ubuntu/docker-compose.yml
-
-# - name: start CouchDB service
-#   become: yes
-#   raw: docker stack deploy -c /home/ubuntu/docker-compose.yml dbservice
 
 #sudo ls -l /var/run/docker.sock
 #permission needs to be changed if attempting to use 'docker' command on instance

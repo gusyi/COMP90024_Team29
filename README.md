@@ -12,3 +12,9 @@ Xinyi Xu 900966
 Yiran Yao 1144268
 
 Xiaotao Tan 1032950
+
+## PPT
+https://docs.google.com/presentation/d/1dbUeNxugGFhfeSRZNZxLlQCiTmEfUJIV4y9zTMjNj1U/edit?ts=5ec7aa93#slide=id.p
+
+## System Deployment & Frontend Presentation Video
+https://youtu.be/UnBb9edMZEg

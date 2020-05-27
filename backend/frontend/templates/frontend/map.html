@@ -48,7 +48,7 @@
   </div>
 </div>
 
-
+<!-- Legend and data boxes -->
 <div id="controls" class="nicebox">
   <div id="legend">
     <div id="census-min">min</div>
@@ -62,7 +62,7 @@
 </div>
 
 
-
+<!-- Menu on the right side of the website -->
 <div class="btn-group-vertical"  id="dropdown">
     <button class="vertical btn btn-secondary btn-lg" type="button"  value="tweet_counts">Tweet Counts</button>
     <button class="vertical btn btn-secondary btn-lg" type="button"  value="average_income">Average Income</button>
@@ -70,11 +70,13 @@
     <button class="vertical btn btn-secondary btn-lg" type="button"  value="migration_percentage">Migration Percentage</button>
     <button class="vertical btn btn-secondary btn-lg" type="button"  value="migration_number">Migration Number</button>
 </div>
+
+<!-- Back button -->
 <div>
   <a href="/" role="button" id="back" class="btn btn-secondary btn-lg">Back</a>
 </div>
 
-
+<!-- Google Map -->
 <div id='map'></div>
 
 
@@ -83,44 +85,21 @@
 <script src="{% static "frontend/main.js" %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="{% static "frontend/javascript/map.js" %}"></script>
-<script src="{% static "frontend/javascript/melbourne.js" %}"></script>
-<script src="{% static "frontend/javascript/vic_geo.js" %}"></script>
 <script src="{% static "frontend/javascript/maps_google_map_style.js" %}"></script>
-<script src="{% static "frontend/javascript/map_style.js" %}"></script>
 <script src="{% static "frontend/javascript/modal.js" %}"></script>
 <script src="{% static "frontend/javascript/apex_charts.js" %}"></script>
 <script src="{% static "frontend/javascript/mouse.js" %}"></script>
 <script src="{% static "frontend/javascript/info_window.js" %}"></script>
-<script src="{% static "frontend/javascript/input.js" %}"></script>
 
 {% for collection in queryset %}
     <script> 
-      {% comment %} var date = "{{ collection.date|escapejs }}";
-      var tweet_counts = "{{ collection.tweetcounts|escapejs }}";
-      
-      var city  = "{{ collection.city|escapejs }}";
-      var average_income = "{{ collection.city.average_income|escapejs }}";
-      //var education_level = "{{ collection.city.education_level|escapejs }}";
-      var postgraduate_percentage = "{{ collection.city.postgraduate_percentage|escapejs }}";
-      var migration_percentage = "{{ collection.city.migration_percentage|escapejs }}";
-      var migration_number = "{{ collection.city.migration_number|escapejs }}";
-
-
-      var approval_rate = "{{ collection.approval_rate|escapejs }}";
-      var city_name = "{{ collection.cityname|escapejs }}";
-
-      for (var i = 0; i < percent_array.length; i++){
-        if (city_name == city_names[i]){
-          var percent = Math.round(parseFloat(approval_rate) * 100).toString(10);
-          percent_array[i] = percent;
-        }
-      } {% endcomment %}
-
       var approval_rate = "{{ collection.approval_rate|escapejs }}";
       var city_name = "{{ collection.cityname|escapejs }}";
       var tweet_counts  = "{{ collection.tweetcounts|escapejs }}";
 
       for (let item of city_info) {
+
+        // Only perform once, to extract static info about a city 
         if (item.name == city_name && item.flag == "0") {
           item.percent =  Math.round(parseFloat(approval_rate) * 100).toString(10);
           item.average_income = "{{ collection.city.average_income|escapejs }}";
@@ -131,6 +110,9 @@
           console.log(city_info);
         }
 
+        // Execute every times, to extract approval rates of a city from different dates
+        // This is the daily approval rate version, since the data fluctuate a lot, give up 
+        //    it temporarily 
         {% comment %} if (item.name == city_name) {
           item.percent =  Math.round(parseFloat(approval_rate) * 100).toString(10);
           item.tweet_counts = (parseInt(item.tweet_counts) + parseInt(tweet_counts)).toString(10); 
@@ -140,6 +122,8 @@
 
         } {% endcomment %}
 
+        // This is the weekly average approval rate version, a trade off between accuracy and 
+        //    low fluctuation 
         if (item.name == city_name) {
           
           if (week_day[parseInt(item.city_id)] == 7) {
@@ -158,19 +142,6 @@
           }
         }
       }
-      
-
-      {% comment %} console.log(date);
-      console.log(tweet_counts);
-      console.log(approval_rate);
-      console.log(city_name);
-      console.log(average_income);
-      //console.log(education_level);
-      console.log(postgraduate_percentage);
-      console.log(migration_percentage);
-      console.log(migration_number);
-      console.log("=======\n");
-      //console.log(collection.city.average_income); {% endcomment %}
 
     </script>
 {% endfor%}

@@ -2,11 +2,17 @@ var city_apex;
 var approval_rate_array=[];
 $(document).ready(function () {
     $("#exampleModal").on("show.bs.modal", function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var recipient = button.data("whatever"); // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        // Button that triggered the modal
+        var button = $(event.relatedTarget); 
+
+         // Extract info from data-* attributes
+        var recipient = button.data("whatever");
+
+        // Update the modal's content. We'll use jQuery here, 
+        //   but you could use a data binding library or other methods instead.
         var modal = $(this);
+
+        // extract information relate to this city from local 
         for (let item of city_info) {
             if (item.name == recipient) {
                 var average_income = item.average_income;
@@ -18,6 +24,7 @@ $(document).ready(function () {
                 //console.log(city_apex);
                 //console.log(approval_rate_matrix[city_apex]);      
 
+                // Put all the approval rates to the array for display
                 approval_rate_array = [];
                 for (let i = 0; i < approval_rate_matrix[city_apex].length; i++) {
                     const element = approval_rate_matrix[city_apex][i];
@@ -33,6 +40,8 @@ $(document).ready(function () {
                 
             }
         }
+
+        // Display financial, educational data to the header of the modal
         modal.find(".modal-title").text(recipient);
         document.getElementById("Average Income:").innerHTML = "$"+ average_income;
         document.getElementById("Postgraduate Percentage: ").innerHTML =
@@ -43,6 +52,8 @@ $(document).ready(function () {
         infoWindow.close();
         options.series[0].data = approval_rate_array;
         //console.log(options.series[0].data);
+
+        // Draw the ApexChart
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
     });

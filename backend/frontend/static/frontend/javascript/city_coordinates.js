@@ -1,3 +1,4 @@
+// coordinates of cities 
 var city_coordinates = {
     type: "FeatureCollection",
     features: [
@@ -59,6 +60,7 @@ var city_coordinates = {
     ],
 };
 
+// information structure of the local info matrix 
 var city_info = [
     {
         name: "Melbourne",
@@ -112,8 +114,10 @@ var city_info = [
 
 var city_names = ["Melbourne", "Geelong", "Ballarat", "Bendigo"];
 
-var approval_rate_matrix = [[], [], [], [], []];
+// stores days of approval rates for cities
+var approval_rate_matrix = [[], [], [], []];
 
+// Transform date info to the correct format
 function formatCourseDate(date) {
     const dateObj = new Date(date + "T00:00:00");
     return new Intl.DateTimeFormat("en-US").format(dateObj);

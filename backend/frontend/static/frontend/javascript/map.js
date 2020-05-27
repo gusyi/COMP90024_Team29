@@ -1,5 +1,7 @@
 var map;
 var infoWindow;
+
+// value of the buttons on the upper right corner menu
 var button_value = document.getElementById("dropdown");
 var percent_array = ["0", "0", "0", "0", "0"];
 var percentMin = Number.MAX_VALUE,
@@ -10,6 +12,7 @@ var input_variable;
 var flag = 0; 
 
 var infoWindow_exist = false; 
+
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: {
@@ -27,18 +30,15 @@ function initMap() {
 
     // load polygon GeoJson
     map.data.addGeoJson(city_coordinates, { idPropertyName: "city_id" });
-    /* map.data.addGeoJson(victoria, {
-        idPropertyName: "vic_lga__3",
-    }); */
 
     map.data.addListener("mouseover", mouseInToRegion);
-    //map.data.addListener("mouseover", showInfoWindow);
     map.data.addListener("mouseout", mouseOutOfRegion);
 
     // initialize the info window
     infoWindow = new google.maps.InfoWindow();
     map.data.addListener("click", showInfoWindow);
 
+    // close the info window when clicked outside of the circle
     google.maps.event.addListener(map, "click", function (event) {
         if (infoWindow_exist == true) {
             infoWindow_exist == false;
@@ -47,29 +47,16 @@ function initMap() {
     });
 
     // wire up the button
-    //var dropdown = document.getElementById("dropdown");
+    // when clicking the buttons on the menu, display new set of data
     google.maps.event.addDomListener(button_value, "click", function () {
-        flag = 1; 
-/*         switch (button_value) {
-            case "tweet_counts":
-                input_variable = Math.sqrt(parseInt(item.tweet_counts));
-                break;
-            case "average_income":
-                input_variable = parseInt(item.average_income);
-                break;
-        } */
-        
-        console.log(button_value);
+        flag = 1;     
+        //console.log(button_value);
         clearData();
-        loadPercentData();
-
-        //console.log(dropdown);
-        //clearData();
-        //loadCensusData(selectBox.options[selectBox.selectedIndex].value);
+        loadData();
     });
 
-    // load data for the
-    loadPercentData();
+    // load data of the map 
+    loadData();
 }
 
 /** Removes data from each shape on the map and resets the UI. */
@@ -82,16 +69,20 @@ function clearData() {
     document.getElementById("data-caret").style.display = "none";
 }
 
-async function loadPercentData() {
+// load data of the map 
+async function loadData() {
 
-    //await updatePercent();
+
     for (let item of city_info) {
         var percentVariable = parseInt(item.percent);
         var city_id = item.city_id;
 
+        // the default value of the map 
         if (flag == 0) {
             input_variable = Math.sqrt(parseInt(item.tweet_counts));
         } 
+
+        // depending on the menu button pressed, replace data 
         switch (button_value) {
             case "tweet_counts":
                 input_variable = Math.sqrt(parseInt(item.tweet_counts));
@@ -110,8 +101,7 @@ async function loadPercentData() {
                 break;
         }
 
-        console.log(item.name+"   " + input_variable);
-            
+        //console.log(item.name+"   " + input_variable);    
         //console.log("tweets:" + tweet_counts + "  " + Math.sqrt(tweet_counts));
 
         // keep track of min and max values
@@ -129,6 +119,7 @@ async function loadPercentData() {
         if (input_variable > variableMax) {
             variableMax = input_variable;
         }
+
         // update the existing row with the new data
         map.data
             .getFeatureById(city_id)
@@ -138,43 +129,17 @@ async function loadPercentData() {
             .setProperty("input_variable", "" + input_variable);
     }
 
-    /* for (var i = 0; i < 5; i++) {
-        var percentVariable = percent_array[i];
-        var city_id = i;
-
-        // keep track of min and max values
-        if (percentVariable < percentMin) {
-            percentMin = percentVariable;
-        }
-        if (percentVariable > percentMax) {
-            percentMax = percentVariable;
-        }
-
-        // update the existing row with the new data
-        map.data
-            .getFeatureById(city_id)
-            .setProperty("percent_variable", ""+percentVariable);
-    } */
-
     // update and display the legend
     document.getElementById("census-min").textContent = percentMin.toLocaleString();
     document.getElementById("census-max").textContent = percentMax.toLocaleString();
 }
 
-/* async function updatePercent() {
-    for (i = 0; i < 5; i++) {
-        if (percent_array[i] == "0")
-            percent_array[i] = getRndInteger(0, 100);
-    }
-} */
-
+// set the style feature of hte circle
 function getCircle(approval_rate, magnitude) {
     var low = [204, 49, 87]; // color of smallest datum
     var high = [209, 98, 46]; // color of largest datum
 
-    // delta represents where the value sits between the min and max
-    //var delta = 0.9;
-    //var delta = (magnitude - percentMin) / (100);
+
     var delta = (approval_rate - percentMin) / (percentMax - percentMin);
     var color = [];
     for (var i = 0; i < 3; i++) {
@@ -186,7 +151,6 @@ function getCircle(approval_rate, magnitude) {
         path: google.maps.SymbolPath.CIRCLE,
         fillColor: "hsl(" + color[0] + "," + color[1] + "%," + color[2] + "%)",
         fillOpacity: 0.7,
-        //scale: 100 + (magnitude-66)*0.5,
         scale:
             50 + ((magnitude - (variableMin*0.9)) / (variableMax * 1.1 - variableMin)) * 50,
         strokeColor: "grey",
@@ -214,13 +178,6 @@ function styleFeature(feature) {
         color[i] = (high[i] - low[i]) * delta + low[i];
     }
 
-    // determine whether to show this shape or not
-    /* var showRow = true;
-    if (feature.getProperty('percent_variable') == null ||
-        isNaN(feature.getProperty('percent_variable'))) {
-        showRow = false;
-    } */
-
     var outlineWeight = 0.5,
         zIndex = 1;
     if (feature.getProperty("state") === "hover") {
@@ -240,4 +197,3 @@ function styleFeature(feature) {
         //visible: showRow
     };
 }
-

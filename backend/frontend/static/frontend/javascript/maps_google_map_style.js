@@ -1,6 +1,6 @@
 // This file 'maps_google_map_style.js' stores the customized Google Map style
 // which is the variable 'google_map_style' .
-// within the file 'maps.js' (inside the function 'initMap').
+// within the file 'map.js' (inside the function 'initMap').
 // This temporary solution will be modified later.
 
 var google_map_style = [{

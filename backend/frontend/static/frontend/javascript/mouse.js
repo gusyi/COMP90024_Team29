@@ -1,3 +1,16 @@
+/* # ====================================
+# COMP90024 Cluster and Cloud Computing - Assignment 2
+# Group 29
+# Hongwei Yin 901012
+# Cheng Sun 900806
+# Xinyi Xu 900966
+# Yiran Yao 1144268
+# Xiaotao Tan 1032950
+# ====================================
+ */
+
+
+
 // Responds to the mouse-in event on a map shape (library).
 // type of 'e': google.maps.MouseEvent
 function mouseInToRegion(e) {

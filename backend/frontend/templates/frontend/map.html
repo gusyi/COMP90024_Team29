@@ -1,3 +1,16 @@
+{% comment %} 
+/* # ====================================
+# COMP90024 Cluster and Cloud Computing - Assignment 2
+# Group 29
+# Hongwei Yin 901012
+# Cheng Sun 900806
+# Xinyi Xu 900966
+# Yiran Yao 1144268
+# Xiaotao Tan 1032950
+# ====================================
+ */
+ {% endcomment %}
+
 {% block main %}
 {% load static %}
 <head>
@@ -107,7 +120,7 @@
           item.migration_percentage = "{{ collection.city.migration_percentage|escapejs }}";
           item.migration_number = "{{ collection.city.migration_number|escapejs }}";
           item.flag = "1";
-          console.log(city_info);
+          //console.log(city_info);
         }
 
         // Execute every times, to extract approval rates of a city from different dates

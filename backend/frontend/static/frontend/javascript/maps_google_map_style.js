@@ -1,3 +1,16 @@
+/* # ====================================
+# COMP90024 Cluster and Cloud Computing - Assignment 2
+# Group 29
+# Hongwei Yin 901012
+# Cheng Sun 900806
+# Xinyi Xu 900966
+# Yiran Yao 1144268
+# Xiaotao Tan 1032950
+# ====================================
+ */
+
+
+
 // This file 'maps_google_map_style.js' stores the customized Google Map style
 // which is the variable 'google_map_style' .
 // within the file 'map.js' (inside the function 'initMap').
